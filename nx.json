@@ -1,0 +1,44 @@
+{
+  "targetDefaults": {
+    "executor": "@nx/workspace:run-commands",
+    "builder": "@nx/vite:build",
+    "bundler": "@nx/vite:bundle",
+    "test": {
+      "executor": "@nx/vite:test",
+      "options": {
+        "config": "apps/my-app/vite.config.ts"
+      }
+    },
+    "@nx/vite:test": {
+      "cache": true,
+      "inputs": ["default", "^default"]
+    },
+    "lint": {
+      "inputs": [
+        "default",
+        "{workspaceRoot}/.eslintrc.json",
+        "{workspaceRoot}/.eslintignore",
+        "{workspaceRoot}/eslint.config.js"
+      ]
+    }
+  },
+  "affected": {
+    "defaultBase": "main"
+  },
+  "workspaceLayout": {
+    "appsDir": "apps",
+    "libsDir": "libs",
+    "toolsDir": "tools",
+    "e2eDir": "e2e",
+    "pluginsDir": "plugins"
+  },
+  "nxCloudAccessToken": "NjI0MWRlZjUtZWI5OS00YmNmLTk5OTctZGY4YzVkNGU4N2I4fHJlYWQtd3JpdGU=",
+  "generators": {
+    "@nx/web:application": {
+      "style": "css",
+      "linter": "eslint",
+      "unitTestRunner": "vitest",
+      "e2eTestRunner": "cypress"
+    }
+  }
+}
