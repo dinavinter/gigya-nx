@@ -1,16 +1,10 @@
-import {Directive, directive, Part, PartInfo, DirectiveParameters} from 'lit/directive.js';
-import {ChildPart, ElementPart, html, noChange} from "lit";
-import {ifDefined} from "lit/directives/if-defined.js";
-import {unsafeHTML} from 'lit/directives/unsafe-html.js';
-import {templateContent} from 'lit/directives/template-content.js';
-
+import {Directive, directive, DirectiveParameters} from 'lit/directive.js';
+import {ChildPart, noChange} from "lit";
 class ScriptDirective extends Directive {
-     i: number = 0;
+    i: number = 0;
     async = true;
     defer = true;
     crossOrigin? = 'anonymous';
-    previousValues = new WeakMap();
-    eventSource?: EventSource;
     public onload: ((ev: Event) => any) | null | undefined;
     onLoadHandler: EventListener = (event: Event) => {
         if (this.onload) {
@@ -19,24 +13,17 @@ class ScriptDirective extends Directive {
     };
     onErrorHandler: OnErrorEventHandler = ( ) => {};
      private apiKey: string | undefined;
-     private domain: string | undefined;
-     constructor(private partInfo: PartInfo) {
-         super(partInfo);
-         console.log('ScriptDirective', partInfo);
+     private domain: string | undefined; 
+     override update(_: ChildPart, [apiKey, domain]: DirectiveParameters<this>) {
+         if (this.apiKey === apiKey && this.domain === domain) {
+             return noChange;
+         }
+         return this.render(apiKey, domain);
      }
-     override update(part: ChildPart, [apiKey, domain]: DirectiveParameters<this>) {
-          if(this.apiKey === apiKey && this.domain === domain) {
-              return noChange;
-          }
-            return this.render(apiKey, domain);
-     }
-    render(apiKey?: string,
-           domain = 'eu1.gigya.com' as string | undefined,
-    ) {
+    render(apiKey?: string, domain = 'eu1.gigya.com' as string | undefined,) {
         console.log('ScriptDirective render', apiKey, domain); 
         this.apiKey = apiKey;
-        this.domain = domain; 
-        
+        this.domain = domain;  
         const script = document.createElement('script');
         script.id = `gigya-script-${this.i}`;
         script.onload = this.onLoadHandler.bind(this);
@@ -54,21 +41,13 @@ class ScriptDirective extends Directive {
 
  
 class ScriptValueDirective extends Directive {
-    previousValues = new WeakMap();
     script: HTMLScriptElement | undefined;
     value: string | undefined;
     
-    constructor(private partInfo: PartInfo) {
-        super(partInfo); 
-        console.log('ScriptDirective', partInfo);
-    }
-    
-    override update(part: ChildPart, [value]: DirectiveParameters<this>) {
-        console.log('ScriptValueDirective', {part,value, this:this});
+    override update(_: ChildPart, [value]: DirectiveParameters<this>) {
         if(this.value === value ) {
             return noChange;
-        }
-        
+        } 
         return this.render(value);
     }
 
@@ -79,28 +58,6 @@ class ScriptValueDirective extends Directive {
         this.value = value;
         return script;
     }
-}
-//
-//
-// export const script = directive((value:string) => (part:ChildNode) => {
-//     // if (!(part instanceof NodePart)) {
-//     //     throw new Error('unsafeHTML can only be used in text bindings');
-//     // }
-//
-//     const previousValue = previousValues.get(part);
-//     if (previousValue !== undefined &&
-//         value === previousValue.value &&
-//         part.value === previousValue.script) {
-//         return;
-//     }
-//
-//     const script = document.createElement('script');
-//     script.textContent = value;
-//
-//     part.setValue(script);
-//
-//     previousValues.set(part, { value, script });
-// });
-
+} 
 export const scriptVal = directive(ScriptValueDirective)
 export const script = directive(ScriptDirective)
