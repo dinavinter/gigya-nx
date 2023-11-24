@@ -32,6 +32,8 @@ class ScriptDirective extends Directive {
         script.defer = this.defer;
         
         script.src = `https://${domain}/js/gigya.js?apiKey=${apiKey}&pretty=true&debug=true`;
+        document.head.appendChild(script);
+        return nothing;
 
     }
 
