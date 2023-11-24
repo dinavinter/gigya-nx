@@ -2,6 +2,7 @@ import './app.element.css';
 import  '@gigya/store';
 export class AppElement extends HTMLElement {
   public static observedAttributes = [];
+  string = "hello";
   constructor() {
     super();
     console.log("ctor", import.meta.env.GIGYA_DOMAIN, import.meta.env.GIGYA_API_KEY);
@@ -11,8 +12,8 @@ export class AppElement extends HTMLElement {
     console.log("store", import.meta.env.GIGYA_DOMAIN, import.meta.env.GIGYA_API_KEY);
 
     const {GIGYA_DOMAIN, GIGYA_API_KEY} = import.meta.env;
-
-    this.innerHTML = `
+    
+    this.string = `
     <div class="wrapper">
     <gigya-js api-key="${GIGYA_API_KEY}" domain="${GIGYA_DOMAIN}">
           <span slot="loading">Loading...</span>
@@ -22,7 +23,7 @@ export class AppElement extends HTMLElement {
             </h1>
            </div>
           <span slot="error">An error occurred while loading the Gigya script.</span>
-        </gigya-js>
+    </gigya-js>
        
        
     </div>

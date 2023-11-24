@@ -1,7 +1,8 @@
 {
   "name": "@gigya/store",
   "version": "0.0.1",
-  "dependencies": {},
+  "type": "module",
+   "dependencies": {},
   "main": "./index.js",
   "module": "./index.mjs",
   "typings": "./index.d.ts"

@@ -1,4 +1,4 @@
-import { createMachine, assign, interpret, ContextFrom } from "@xstate/fsm";
+import {assign, createMachine, interpret} from "@xstate/fsm";
 
 const assignLoadRequest = assign((context, event: LoadEvent) => ({
   ...context,

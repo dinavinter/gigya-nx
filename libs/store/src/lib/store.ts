@@ -1,86 +1,58 @@
 import { LitElement, html, css } from "lit";
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property,state } from 'lit/decorators.js';
+import {script, scriptVal} from "./loader/scriptDirective";
+import {asyncReplace} from "lit/directives/async-replace.js";
 
-import { gigyaJsLoader } from "./loader";
-
-@customElement('gigya-store')
+@customElement('gigya-js')
 class GigyaStore extends LitElement {
+  static override shadowRootOptions = {
+    ...LitElement.shadowRootOptions};
+ 
   static override styles = css`
     :host {
       display: block;
       padding: 16px;
       color: var(--gigya-loader-text-color, black);
-    }
-  `;
+    }`; 
 
-  @property({ type: String }) state = "idle";
-
-  __update({ value }: { value: string }) {
-    this.state = value;
-  }
-
-  service: typeof gigyaJsLoader;
-
-  constructor() {
-    super();
-    this.service = gigyaJsLoader;
-    this.service.subscribe(this.__update.bind(this));
-  }
-
-  apiKey?: string;
-  domain?: string;
-
-  static override get properties() {
-    return {
-      apiKey: { type: String, reflect: true, attribute: "api-key" },
-      domain: { type: String, reflect: true },
-      error: { type: String },
-      state: { type: String },
-    };
-  }
-
-  override updated() {
-    console.log("updated", this.apiKey, this.domain);
-    if (
-        this.apiKey &&
-        this.domain &&
-        this.service.state.context["apiKey"] !== this.apiKey &&
-        this.service.state.context.domain !== this.domain
-    )
-      this.service.send({
-        type: "LOAD",
-        apiKey: this.apiKey,
-        domain: this.domain,
-      });
-  }
   
-  
+  @property({type: String, attribute: 'api-key' }) apiKey: string | undefined =  undefined;
 
-  override firstUpdated() {
-    console.log("firstUpdated", this.apiKey, this.domain);
+  @property({type: String, attribute: 'domain'}) domain: string | undefined = undefined;
 
-    if (this.apiKey && this.domain)
-      this.service.send({
-        type: "LOAD",
-        apiKey: this.apiKey,
-        domain: this.domain,
-      });
+  @property({type: Boolean, attribute: 'debug'}) debug: boolean = true;
+  private gigya: any;
+
+  static waitForGigya():Promise<any> {
+    return new Promise((resolve) => {
+      const interval= setInterval(()=>{
+        const gigya = (window as any).gigya as Gigya;
+        if(gigya && gigya.thisScript ){
+          console.log('Gigya loaded 🥳');
+          clearInterval(interval);
+          resolve(gigya);
+        }}, 100);
+    });
   }
-  
-  
 
+  async *states(){
+    yield 'loading'
+    this.gigya = await GigyaStore.waitForGigya();
+    yield 'ready'; 
+  }
+
+  @state()
+  private state = this.states();
+  
   override render() {
-    return html`
-      <div>
-        <script src="https://cdns.${this.domain}/js/gigya.js?apiKey=${this.apiKey}" ></script>
-        <slot></slot>
-        
-        <slot name=${this.service.state.value}></slot>
-      </div>
+    console.log('render', this.apiKey, this.domain);
+ 
+    return html` 
+        <slot ></slot> 
+        ${asyncReplace(this.state,state=> html`<slot name="${state}"></slot>`)}
+        ${script(this.apiKey, this.domain)}
     `;
-  }
-
-
+  } 
 }
 
 

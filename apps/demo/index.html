@@ -11,6 +11,16 @@
   </head>
   <body>
     <app-root></app-root>
+    <gigya-js api-key="%GIGYA_API_KEY%" domain="%GIGYA_DOMAIN%">
+       <span>Hi there</span>
+      <span slot="loading">Loading...</span>
+      <div slot="ready">
+        <h1>
+          <span> Gigya script loaded successfully 👋 </span>
+        </h1>
+      </div>
+      <span slot="error">An error occurred while loading the Gigya script.</span>
+    </gigya-js>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
