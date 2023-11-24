@@ -4,11 +4,20 @@ function waitForGigya () {
     return new Promise((resolve) => {
         const interval = setInterval(() => {
             const gigya = (window as any).gigya as any;
+
+            if (gigya && gigya.thisScript && gigya.thisScript.APIKey) {
+                console.log(`Gigya loaded with APIKey ${gigya.thisScript.APIKey} 🥳`);
+
+                clearInterval(interval);
+                resolve(gigya);
+            } else
             if (gigya && gigya.thisScript) {
                 console.log('Gigya loaded 🥳');
                 clearInterval(interval);
                 resolve(gigya);
+
             }
+            
         }, 100);
     });
 }

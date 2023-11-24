@@ -11,40 +11,21 @@
   </head>
   <body>
   <div>
-  <template id="ready0">
-    <span>yo yo</span>
-    <script>
-      gigya.accounts.showScreenSet({
-        screenSet: "Default-RegistrationLogin",
-        containerID: "gigyaContainer",
-        startScreen: "gigya-register-screen"});
-
-    </script>
-
-  </template>
     <app-root></app-root>
     <gigya-js api-key="%GIGYA_API_KEY%" domain="%GIGYA_DOMAIN%">
-       <span>Hi there</span>
-      <span slot="loading">Loading...</span>
-      <div slot="ready">
-        <h1>
-          <span> Gigya script loaded successfully 👋 </span>
-        </h1> 
-        
-        
-      </div>
+      <div slot="loading" ></div>
+      <div slot="ready" ></div>
+      <span slot="error" >An error occurred while loading the Gigya script.</span>
+
       <template id="ready">
-        <span>yo yo</span>
         <script type="application/javascript" name="script">
             gigya.accounts.showScreenSet({
               screenSet: "Default-RegistrationLogin",
-              startScreen: "gigya-register-screen"});
-          
-          
+              startScreen: "gigya-register-screen",
+              apiKey: "%GIGYA_API_KEY%"});
         </script>
 
       </template>
-      <span slot="error">An error occurred while loading the Gigya script.</span>
     </gigya-js>
     <script type="module" src="/src/main.ts"></script>
   </div>

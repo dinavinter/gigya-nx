@@ -1,8 +1,8 @@
 import {Directive, directive, DirectiveParameters} from 'lit/directive.js';
-import {ChildPart, noChange} from "lit";
+import {ChildPart, noChange, nothing} from "lit";
 class ScriptDirective extends Directive {
     i: number = 0;
-    async = true;
+    async = false;
     defer = false;
     crossOrigin? = 'anonymous';
     public onload: ((ev: Event) => any) | null | undefined;
@@ -25,14 +25,13 @@ class ScriptDirective extends Directive {
         this.apiKey = apiKey;
         this.domain = domain;  
         const script = document.createElement('script');
-        script.id = `gigya-script-${this.i}`;
-        script.onload = this.onLoadHandler.bind(this);
-        script.onerror = this.onErrorHandler?.bind(this) || null;
+        script.id = `gigya-script`;
+        // script.onload = this.onLoadHandler.bind(this);
+        // script.onerror = this.onErrorHandler?.bind(this) || null;
         script.async = this.async;
         script.defer = this.defer;
-        script.src = `https://cdns.${domain}/js/gigya.js?apikey=${apiKey}`;
         
-        return script;
+        script.src = `https://${domain}/js/gigya.js?apiKey=${apiKey}&pretty=true&debug=true`;
 
     }
 

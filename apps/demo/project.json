@@ -34,6 +34,7 @@
         "logLevel": "info",
         "clearScreen": true,
         "force": true,
+        "port": 443,
         "https": {
            "key": "./cert/local.pyzlo.in/privkey1.pem",
            "cert": "./cert/local.pyzlo.in/fullchain1.pem"

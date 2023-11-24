@@ -1,11 +1,11 @@
-import {css, html, LitElement, nothing} from "lit";
-import {customElement, property, state,query} from 'lit/decorators.js';
-import {script, scriptVal} from "./loader/scriptDirective";
+import {css, html, LitElement} from "lit";
+import {customElement, property, query, state} from 'lit/decorators.js';
+import {GigyaScriptService, GigyaScriptState, script} from "./loader";
 import {asyncReplace} from "lit/directives/async-replace.js";
-import {GigyaScriptService, GigyaScriptState} from "./script-observer";
-import {when} from "lit/directives/when.js";
-import {templateContent} from "lit/directives/template-content.js";
-import {directive, Directive, DirectiveParameters} from "lit/directive.js";
+
+import {readyTemplate} from "./directives";
+
+
 // add summary and example
 // add description
 // A wrapper for the gigya script, which loads the script and provides a state for the script.
@@ -25,16 +25,15 @@ import {directive, Directive, DirectiveParameters} from "lit/directive.js";
 //            </div>
 //           <span slot="error">An error occurred while loading the Gigya script.</span>
 //         </gigya-js>
- 
 @customElement('gigya-js')
 class GigyaStore extends LitElement {
   static override shadowRootOptions = {
-    ...LitElement.shadowRootOptions};
+    ...LitElement.shadowRootOptions,
+  delegatesFocus: true};
  
   static override styles = css`
     :host {
       display: block;
-      padding: 16px;
       color: var(--gigya-loader-text-color, black);
     }`; 
 
@@ -69,43 +68,32 @@ class GigyaStore extends LitElement {
   public accessor template: HTMLTemplateElement[] = [];
   override render() {
     console.log('render', this.apiKey, this.domain, this.template);
-   
+    return html`  
+          ${ this.stateSlot()}
+          ${ this.templateContent()}
+          ${ this.script()} 
+    `
+
+  }
+
+  private stateSlot() {
     return html`
-      <slot ></slot>
-      ${asyncReplace(this.state,state=> html`<slot name="${state}"></slot>`)}
-      ${readyTemplate(this.gigya ,  'template#ready') }
-      ${script(this.apiKey, this.domain)}
-
-    `;
-  } 
+      <slot ></slot> 
+      ${asyncReplace(this.state, state => html`<slot name="${state}"></slot>`)}`;
+  }
+  private templateContent() {
+    return html`${readyTemplate(this.gigya ,  'template#ready') }`;
+  }
+  private script() {
+    return html`${script(this.apiKey, this.domain)}`;
+  }
+ 
+  
 }
 
-
-type Falsy = null | undefined | false | 0 | -0 | 0n | '';
-
-class ReadyTemplateDirective extends Directive {
-  
-  
-  render<C extends Falsy>( condition: C, template:string )  {
-    const templateEL= document.querySelector(template) as HTMLTemplateElement;
-    console.log('templateEL', templateEL, condition, template, templateEL.content, templateEL.children);
-    if(!templateEL){
-      return nothing;
-    }
-    console.log(GigyaScriptService.state, (window as any).gigya);
-    const scriptEL = templateEL.content.children.namedItem('script')  as HTMLScriptElement;
-    console.log('scriptEL', scriptEL );
-
-
-    const renderCondition = condition && scriptEL ;
-    return html`${when(renderCondition, (t)=> scriptVal(scriptEL.innerText), ()=> nothing)}`;
-   }
-   
-
-}
-
-export const readyTemplate = directive(ReadyTemplateDirective);
   
 
 
 export { GigyaStore };
+
+
