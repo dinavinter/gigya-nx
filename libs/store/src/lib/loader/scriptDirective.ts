@@ -3,7 +3,7 @@ import {ChildPart, noChange} from "lit";
 class ScriptDirective extends Directive {
     i: number = 0;
     async = true;
-    defer = true;
+    defer = false;
     crossOrigin? = 'anonymous';
     public onload: ((ev: Event) => any) | null | undefined;
     onLoadHandler: EventListener = (event: Event) => {
@@ -52,6 +52,7 @@ class ScriptValueDirective extends Directive {
     }
 
     render(value:string) {
+        console.log('ScriptValueDirective render', value);
         const script = document.createElement('script');
         script.textContent = value;
         this.script= script;
