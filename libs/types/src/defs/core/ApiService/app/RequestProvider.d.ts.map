@@ -1,0 +1,1 @@
+{"version":3,"file":"RequestProvider.d.ts","sourceRoot":"","sources":["../../../../../src/core/ApiService/app/RequestProvider.ts"],"names":[],"mappings":"AACA,qBAAa,eAAe;IAEpB,OAAO,CAAC,WAAW;IACZ,OAAO;IACd,OAAO,CAAC,IAAI;gBAFJ,WAAW,MAAmB,EAC/B,OAAO,SAAQ,EACd,IAAI,6BAAS;IAGnB,IAAI,CAAC,UAAU,KAAA,EAAE,UAAU,KAAA,EAAE,MAAM,KAAA,EAAE,QAAQ,KAAA,EAAE,OAAO,KAAK;CAiBpE"}

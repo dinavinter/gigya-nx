@@ -1,0 +1,1 @@
+{"version":3,"file":"UrlParamsHelper.d.ts","sourceRoot":"","sources":["../../../../../../src/core/Gigya.Js/app/Utils/UrlParamsHelper.ts"],"names":[],"mappings":"AAQA,MAAM,CAAC,OAAO,OAAO,eAAe;IAGb,OAAO,CAAC,IAAI;IAF/B,OAAO,CAAC,aAAa,CAAsB;gBAEhB,IAAI,gCAAyB;IAiBjD,mBAAmB,CAAC,WAAW,SAAqB;IAMpD,YAAY,CAAC,MAAM,SAAqB;IASxC,WAAW;IAOX,wBAAwB,CAAC,kBAAkB,EAAE,MAAM;IAQnD,QAAQ;CAQlB"}

@@ -1,0 +1,33 @@
+import { BaseRequest } from 'src/core/Gigya.Js.Adapters.Web/app/BaseRequest';
+import { ApiAdapterSettings } from 'src/core/Gigya.Js/interfaces/IApiAdapter';
+import Provider = gigya._.providers.Provider;
+export declare class OauthRequest extends BaseRequest {
+    id: string;
+    baseUrl: string;
+    methodName: string;
+    params: Object;
+    callback: (response: Object) => void;
+    settings: ApiAdapterSettings;
+    private windowName;
+    private requestID;
+    constructor(id: string, baseUrl: string, methodName: string, params: Object, callback: (response: Object) => void, settings?: ApiAdapterSettings);
+    beforeRequest(): void;
+    afterResponse(response: Object): void;
+    getAuthFlow(): string;
+    protected getServerParamsString(provider?: Provider): Promise<string>;
+    protected sendAction(): Promise<void>;
+    protected get domain(): string;
+    getServerParams(): Object;
+    getState(requestID: string, methodName: string, authFlow: string): string;
+    private _normalizeParamsForSSO;
+    private _normalizeParamsForSocial;
+    private _createSSOStateParam;
+    private _createSocialStateParam;
+    private get _messagingMethod();
+    private get _lid();
+    private get _state();
+    private get _domain();
+    private get enforceRedirectForSocial();
+    private isLinkAccountsV2Flow;
+    private extractProviderSessionForLinkAccounts;
+}

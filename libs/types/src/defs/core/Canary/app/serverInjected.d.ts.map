@@ -1,0 +1,1 @@
+{"version":3,"file":"serverInjected.d.ts","sourceRoot":"","sources":["../../../../../src/core/Canary/app/serverInjected.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,YAAY;IACzB,WAAW,EAAE,MAAM,CAAC;IACpB,OAAO,EAAE,MAAM,CAAC;IAChB,YAAY,EAAE;QACV,QAAQ,EAAE,MAAM,CAAC;QACjB,OAAO,EAAE,MAAM,CAAC;KACnB,CAAC;CACL"}

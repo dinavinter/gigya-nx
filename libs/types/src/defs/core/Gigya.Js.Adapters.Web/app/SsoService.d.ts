@@ -1,0 +1,31 @@
+import { Mode, SDKSetGroupTokenParams, SDKGetGroupTokenParams, SDKLogoutParams, SDKRemoveGroupTokenParams, SDKSetLoginTokenExpParams, SDKGetLoginTokenExpParams, SDKCheckTokenRenewParams, SDKCanaryIndicationParams, GetGroupTokenResponse, SDKSetGroupContext, ISsoService, GetLoginTokenExpResponse, CanaryIndicationResponse, SetLoginTokenExpResponse, GetGroupApiDomainResponse, SDKGetGroupApiDomainParams, SDKSetGroupApiDomainParams, SDKLogoutResponse } from 'src/fidm/Gigya.JS.SSO/app/interfaces';
+export declare var _storedLoginTokenExp: string;
+export declare let _requestTimeout: number;
+export declare class SsoService implements ISsoService {
+    private static _instance;
+    private constructor();
+    static getInstance(ssoKey?: string): Promise<ISsoService>;
+    checkTokenRenew(loginToken: string): Promise<GetGroupTokenResponse>;
+    getToken(): Promise<GetGroupTokenResponse>;
+    getTokenExpiration(): Promise<GetLoginTokenExpResponse>;
+    logout(): Promise<SDKLogoutResponse>;
+    removeToken(): Promise<void>;
+    setGroupContext(groupContext: any): Promise<void>;
+    setToken(lt: string, expiration?: number | string, gltexp?: string): Promise<void>;
+    setTokenExpiration(loginTokenExp: string, useCache?: boolean): Promise<SetLoginTokenExpResponse>;
+    syncCanaryIndication(isCanary: string, canaryVersion: string): Promise<CanaryIndicationResponse>;
+    getGroupApiDomain(): Promise<GetGroupApiDomainResponse>;
+    setGroupApiDomain(domain: string): Promise<void>;
+}
+export declare function _request(mode: Mode, p: SDKSetGroupTokenParams | SDKGetGroupTokenParams | SDKLogoutParams | SDKRemoveGroupTokenParams | SDKSetLoginTokenExpParams | SDKGetLoginTokenExpParams | SDKCheckTokenRenewParams | SDKCanaryIndicationParams | SDKSetGroupContext): void;
+export declare function getGroupToken(params?: SDKGetGroupTokenParams): void;
+export declare function setGroupToken(params: SDKSetGroupTokenParams): void;
+export declare function logout(params?: SDKLogoutParams): void;
+export declare function removeGroupToken(params?: SDKRemoveGroupTokenParams): void;
+export declare function setLoginTokenExp(params: SDKSetLoginTokenExpParams, useCache?: boolean): void;
+export declare function getLoginTokenExp(params: SDKGetLoginTokenExpParams): void;
+export declare function checkTokenRenew(params: SDKCheckTokenRenewParams): void;
+export declare function syncCanaryIndication(params: SDKCanaryIndicationParams): void;
+export declare function setGroupContextCookie(params: SDKSetGroupContext): void;
+export declare function setGroupApiDomain(params: SDKSetGroupApiDomainParams): void;
+export declare function getGroupApiDomain(params: SDKGetGroupApiDomainParams): void;

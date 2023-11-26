@@ -1,0 +1,10 @@
+export { BasePage } from './BasePage';
+export { GenericPage } from './GenericPage';
+export { RequireSessionPage } from './RequireSessionPage';
+export { DeviceRegistrationPage } from './DeviceRegistrationPage';
+export { OIDCLoginPage } from './OIDCLoginPage';
+export { SAMLLoginPage } from './SAMLLoginPage';
+export { SiteLoginPage } from './SiteLoginPage';
+export { SSOLoginPage } from './SSOLoginPage';
+export { ProfileUpdatePage } from './ProfileUpdatePage';
+export { ResetPasswordPage } from './ResetPasswordPage';

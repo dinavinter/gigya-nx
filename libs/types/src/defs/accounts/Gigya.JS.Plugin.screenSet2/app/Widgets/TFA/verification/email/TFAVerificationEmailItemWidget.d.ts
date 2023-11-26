@@ -1,0 +1,56 @@
+import { TFAVerificationBaseItemWidget } from "../TFAVerificationBaseItemWidget";
+import { ITfaEmailItem, TfaProvider } from 'src/core/Gigya.Js/app/TFA/types';
+import { FormInput } from "../../../../Inputs/FormInput";
+import { BaseForm } from '../../../../BaseForm';
+export declare const TFAEmailItem_CONSTS: {
+    codeInputSelector: string;
+    selector: string;
+    sendButtonSelector: string;
+    submitButtonSelector: string;
+    resendButtonSelector: string;
+    expandedAttribute: string;
+    errorMessageSelector: string;
+    errorActiveMessageClass: string;
+    rememberDeviceSelector: string;
+    symbolsPlaceholder: string;
+    nameAttr: string;
+    boundToAttr: string;
+    inputErrorSelector: string;
+    ariaLabelAttr: string;
+    containerClass: string;
+    containerEnabledClass: string;
+};
+export declare class TFAVerificationEmailItemWidget extends TFAVerificationBaseItemWidget {
+    private _domUtils;
+    static CONSTS: {
+        codeInputSelector: string;
+        selector: string;
+        sendButtonSelector: string;
+        submitButtonSelector: string;
+        resendButtonSelector: string;
+        expandedAttribute: string;
+        errorMessageSelector: string;
+        errorActiveMessageClass: string;
+        rememberDeviceSelector: string;
+        symbolsPlaceholder: string;
+        nameAttr: string;
+        boundToAttr: string;
+        inputErrorSelector: string;
+        ariaLabelAttr: string;
+        containerClass: string;
+        containerEnabledClass: string;
+    };
+    protected readonly providerName = TfaProvider.email;
+    private resendLinkHelper;
+    constructor(_form: BaseForm, el: HTMLLIElement, _domUtils?: typeof gigya.utils.DOM);
+    unlinkInstanceElement(): void;
+    protected sendCodeApi(): Promise<import("gigya").GigyaResponse>;
+    protected verifyCodeApi(): Promise<import("gigya").GigyaResponse>;
+    protected addResendButtonHandlers(): void;
+    protected get codeInput(): HTMLInputElement;
+    protected get email(): ITfaEmailItem;
+    protected get lastSymbols(): string;
+    protected get codeFormField(): FormInput;
+    protected get resendButton(): HTMLElement;
+    protected startCountDown(): void;
+}

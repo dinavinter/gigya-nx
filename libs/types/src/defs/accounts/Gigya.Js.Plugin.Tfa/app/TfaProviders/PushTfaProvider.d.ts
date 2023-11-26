@@ -1,0 +1,34 @@
+import { BaseTfaProvider } from 'src/accounts/Gigya.Js.Plugin.Tfa/app/TfaProviders/BaseTfaProvider';
+import { TfaPlugin, TfaMode } from 'src/accounts/Gigya.Js.Plugin.Tfa/app/TfaPlugin';
+import { IBackupCodesManager } from "../helpers/BackupCodesManager";
+export declare type TfaProviderCallback = (response: Object, providerAssertion: string, tempDevice: boolean) => void;
+export declare class PushTfaProvider extends BaseTfaProvider {
+    private readonly _backupCodesManager;
+    private readonly _pollingLimitMillis;
+    private readonly _pollingIntervalMillis;
+    private _pollingStartTime;
+    constructor(plugin: TfaPlugin, container: HTMLElement, params: Object, mode: TfaMode, callback: TfaProviderCallback, _backupCodesManager: IBackupCodesManager, _pollingLimitMillis?: number, _pollingIntervalMillis?: number);
+    private checkIsVerified;
+    private onIsVerifiedResponse;
+    private startPolling;
+    private stopPolling;
+    private shouldContinuePolling;
+    private shouldStopPolling;
+    private onPushVerified;
+    private onError;
+    private onSendVerificationResponse;
+    private startPushVerificationFlow;
+    private resendPushNotificationClickHandler;
+    private showVerifyMode;
+    private useBackupCodesClickHandler;
+    private submitBackupCodeClickHandler;
+    private getBackupCodeErrorMessage;
+    private showEditMode;
+    private showBackupCodesEditMode;
+    private showGenerateNewCodesConfirmation;
+    private getSubmitButton;
+    private getBackupCodeInput;
+    private getResendButton;
+    private getUseBackupCodesButton;
+    startFlow(capabilities?: string[]): void;
+}

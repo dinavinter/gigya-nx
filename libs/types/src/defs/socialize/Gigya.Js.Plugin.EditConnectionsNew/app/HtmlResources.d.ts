@@ -1,0 +1,11 @@
+export declare var connectedSocialProvider: any;
+export declare var defaultPhotoURL: any;
+export declare var disconnectedSocialProvider: any;
+export declare var edit: any;
+export declare var footer: any;
+export declare var gigyaBrand: any;
+export declare var gigyaTerms: any;
+export declare var identityBirthDate: any;
+export declare var identityCity: any;
+export declare var identityCountry: any;
+export declare var socialProviderApps: any;

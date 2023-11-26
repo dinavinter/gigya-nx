@@ -1,0 +1,1 @@
+{"version":3,"file":"IDisposable.d.ts","sourceRoot":"","sources":["../../../../../src/core/Gigya.Js/interfaces/IDisposable.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,YAAY,EAAE,MAAM,+CAA+C,CAAC;AAE7E,MAAM,WAAW,WAAW;IACxB,OAAO,EAAE,MAAM,IAAI,CAAC;IACpB,eAAe,CAAC,EAAE,MAAM,YAAY,CAAC,MAAM,IAAI,CAAC,CAAC;CACpD"}

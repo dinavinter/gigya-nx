@@ -1,0 +1,20 @@
+export declare var defaultTemplates: {
+    container: string;
+    selectProvider: string;
+    progress: string;
+    error: string;
+    phoneRegister: string;
+    phoneEnterCode: string;
+    emailEnterCode: string;
+    phoneResend: string;
+    phoneEdit: string;
+    phoneEditEntry: string;
+    totpRegister: string;
+    totpEdit: string;
+    totpBackupCodes: string;
+    totpGenerateNewCodesConfirmation: string[];
+    totpGenerateNewCodesConfirmationWCAGComply: string[];
+    totpVerify: string;
+    pushVerificationPhone: string;
+    pushVerificationBackupCodes: string;
+};

@@ -1,0 +1,1 @@
+{"version":3,"file":"EventWrapper.d.ts","sourceRoot":"","sources":["../../../../../../src/core/Gigya.Js/app/BaseObject/EventWrapper.ts"],"names":[],"mappings":"AAAA,qBAAa,YAAY,CAAC,CAAC,SAAS,QAAQ;IAC5B,OAAO,CAAC,SAAS;gBAAT,SAAS,GAAE,KAAK,CAAC,CAAC,CAAM;IAErC,GAAG,CAAC,OAAO,EAAE,CAAC;IAId,MAAM,CAAC,OAAO,EAAE,CAAC;CAM3B"}

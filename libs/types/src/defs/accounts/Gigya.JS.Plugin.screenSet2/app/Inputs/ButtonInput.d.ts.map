@@ -1,0 +1,1 @@
+{"version":3,"file":"ButtonInput.d.ts","sourceRoot":"","sources":["../../../../../../src/accounts/Gigya.JS.Plugin.screenSet2/app/Inputs/ButtonInput.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAE,iBAAiB,EAAE,MAAM,8DAA8D,CAAC;AAE5G,qBAAa,WAAY,SAAQ,SAAS;WACxB,kBAAkB,CAAC,OAAO,EAAE,iBAAiB;gBAI/C,OAAO,EAAE,iBAAiB;IAM/B,QAAQ;IAIR,OAAO;IAIP,MAAM;CAGhB"}

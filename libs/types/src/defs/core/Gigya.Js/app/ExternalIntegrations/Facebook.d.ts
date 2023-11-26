@@ -1,0 +1,10 @@
+export declare var initializedTime: Date;
+export declare var isLoggedIn: boolean;
+export declare var isConnected: boolean;
+export declare function isLoaded(): boolean;
+export declare function load(noAppID: any): void;
+export declare function refreshSession(): void;
+export declare function retryPending(): void;
+export declare function runWhenLoaded(callback: any): void;
+export declare function getParams(): {};
+export declare function autoLogin(): void;

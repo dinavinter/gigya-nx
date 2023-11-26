@@ -1,0 +1,1 @@
+export declare const MAGIC_LINK_UNACCEPTABLE_PARAMS_REGEX: RegExp;

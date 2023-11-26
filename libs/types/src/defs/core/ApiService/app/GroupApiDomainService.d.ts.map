@@ -1,0 +1,1 @@
+{"version":3,"file":"GroupApiDomainService.d.ts","sourceRoot":"","sources":["../../../../../src/core/ApiService/app/GroupApiDomainService.ts"],"names":[],"mappings":"AAGA,qBAAa,qBAAqB;IAI1B,OAAO,CAAC,OAAO;IACf,OAAO,CAAC,QAAQ;IAChB,OAAO,CAAC,WAAW;IALvB,OAAO,CAAC,WAAW,CAAS;gBAGhB,OAAO,SAA+B,EACtC,QAAQ,uDAA4F,EACpG,WAAW,SAAuB;IAKvC,GAAG;IAGH,GAAG,CAAC,SAAS,EAAE,MAAM;CAO/B"}

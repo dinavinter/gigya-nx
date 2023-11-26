@@ -1,0 +1,1 @@
+{"version":3,"file":"configuration.d.ts","sourceRoot":"","sources":["../../../../../src/fidm/Gigya.Js.SamlProxy/app/configuration.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,cAAc,EAAE,MAAM,gDAAgD,CAAC;AAGhF,MAAM,WAAW,sBAAsB;IACnC,MAAM,EAAE,MAAM,CAAC;IACf,UAAU,EAAE,MAAM,CAAC;CACtB;AAqBD,wBAAgB,iBAAiB,IAAI,sBAAsB,CAiB1D;AACD,wBAAgB,kBAAkB,CAAC,cAAc,EAAE,sBAAsB,GAAG,cAAc,CAezF"}

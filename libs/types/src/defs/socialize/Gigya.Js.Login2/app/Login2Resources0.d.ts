@@ -1,0 +1,16 @@
+export declare var arrow: any;
+export declare var footer: any;
+export declare var footerBrandLong: any;
+export declare var footerBrandShort: any;
+export declare var footerBrandWhatIsThis: any;
+export declare var footerDivider: any;
+export declare var footerEdit: any;
+export declare var footerTerms: any;
+export declare var header: any;
+export declare var login: any;
+export declare var providerImage: any;
+export declare var uiContainer: any;
+export declare var welcome: any;
+export declare var welcomeBubble: any;
+export declare var welcomeGreeting: any;
+export declare var welcomeSignInLink: any;

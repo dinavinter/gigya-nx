@@ -1,0 +1,1 @@
+{"version":3,"file":"BaseMock.d.ts","sourceRoot":"","sources":["../../../../../src/accounts/Gigya.JS.Plugin.screenSet2/mocks/BaseMock.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,UAAU,EAAE,MAAM,cAAc,CAAC;AAE1C,qBAAa,QAAQ;IAGL,SAAS,CAAC,MAAM,EAAE,UAAU;IAFxC,SAAS,CAAC,QAAQ,EAAE,GAAG,CAAC;gBAEF,MAAM,GAAE,UAAe;IAEtC,WAAW;CAwCrB"}

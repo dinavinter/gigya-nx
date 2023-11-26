@@ -1,0 +1,38 @@
+import { ServerApi } from 'src/core/Gigya.Js/app/API/ServerApi';
+import { IRiskAssessmentHandler } from 'src/core/Gigya.Js/app/RiskAssessment/RiskAssessmentHandler';
+export declare class ServerApiRequest {
+    api: ServerApi;
+    params: Object;
+    originalParams: Object;
+    private callback;
+    private riskAssessmentHandler;
+    constructor(api: ServerApi, params: Object, riskAssessmentHandler?: IRiskAssessmentHandler);
+    start(): void;
+    private sendRequest;
+    private getMethodUrl;
+    private constructRestUrl;
+    private beforeRequest;
+    private setOverridableParams;
+    private doesHaveAltSessionParam;
+    private setNonOverridableParams;
+    private handleDeprecatedParams;
+    private handleRiskAssessment;
+    private handleCollections;
+    private extractListOfGIGUIDs;
+    private handleConnectWithoutLoginBehavior;
+    private filterParams;
+    private getFullSchema;
+    private preprocessServerResponse;
+    private getExpiredSessionResponse;
+    private afterServerApiResponse;
+    private addDefaultResponseProperties;
+    private handleMethodResponse;
+    private logoutFromProvidersIfNeeded;
+    private logoutFromProvider;
+    private generateEventsFromResponse;
+    private generateInterruptionEventFromResponse;
+    private setSocialCookies;
+    private dispatchAccountsLoginEvent;
+    private getProviderName;
+    private getSocialProviders;
+}

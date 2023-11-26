@@ -1,0 +1,14 @@
+export * as Consent from 'src/accounts/Gigya.JS.Plugin.screenSet2/app/Consent';
+export * as Debug from 'src/accounts/Gigya.JS.Plugin.screenSet2/app/Debug';
+export * as ErrorDisplayElement from 'src/accounts/Gigya.JS.Plugin.screenSet2/app/ErrorDisplayElement';
+export * as Errors from 'src/accounts/Gigya.JS.Plugin.screenSet2/app/Errors';
+export * as LoginModes from 'src/accounts/Gigya.JS.Plugin.screenSet2/app/LoginModes';
+export * as Screen from 'src/accounts/Gigya.JS.Plugin.screenSet2/app/Screen';
+export * as ScreenConsts from 'src/accounts/Gigya.JS.Plugin.screenSet2/app/ScreenConsts';
+export * as ScreenOptions from 'src/accounts/Gigya.JS.Plugin.screenSet2/app/ScreenOptions';
+export * as ScreenSetData from 'src/accounts/Gigya.JS.Plugin.screenSet2/app/ScreenSetData';
+export * as ScreenSetPlugin from 'src/accounts/Gigya.JS.Plugin.screenSet2/app/ScreenSetPlugin';
+export * as ScreenSetHtmlResources from 'src/accounts/Gigya.JS.Plugin.screenSet2/app/ScreenSetResources';
+export * as TemplateElement from 'src/accounts/Gigya.JS.Plugin.screenSet2/app/TemplateElement';
+export * as Templates from 'src/accounts/Gigya.JS.Plugin.screenSet2/app/Templates';
+export * as Captcha from 'src/accounts/Gigya.JS.Plugin.screenSet2/app/Captcha';

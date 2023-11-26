@@ -1,6 +1,7 @@
 import {assign, createMachine, interpret} from "@xstate/fsm";
+import {gigya} from "@gigya/types";
 
-function waitForGigya () {
+function waitForGigya ():Promise<gigya> {
     return new Promise((resolve) => {
         const interval = setInterval(() => {
             const gigya = (window as any).gigya as any;
@@ -36,7 +37,7 @@ type ErrorEvent = {
 
 type LoadedEvent = {
     type: "LOADED";
-    gigya: any;
+    gigya: gigya;
 };
 
 declare type GigyaStagingDomain =
@@ -65,7 +66,7 @@ const scriptMachine = createMachine<Context, Events>({
     id: 'script',
     initial: 'loading',
     context: {
-        gigya: undefined as any
+        gigya: undefined as gigya | undefined,
     },
     states: {
         loading: {

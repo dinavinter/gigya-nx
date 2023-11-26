@@ -1,0 +1,12 @@
+export declare var parseScriptRetries: number;
+export declare function init(): void;
+export declare function warnOnUnsupportedBrowser(): void;
+export declare function loadABTesting(): void;
+export declare function startDebugIfNeeded(callback: () => void): void;
+export declare function loadOmniture(): void;
+export declare function parseLang(lang?: string): gigya.Lang;
+export declare function parseScriptElement(callback: (isContextReplaced: boolean) => void): Promise<void>;
+export declare function initApiAdapter(callback: () => void): void;
+export declare function autoLogin(): void;
+export declare function checkReturnFromRedirect(callback: Function): void;
+export declare function injectExternalSdks(): void;

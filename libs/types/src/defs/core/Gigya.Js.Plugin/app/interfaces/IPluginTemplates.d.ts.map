@@ -1,0 +1,1 @@
+{"version":3,"file":"IPluginTemplates.d.ts","sourceRoot":"","sources":["../../../../../../src/core/Gigya.Js.Plugin/app/interfaces/IPluginTemplates.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,IAAI,EAAE,MAAM,mCAAmC,CAAC;AAEzD,MAAM,WAAW,gBAAiB,SAAQ,IAAI,CAAC,MAAM,CAAC;IAClD,WAAW,CAAC,EAAE,MAAM,CAAC;IACrB,KAAK,CAAC,EAAE,MAAM,CAAC;IACf,gBAAgB,CAAC,EAAE,MAAM,CAAC;CAC7B"}
