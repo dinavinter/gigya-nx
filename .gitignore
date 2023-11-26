@@ -16,3 +16,5 @@ cert
 .idea/
 /cache/
 /.nx/cache/
+
+.nx/cache
