@@ -8,12 +8,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@gigya/types": "workspace:^",
     "lit": "^3.0.2"
   },
   "devDependencies": {
     "typescript": "^5.2.2",
     "vite": "^5.0.0"
   }
- 
-  
 }

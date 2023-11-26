@@ -4,7 +4,6 @@ import {GigyaScriptService, GigyaScriptState, script} from "./loader";
 import {asyncReplace} from "lit/directives/async-replace.js";
 
 import {readyTemplate} from "./directives";
-import {MyElement} from "../my-element.ts";
 
 
 // add summary and example

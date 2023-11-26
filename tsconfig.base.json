@@ -16,7 +16,6 @@
     "baseUrl": ".",
     "paths": {
       "@defs/*": ["libs/types/src/defs/*"],
-      "@gigya/store": ["libs/store/src/index.ts"],
       "@gigya/types": ["libs/types/src/index.ts"],
       "gigya-sdk": ["libs/gigya-sdk/src/index.ts"]
     }
