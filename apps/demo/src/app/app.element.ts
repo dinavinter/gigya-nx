@@ -1,33 +1,75 @@
 import './app.element.css';
-import  '@gigya/store';
-export class AppElement extends HTMLElement {
-  public static observedAttributes = [];
-  string = "hello";
-  constructor() {
-    super();
-    console.log("ctor", import.meta.env.GIGYA_DOMAIN, import.meta.env.GIGYA_API_KEY);
+import '@gigya/store';
+import initSwc, {transformSync} from "@swc/wasm-web";
 
-  }
-  connectedCallback() {
-    console.log("store", import.meta.env.GIGYA_DOMAIN, import.meta.env.GIGYA_API_KEY);
 
-    const {GIGYA_DOMAIN, GIGYA_API_KEY} = import.meta.env;
-    
-    this.string = `
-    <div class="wrapper">
-    <gigya-js api-key="${GIGYA_API_KEY}" domain="${GIGYA_DOMAIN}">
-          <span slot="loading">Loading...</span>
-          <div slot="loaded">
-            <h1>
-              <span> Gigya script loaded successfully 👋 </span>
-            </h1>
-           </div>
-          <span slot="error">An error occurred while loading the Gigya script.</span>
-    </gigya-js>
-       
-       
-    </div>
-      `;
-  }
+
+export class CompilerElement extends HTMLElement {
+    public static observedAttributes = [];
+    accessor code: string = "";
+    accessor compiled: string = "";
+    accessor error: string = "";
+    accessor loading: string = "";
+    accessor loaded: string = "";
+    accessor compiledError: string = "";
+
+    constructor() {
+        super();
+        this.code = this.innerHTML;
+    }
+
+    connectedCallback() {
+        this.innerHTML = `
+        <div class="wrapper">
+            <textarea id="code" style="width: 100%; height: 100px"></textarea>
+            <button id="compile">Compile</button>
+            <textarea id="result"></textarea>
+        </div>
+        `;
+        const code = this.querySelector<HTMLTextAreaElement>('#code')!;
+        const compile = this.querySelector<HTMLButtonElement>('#compile')!;
+        const result = this.querySelector<HTMLTextAreaElement>('#result')!;
+        compile.addEventListener('click', () => {
+            try {
+                const compiled = transformSync(code.value, {});
+                result.textContent = compiled.code;
+            } catch (e: any) {
+                result.textContent = e.toString();
+            }
+        });
+    }
+
 }
+customElements.define('compiler', CompilerElement);
+
+export class AppElement extends HTMLElement {
+    public static observedAttributes = [];
+    initialized = false;
+    string = "hello";
+
+
+    compile() {
+        if (!this.initialized) {
+            return;
+        }
+        const result = transformSync(`console.log('hello')`, {});
+        console.log(result);
+         
+    }
+
+    connectedCallback() {
+        console.log("store", import.meta.env.GIGYA_DOMAIN, import.meta.env.GIGYA_API_KEY);
+
+        initSwc().then(() => {
+            this.initialized = true;
+        });
+
+        this.innerHTML = `
+         <div class="main">
+              <compiler style="width: 100%; height: 100px"></compiler>
+          </div>
+      `;
+    }
+}
+
 customElements.define('app-root', AppElement);
