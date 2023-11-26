@@ -22,8 +22,7 @@
       }
     },
     "serve": {
-      "executor": "@nx/vite:dev-server",
-      "defaultConfiguration": "development",
+      "command": "vite",
       "options": {
         "buildTarget": "demo:build",
         "buildLibsFromSource": true,
