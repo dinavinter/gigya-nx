@@ -54,7 +54,7 @@ export type GigyaDomain =
     | "cn1.gigya-api.cn"
     | GigyaStagingDomain;
 
-export type GigyaServiceState = "idle" | "loading" | "loaded" | "error";
+// export type GigyaServiceState = "idle" | "loading" | "loaded" | "error";
 export type GigyaServiceProps = { apikey?: string; domain?: GigyaDomain };
   type  Context = GigyaServiceProps & {
     error?: string;
@@ -88,7 +88,7 @@ const scriptMachine = createMachine<Context, Events>({
                 });
             },
             assignGigya: assign({
-                gigya: (context, event) => (event as LoadedEvent).gigya
+                gigya: (_, event) => (event as LoadedEvent).gigya
             })
         }
     });

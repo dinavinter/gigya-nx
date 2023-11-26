@@ -2,14 +2,7 @@
   "name": "@gigya/types",
   "version": "0.0.1",
   "type": "module",
-
-  "dependencies": {
-    "@types/node": "^20.10.0",
-    "node-ts": "^6.0.1"
-  },
-  "devDependencies": {
-    "@types/node": "^20.10.0"
-  },
+ 
   "main": "./index.js",
   "module": "./index.mjs",
   "typings": "./index.d.ts"

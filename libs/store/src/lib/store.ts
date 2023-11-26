@@ -60,9 +60,6 @@ class GigyaStore extends LitElement {
   @state()
   private state = GigyaScriptState();
   
-    @state()
-    private ready  = false;
-    
  
   @query('template')
   public accessor template: HTMLTemplateElement[] = [];

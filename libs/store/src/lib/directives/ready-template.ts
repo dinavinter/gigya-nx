@@ -20,7 +20,7 @@ class ReadyTemplateDirective extends Directive {
 
 
         const renderCondition = condition && scriptEL;
-        return html`${when(renderCondition, (t) => scriptVal(scriptEL.innerText), () => nothing)}`;
+        return html`${when(renderCondition, (_) => scriptVal(scriptEL.innerText), () => nothing)}`;
     }
 
 
