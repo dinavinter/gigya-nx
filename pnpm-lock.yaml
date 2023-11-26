@@ -144,9 +144,9 @@ importers:
 
   apps/web:
     dependencies:
-      gigya-wc:
+      '@gigya/wc':
         specifier: workspace:*
-        version: link:../../libs/gigya-wc
+        version: link:../../libs/wc
     devDependencies:
       typescript:
         specifier: ^5.2.2
@@ -157,7 +157,9 @@ importers:
 
   libs/gigya-sdk: {}
 
-  libs/gigya-wc:
+  libs/types: {}
+
+  libs/wc:
     dependencies:
       '@gigya/types':
         specifier: workspace:^
@@ -172,8 +174,6 @@ importers:
       vite:
         specifier: ^5.0.0
         version: 5.0.2(@types/node@20.10.0)
-
-  libs/types: {}
 
 packages:
 

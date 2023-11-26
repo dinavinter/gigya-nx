@@ -1,5 +1,5 @@
 import './style.css'
-import 'gigya-wc'
+import '@gigya/wc'
 import './compiler-element.ts'
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>  
