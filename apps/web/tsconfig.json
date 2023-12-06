@@ -19,5 +19,11 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
+  "paths": {
+    "~/*": ["src/*"],
+    "~elem/*": ["src/elements/*"],
+    "~page/*": ["src/pages/*"],
+    "~transform/*": ["src/store/*"],
+  },
   "include": ["src"]
 }
