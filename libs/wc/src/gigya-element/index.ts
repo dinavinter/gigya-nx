@@ -1,9 +1,15 @@
 import { css, html, LitElement } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { GigyaScriptService, GigyaScriptState, script } from './loader';
+import {gigyaContext, GigyaScriptService, GigyaScriptState, script} from './loader';
 import { asyncReplace } from 'lit/directives/async-replace.js';
+import type gigya from '@gigya/types/src/index';
 
 import { readyTemplate } from './directives';
+import {provide} from "@lit/context";
+import {GigyaConsumerElement} from "./consumer";
+  
+import  './consumer/index';
+import '../my-element'
 
 // add summary and example
 // add description
@@ -45,7 +51,8 @@ export class GigyaStore extends LitElement {
     this.service.subscribe((state) => {
       console.log('GigyaScriptService', state.value);
       if (state.matches('ready')) {
-        this.gigya = state.context['gigya'];
+        this.gigya = state.context.gigya;
+        this._dispatchReady();
       }
     });
   }
@@ -59,13 +66,24 @@ export class GigyaStore extends LitElement {
   @property({ type: Boolean, attribute: 'debug' }) debug: boolean = true;
 
   @state()
-  private gigya: any;
+  @provide({context: gigyaContext})
+  private gigya: gigya | undefined = undefined;
 
   @state()
   private state = GigyaScriptState();
 
   @query('template')
   public accessor template: HTMLTemplateElement[] = [];
+
+  _dispatchReady() {
+    let ready = new CustomEvent('gigya-js-ready', {
+      detail: { message: 'loaded', gigya: this.gigya },
+      bubbles: true,
+      composed: true });
+    this.dispatchEvent(ready);
+  }
+
+
   override render() {
     console.log('render', this.apiKey, this.domain, this.template);
     return html`
@@ -91,5 +109,7 @@ export class GigyaStore extends LitElement {
 declare global {
   interface HTMLElementTagNameMap {
     'gigya-js': GigyaStore;
+    'gigya-consumer': GigyaConsumerElement;
   }
 }
+export {GigyaConsumerElement} from './consumer';

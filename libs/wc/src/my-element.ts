@@ -1,8 +1,11 @@
 import { LitElement, css, html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
-import litLogo from './assets/lit.svg';
-import viteLogo from '/vite.svg';
-import { GigyaStore } from './gigya-element';
+import {customElement, property} from 'lit/decorators.js';
+ import {GigyaConsumerElement, GigyaStore} from './gigya-element';
+import {consume} from "@lit/context";
+import gigyaContext from "./gigya-element/loader/context.ts";
+import {ifDefined} from "lit/directives/if-defined.js";
+import type gigya from '@gigya/types/src/index';
+import {ContextConsumer} from "@lit/context";
 
 /**
  * An example element.
@@ -24,33 +27,32 @@ export class MyElement extends LitElement {
   @property({ type: Number })
   count = 0;
 
+  @consume({context: gigyaContext, subscribe: true})
+  @property({type: Object, state: true, attribute: false, reflect: true})
+  protected gigya:gigya  | undefined;
+
+  private myData = new ContextConsumer(this, {
+    context: gigyaContext,
+    subscribe: true
+  });
+
+
   render() {
+    console.log('gigya-consumer-my-elm', this.gigya);  
     return html`
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src=${viteLogo} class="logo" alt="Vite logo" />
-        </a>
-        <a href="https://lit.dev" target="_blank">
-          <img src=${litLogo} class="logo lit" alt="Lit logo" />
-        </a>
-      </div>
-      <slot></slot>
-      <div class="card">
-        <button @click=${this._onClick} part="button">
-          count is ${this.count}
-        </button>
-      </div>
-      <p class="read-the-docs">${this.docsHint}</p>
+        ${this.myData.value}
+        <span>${ifDefined(this.gigya?.apiKey)}</span>
+
+        <p class="read-the-docs">${this.docsHint}</p>
     `;
   }
 
-  private _onClick() {
-    this.count++;
-  }
+  
 
   static styles = css`
     :host {
-      max-width: 1280px;
+      max-width: 400px;
       margin: 0 auto;
       padding: 2rem;
       text-align: center;
@@ -125,5 +127,6 @@ declare global {
   interface HTMLElementTagNameMap {
     'my-element': MyElement;
     'gigya-js': GigyaStore;
+    'gigya-consumer': GigyaConsumerElement;
   }
 }

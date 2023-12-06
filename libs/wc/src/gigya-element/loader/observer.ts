@@ -1,5 +1,5 @@
-import { assign, createMachine, interpret } from '@xstate/fsm';
-import { gigya } from '@gigya/types';
+import {assign, createMachine, interpret} from '@xstate/fsm';
+import type gigya from '@gigya/types/src/index';
 
 function waitForGigya(): Promise<gigya> {
   return new Promise((resolve) => {
@@ -54,6 +54,7 @@ export type GigyaDomain =
 export type GigyaServiceProps = { apikey?: string; domain?: GigyaDomain };
 type Context = GigyaServiceProps & {
   error?: string;
+  gigya?: gigya;
 } & Record<string, unknown>;
 
 type Events = ErrorEvent | LoadedEvent;
