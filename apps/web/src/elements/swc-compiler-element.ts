@@ -1,6 +1,14 @@
 const swc = await import("../../../../node_modules/@swc/wasm-web/wasm-web.js");
 await swc.default();
 
+export interface AstEvent  {
+
+    code: string,
+    ast: typeof swc.parse,
+    print: typeof swc.print
+
+
+}
 export class SwcCompilerElement extends HTMLElement {
     private outputElement: HTMLPreElement;
 
@@ -40,10 +48,20 @@ export class SwcCompilerElement extends HTMLElement {
                 }
             });
             this.outputElement.textContent = compiled.code;
-        } catch (error) {
+            this.dispatchEvent(new CustomEvent('code', {detail: compiled.code}));
+            this.dispatchEvent(new CustomEvent<AstEvent>('ast', {detail: {
+                code: compiled.code, 
+                    ast: swc.parse,
+                    print: swc.print
+                    
+                }}));
+            
+         } catch (error) {
             this.outputElement.textContent = error instanceof Error ? error.message : `${error}`;
         }
     }
 }
+
+
 
 customElements.define('swc-compiler', SwcCompilerElement);

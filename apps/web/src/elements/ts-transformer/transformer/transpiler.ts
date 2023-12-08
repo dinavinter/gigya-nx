@@ -1,7 +1,7 @@
-import ts from 'typescript';
+import ts, {ScriptTarget} from 'typescript';
 import halts, {loopProtect} from 'halting-problem';
 
-let compilerOptions: ts.TranspileOptions = { compilerOptions: { module: ts.ModuleKind.System  } };
+let compilerOptions: ts.TranspileOptions = { compilerOptions: { module: ts.ModuleKind.ES2022, esModuleInterop:true, target:ScriptTarget.ESNext   } };
 
 export default function transpile(code: string) {
     let es5Code = ts.transpileModule(code, compilerOptions).outputText;

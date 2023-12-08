@@ -2,6 +2,7 @@
 
 import {exportGigyaModule} from "./parser";
 import {GigyaConsumerElement} from "@gigya/wc/src/gigya-element";
+import {waitForGigya} from "@gigya/wc/src/gigya-element/loader";
 
 export class GigyaModuleElement extends GigyaConsumerElement {
     public static observedAttributes = ["oncode" , "gigya"];
@@ -11,6 +12,7 @@ export class GigyaModuleElement extends GigyaConsumerElement {
     constructor() {
         super();
         this.generateCode.bind(this);
+        waitForGigya().then((g)=>this.gigya =g).then(()=>this.generateCode());
         
     }
 

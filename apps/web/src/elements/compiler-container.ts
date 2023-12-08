@@ -1,7 +1,9 @@
  import './gigya-module/element'
  import './swc-compiler-element'
+ import './ts-transformer/element'
  import {type GigyaModuleElement} from "./gigya-module/element";
- import {type SwcCompilerElement} from "./swc-compiler-element.ts";
+ import {AstDetails, type SwcCompilerElement} from "./swc-compiler-element.ts";
+ import {TsTransformerElement} from "./ts-transformer/element.ts";
 export class ModuleCompilerContainer extends HTMLElement {
     private gigyaModuleElement: GigyaModuleElement | undefined;
  
@@ -22,6 +24,7 @@ export class ModuleCompilerContainer extends HTMLElement {
            <main>
              <gigya-module ></gigya-module>
             <swc-compiler></swc-compiler>
+            <ts-transformer></ts-transformer>
            </main>
     
           <footer contenteditable>Footer Content —  .com 2020</footer>
@@ -30,6 +33,7 @@ export class ModuleCompilerContainer extends HTMLElement {
     `;
         this.gigyaModuleElement = this.querySelector<GigyaModuleElement>('gigya-module')!;
         const swcCompilerElement = this.querySelector<SwcCompilerElement>('swc-compiler')!;
+        const tsTransformerElement = this.querySelector<TsTransformerElement>('ts-transformer')!;
         const exportButton = this.querySelector<HTMLButtonElement>('#export-button')!;
         // const transformButton = this.querySelector<HTMLButtonElement>('#transform-button')!;
         
@@ -42,6 +46,12 @@ export class ModuleCompilerContainer extends HTMLElement {
             swcCompilerElement.setAttribute('code', (event as CustomEvent).detail);
         });
         
+        // swcCompilerElement.addEventListener('code', (event: Event) => {
+        //     tsTransformerElement.setAttribute('code', (event as CustomEvent).detail);
+        // });
+        swcCompilerElement.addEventListener('ast', (event: Event) => {
+            tsTransformerElement?.setAst((event as CustomEvent<AstDetails>).detail);
+        });
      
         
         
