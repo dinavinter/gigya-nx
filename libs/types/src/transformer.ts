@@ -1,24 +1,10 @@
-// write ts transformer to inline import types in the source code
 
 import path from 'path';
 import ts from 'typescript';
 import * as fs from "fs";
-import * as dom from 'dts-dom';
-
-function domdtas(name: string) {
-    const intf = dom.create.interface(name);
-    intf.jsDocComment = 'This is my nice interface';
-    intf.members.push(dom.create.method(
-        'getThing',
-        [dom.create.parameter('x', dom.type.number)],
-        dom.type.void,
-        dom.DeclarationFlags.Optional));
-
-    const ns = dom.create.namespace('SomeNamespace');
-    ns.members.push(intf);
-
-    console.log(dom.emit(ns));
-}
+ 
+// this transformer is for inline all imported types in the source file
+ 
 
 function isPrivateAccesor(typeelem: ts.Node) {
   return   ts.isAccessor(typeelem) && typeelem.modifiers?.some((m) => m.kind === ts.SyntaxKind.PrivateKeyword)
@@ -99,48 +85,7 @@ function  createDeclarationFileTransformer (program: ts.Program) {
                     }
 
                     
-                    function visitHeritageClauses(node:ts.ClassDeclaration) {
-                        const membersLog = node.members.map((m)=>{
-                            return {
-                                name: m.name?.getText(),
-                                kind: ts.SyntaxKind[m.kind],
-                                alias: checker.getTypeAtLocation(m)?.aliasSymbol?.name,
-                                type: ts.isPropertySignature(m) && m.type && ts.isTypeReferenceNode(m.type) && m.type.typeName.getText(),
-                                typeKind: ts.isPropertySignature(m) && m.type && ts.SyntaxKind[m.type.kind],
-                            }
-                        });
-                        console.log("visitClass ", name, node.name?.getText(), membersLog.length, membersLog, node.heritageClauses?.length );
-                        
-                        const baseClassTypes = (node.heritageClauses || [])
-                            ?.flatMap(heritageToSymbol)
-                            .map(x=>x.members)
-                           
-                        
-                        return baseClassTypes;
- 
-                     }
-                     
-                     //returns array of type from symbol
-                   function  visitSymbolTable( symbolTable: ts.SymbolTable | undefined):{
-                          name:string,
-                          type: ts.Type,
-                          node: ts.Declaration | undefined
-                     }[] {
-                        if (!symbolTable) {
-                            return [];
-                        }
-                        return [...symbolTable.entries()].flatMap(([name, symbol]) => {
-                            const type = checker.getDeclaredTypeOfSymbol(symbol);
-                             
-                             return{
-                                 name: name.toString()  ,
-                                 type,
-                                 node: symbol.valueDeclaration,
-                                 symbol
-                             }
-                        });
-                        
-                   }                        
+                       
                     
 
                     /**
@@ -266,13 +211,12 @@ function  createDeclarationFileTransformer (program: ts.Program) {
                                     const members = classToTypeElements(node);
                                     log(node, checker, heritageTypes, name); 
                                     heritageTypes
-                                        
-                                        .forEach(
-                                        s=> s.valueDeclaration && visit_node(s.valueDeclaration)
-                                    )
-                                     
-                                    members.filter(m=>m.name && !types.has(m.name.getText()))
-                                        .forEach(m=>visit_node(m))
+                                        .filter(s=> s.valueDeclaration)
+                                        .map(s=>s.valueDeclaration)
+                                         .concat(members.filter(m=>m.name )                                        .filter(m=>m.name && !types.has(m.name.getText()))
+                                             .filter(m=>m.name && !types.has(m.name.getText()))
+                                         ).forEach(m=>visit_node(m!))
+ 
                                     const typeLiteral=context.factory.createTypeLiteralNode(classToTypeElements(node));
 
                                      return  context.factory.createIntersectionTypeNode(heritageTypes
@@ -286,62 +230,7 @@ function  createDeclarationFileTransformer (program: ts.Program) {
 
                                 }
                                
-                                   
-                                // //concat   type elements from base classes
-                                // const baseClasssDeps = visitHeritageClauses(node);
-                                //
-                                // baseClasssDeps
-                                //     // .forEach((baseClass) => {
-                                //     //     visit_node(baseClass);
-                                //     // });
-                                //     //    
-                                //    .flatMap(visitSymbolTable)
-                                //     .forEach(({ node}) => {
-                                //          node && visit_node(node);
-                                //      });
-
-
-
-
-                               // const extnededType= baseClasssDeps 
-                               //      .flatMap(visitSymbolTable)
-                               //     .map(({type, node})=> visitType(name,type))
-                               //     .map(literal=> context.factory.createTypeReferenceNode(name, [literal]));
-                                
-                                
-                                  
-
-                                // const typeElements = node.members.map(member => {
-                                //     if (ts.isPropertyDeclaration(member)) {
-                                //         return ts.factory.createPropertySignature(
-                                //             member.modifiers,
-                                //             member.name,
-                                //             member.questionToken,
-                                //             member.type
-                                //         );
-                                //     }
-                                //     // Add other cases if needed (e.g., for methods)
-                                //     return undefined;
-                                // }).filter((member): member is ts.TypeElement => member !== undefined);
-
-
-                                // const classDeclaration = context.factory.createClassDeclaration(
-                                //     node.modifiers,
-                                //     node.name,
-                                //     node.typeParameters,
-                                //     node.heritageClauses,
-                                //     node.members
-                                // );
-
-
-
-                                
-                                
-
-
-                                // const symbol = checker.getSymbolAtLocation(node.name!)!;
-                                // const type = checker.getDeclaredTypeOfSymbol(symbol);
-                                // visitType(name, type);
+                              
                             }
                            
                             return ts.visitEachChild(node, visit_node, context);
@@ -379,106 +268,7 @@ function  createDeclarationFileTransformer (program: ts.Program) {
                     }
 
                     return ts.visitEachChild(node, visitSpecificDeclaration(name), context);
-
-
-                    // if (ts.isExportDeclaration(node) && node.name?.getText() === name) {
-                    //     console.log("visit-export-dec ", node.name.getText());
-                    //     return ts.visitEachChild(node, visit, context);
-                    // }
-                    // if (ts.isExportAssignment(node) && node.name?.getText() === name) {
-                    //     console.log("visit-export-assignment ", node.name.getText());
-                    //     return ts.visitEachChild(node, visit, context);
-                    // }
-                    // if (ts.isExportSpecifier(node) && node.name.getText() === name) {
-                    //     console.log("visit-export-specifier ", node.name.getText());
-                    //     return ts.visitEachChild(node, visit, context);
-                    // }
-                    // if (ts.isImportSpecifier(node) && node.name.getText() === name) {
-                    //     console.log("visit-import-specifier ", node.name.getText());
-                    //     return  undefined;
-                    // }
-                    // if (ts.isImportClause(node) && node.name?.getText() === name) {
-                    //     console.log("visit-import-clause ", node.name.getText());
-                    //     return  undefined;
-                    // }
-                    // if (ts.isImportTypeNode(node) && node.getText() === name) {
-                    //     console.log("visit-import-type-node ", node.getText());
-                    //     return  undefined;
-                    // }
-                    // if (ts.isImportEqualsDeclaration(node) && node.name.getText() === name) {
-                    //     console.log("visit-import-equals-declaration ", node.name.getText());
-                    //     return  undefined;
-                    // }
-                    // if (ts.isImportDeclaration(node) && node.importClause?.name?.getText() === name) {
-                    //      return  undefined;
-                    // }
                     
-                   
-                    
-                    /*
-                    if (ts.isClassDeclaration(node) && node.name?.getText() === name) {
-                        console.log("isClassDeclaration ", node);
-                        const symbol = checker.getSymbolAtLocation(node.name!)!;
-                        const type = checker.getDeclaredTypeOfSymbol(symbol);
-                        const declarations = checker.getPropertiesOfType(type).flatMap((property: any) => {
-                         
-                            return property.declarations.map(visit);
-                        });
-                        const typeLiteralNode = context.factory.createTypeLiteralNode(declarations);
-                        // console.log("typeLiteralNode ", node.typeName.getText());
-                        // context.factory.updateSourceFile(file, context.factory.createNodeArray([...file.statements,...declarations, typeLiteralNode]));
-                        //no changes in source file
-                        return [typeLiteralNode];
-                    }
-                    if (ts.isFunctionDeclaration(node) && node.name?.getText() === name) {
-                        console.log("isFunctionDeclaration ", node);
-                        const symbol = checker.getSymbolAtLocation(node.name!)!;
-                        const type = checker.getDeclaredTypeOfSymbol(symbol);
-                        const declarations = checker.getPropertiesOfType(type).flatMap((property: any) => {
-                           
-                            return property.declarations.map(visit);
-                        });
-                        const typeLiteralNode = context.factory.createTypeLiteralNode(declarations);
-                        // console.log("typeLiteralNode ", node.typeName.getText());
-                        // context.factory.updateSourceFile(file, context.factory.createNodeArray([...file.statements,...declarations, typeLiteralNode]));
-                        //no changes in source file
-                        return [typeLiteralNode];
-                    }
-                    if (ts.isVariableStatement(node)) {
-                        node.declarationList?.declarations.forEach((d) => {
-                            if (ts.isVariableDeclaration(d) && d.name.getText() === name) {
-                                console.log("isVariableDeclaration ", d.name.getText());
-                                const symbol = checker.getSymbolAtLocation(d.name!)!;
-                                const type = checker.getDeclaredTypeOfSymbol(symbol);
-                                const declarations = checker.getPropertiesOfType(type).flatMap((property: any) => {
-                                    
-                                    return property.declarations.map(visit);
-                                });
-                                const typeLiteralNode = context.factory.createTypeLiteralNode(declarations);
-                                // console.log("typeLiteralNode ", node.typeName.getText());
-                                // context.factory.updateSourceFile(file, context.factory.createNodeArray([...file.statements,...declarations, typeLiteralNode]));
-                                //no changes in source file
-                                return [typeLiteralNode];
-                            }
-                        })
-                    }
-                    if (ts.isImportDeclaration(node) && ts.isStringLiteral(node.moduleSpecifier) && node.importClause?.name?.getText() === name) {
-                        const moduleSpecifier = node.moduleSpecifier;
-                        const text = moduleSpecifier.text;
-                        const moduleSourcePAth = moduleSpecifier.getSourceFile().fileName;
-
-                        const resolved = ts.resolveModuleName(text, moduleSourcePAth, program.getCompilerOptions(), ts.sys);
-                        console.log("isTypeOnlyImportDeclaration ", text, moduleSourcePAth, resolved);
-                        if (resolved.resolvedModule)
-                            return ts.visitEachChild(node, visitSpecificDeclaration(name, resolved.resolvedModule), context);
-                        else
-                            console.log("isTypeOnlyImportDeclaration: not resolved ", text, moduleSourcePAth, resolved);
-
-
-                    } */
-
-                    // const symbol = checker.getSymbolAtLocation(node)!;
-
 
                 } 
              }
@@ -525,6 +315,9 @@ function  createDeclarationFileTransformer (program: ts.Program) {
             const typesStatements = [...types.entries()]
                 .filter(([name])=>name!== 'Promise')
                 .map(([name, typeNode])=>context.factory.createTypeAliasDeclaration([], name, [], typeNode));
+ 
+            typesStatements[0] && ts.addSyntheticLeadingComment(typesStatements[0], ts.SyntaxKind.MultiLineCommentTrivia, "\nimported types\n", true);
+ 
             return context.factory.updateSourceFile(source,  [...source.statements,...typesStatements]);
             function moduleSource(node: ts.ImportDeclaration) {
                 const moduleSpecifier = node.moduleSpecifier as ts.StringLiteral;
@@ -534,13 +327,7 @@ function  createDeclarationFileTransformer (program: ts.Program) {
                     return {text, moduleSourcePAth, resolved:resolved.resolvedModule, source:program.getSourceFile(resolved.resolvedModule?.resolvedFileName!)!};
                 
              }
-            // if()
-            // context.factory.updateSourceFile(
-            //     file,
-            //     context.factory.createNodeArray([node, ...file.statements]),
-            // );
-            // console.log(node);
-            //  return node;
+           
         };
     };
 }
@@ -550,9 +337,7 @@ function  createDeclarationFileTransformer (program: ts.Program) {
  const __dirname = process.cwd();
 console.log('Generating typescript models... dir:' + __dirname   )
 
-try {
-    // Usage
-
+try { 
     const filePath = path.resolve(__dirname, './src/type-maker.ts');
     const runtime_dir = path.resolve(__dirname, './src/runtime');
     const defs_dir = path.resolve(__dirname, './src/defs');
@@ -569,12 +354,9 @@ try {
             "src/*": ["src/defs/*"],
         }
     });
-     // const sourceFiles = [...program.getSourceFiles()];
-    const result = ts.transform(source, [createDeclarationFileTransformer(program)]);
-    // const transformedSourceFile = result.transformed[0];
-    const printer = ts.createPrinter();
-    // const code = printer.printFile(transformedSourceFile);
-    
+     const result = ts.transform(source, [createDeclarationFileTransformer(program)]);
+     const printer = ts.createPrinter();
+     
     const outputDir = path.resolve(__dirname, '../generated');
     if (!fs.existsSync(outputDir)) {
         fs.mkdirSync(outputDir);
@@ -582,7 +364,7 @@ try {
     console.log('Writing generated typescript to ' + outputDir);
     console.log('files: ', (<ts.SourceFile[]>result.transformed).map((f)=>path.resolve(outputDir, path.parse(f.fileName).name + '.d.ts')));
 
-// Write pretty printed transformed typescript to output directory
+   // Write pretty printed transformed typescript to output directory
     result.transformed.forEach((f)=> {
         const code = printer.printFile(f);
         const outputFilePath = path.resolve(outputDir, path.parse(f.fileName).name + '.d.ts');
