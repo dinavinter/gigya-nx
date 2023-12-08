@@ -33,93 +33,8 @@ function  createDeclarationFileTransformer (program: ts.Program) {
     const types = new Map<string, ts.TypeLiteralNode>();
      return (context:ts.TransformationContext) => {
         return (file:ts.SourceFile ) => {
-
-
-            const typeAliasToInterfaceTransformer: (node: ts.Node) => ts.Node = (node: ts.Node) => {
-                const visit: ts.Visitor = node => {
  
-                    function getDeclarations(type: ts.Type) {
-                        return checker.getPropertiesOfType(type).flatMap(property => {
-                            /*
-                              Type references declarations may themselves have type references, so we need
-                              to resolve those literals as well 
-                            */
-                            return property.declarations?.map(visit).flatMap(a => a || []) || [];
-                        });
-                    }
-
-                    /*
-                                          Convert type references to type literals
-                                            interface IUser {
-                                              username: string
-                                            }
-                                            type User = IUser <--- IUser is a type reference
-                                            interface Context {
-                                              user: User <--- User is a type reference
-                                            }
-                                          In both cases we want to convert the type reference to
-                                          it's primitive literals. We want:
-                                            interface IUser {
-                                              username: string
-                                            }
-                                            type User = {
-                                              username: string
-                                            }
-                                            interface Context {
-                                              user: {
-                                                username: string
-                                              }
-                                            }
-                                        */
-                    if (ts.isTypeReferenceNode(node)) {
-                        const symbol = checker.getSymbolAtLocation(node.typeName)!;
-                        const type = checker.getDeclaredTypeOfSymbol(symbol);
-                        const declarations = getDeclarations(type);
-                        return context.factory.createTypeLiteralNode(declarations.filter(ts.isTypeElement));
-                    }
-
-                    /* 
-                      Convert type alias to interface declaration
-                        interface IUser {
-                          username: string
-                        }
-                        type User = IUser
-                    
-                      We want to remove all type aliases
-                        interface IUser {
-                          username: string
-                        }
-                        interface User {
-                          username: string  <-- Also need to resolve IUser
-                        }
-                    
-                    */
-
-                    if (ts.isTypeAliasDeclaration(node)) {
-                        const symbol = checker.getSymbolAtLocation(node.name)!;
-                        const type = checker.getDeclaredTypeOfSymbol(symbol);
-                        const declarations = getDeclarations(type);
-
-                        // Create interface with fully resolved types
-                        return context.factory.createInterfaceDeclaration(
-                             [context.factory.createToken(ts.SyntaxKind.DeclareKeyword)],
-                            node.name.getText(),
-                            [], 
-                            [],
-                            declarations.filter(ts.isTypeElement)
-                        );
-                    }
-                    // Remove all export declarations
-                    // if (ts.isImportDeclaration(node)) {
-                    //     return undefined;
-                    // }
-
-                    return ts.visitEachChild(node, visit, context);
-                };
-
-                return ts.visitNode(node, visit);
-            };
-            const visitSpecificDeclaration = (name:string) => {
+             const visitSpecificDeclaration = (name:string) => {
                 return (node: ts.Node) => {
                     //search for any declration and related types in source file
                     const visitType = (name: string, node: ts.Type) => {
@@ -140,15 +55,7 @@ function  createDeclarationFileTransformer (program: ts.Program) {
                         }));
 
                         types.set(name, typeLiteralNode);
-
-                        // declarations
-                        //     .filter(ts.isPropertySignature)
-                        //     .map((d) => d.type)
-                        //     .filter((d) => d && ts.isTypeReferenceNode(d))
-                        //     .map((d) => d as ts.TypeReferenceNode)
-                        //     .filter((d) => !types.has(d.typeName.getText()))
-                        //     .forEach(visitTypeReferenceNode);
-
+ 
                         const visitDeclaration = (node: ts.Node) => {
                             
                             if (ts.isTypeReferenceNode(node) && !types.has(node.typeName.getText())) {
@@ -158,10 +65,7 @@ function  createDeclarationFileTransformer (program: ts.Program) {
 
                         }
                         declarations
-                            // .filter(ts.isPropertySignature)
-                            // .map((d) => d.type)
-                            // .filter((d) => d && !ts.isTypeReferenceNode(d))
-                            .forEach(d=> ts.visitEachChild(d, visitDeclaration , context));
+                             .forEach(d=> ts.visitEachChild(d, visitDeclaration , context));
 
                       
                     }
