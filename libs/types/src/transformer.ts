@@ -27,10 +27,32 @@ function isNotPrivate(node: ts.Node) {
     return !isPrivateAccesor(node)
 }
 
+function log(node: ts.ClassDeclaration, checker: ts.TypeChecker, heritageTypes: ts.Symbol[], name: string) {
+    const membersLog = node.members.map((m) => {
+        return {
+            name: m.name?.getText(),
+            kind: ts.SyntaxKind[m.kind],
+            alias: checker.getTypeAtLocation(m)?.aliasSymbol?.name,
+            type: ts.isPropertySignature(m) && m.type && ts.isTypeReferenceNode(m.type) && m.type.typeName.getText(),
+            typeKind: ts.isPropertySignature(m) && m.type && ts.SyntaxKind[m.type.kind],
+        }
+    });
+    const heritageTypesLog = heritageTypes.map(s => {
+        return {
+            name: s.name,
+            declaration_kind: s.valueDeclaration && ts.SyntaxKind[s.valueDeclaration?.kind] || "none",
+            declaration_fToken: s.valueDeclaration && s.valueDeclaration?.getFirstToken(),
+        }
+    });
+
+    const childrenLog = node.getChildren()?.map((d) => ts.SyntaxKind[d.kind]);
+    console.log("visit-class-dec ", name, node.name?.getText(), "\n\tchildren: \t", childrenLog, "\n\tmembers:\t", membersLog.length, membersLog, "\n\theritage:\t", heritageTypesLog);
+}
+
 // type programTransformer = (program: ts.Program) => ts.TransformerFactory<ts.SourceFile>;
 function  createDeclarationFileTransformer (program: ts.Program) {
     const checker = program.getTypeChecker();
-    const types = new Map<string, ts.TypeLiteralNode>();
+    const types = new Map<string, ts.TypeNode>();
      return (context:ts.TransformationContext) => {
         return (file:ts.SourceFile ) => {
  
@@ -67,15 +89,90 @@ function  createDeclarationFileTransformer (program: ts.Program) {
                         declarations
                              .forEach(d=> ts.visitEachChild(d, visitDeclaration , context));
 
+                        
+                        return typeLiteralNode;
                       
                     }
 
                     const visitTypeReferenceNode = (node: ts.TypeReferenceNode) => {
-                        visitType(node.typeName.getText()!,checker.getTypeAtLocation(node));
+                        return visitType(node.typeName.getText()!,checker.getTypeAtLocation(node));
                     }
+
                     
+                    function visitHeritageClauses(node:ts.ClassDeclaration) {
+                        const membersLog = node.members.map((m)=>{
+                            return {
+                                name: m.name?.getText(),
+                                kind: ts.SyntaxKind[m.kind],
+                                alias: checker.getTypeAtLocation(m)?.aliasSymbol?.name,
+                                type: ts.isPropertySignature(m) && m.type && ts.isTypeReferenceNode(m.type) && m.type.typeName.getText(),
+                                typeKind: ts.isPropertySignature(m) && m.type && ts.SyntaxKind[m.type.kind],
+                            }
+                        });
+                        console.log("visitClass ", name, node.name?.getText(), membersLog.length, membersLog, node.heritageClauses?.length );
+                        
+                        const baseClassTypes = (node.heritageClauses || [])
+                            ?.flatMap(heritageToSymbol)
+                            .map(x=>x.members)
+                           
+                        
+                        return baseClassTypes;
+ 
+                     }
                      
-                     const visit_node = (node: ts.Node) => {
+                     //returns array of type from symbol
+                   function  visitSymbolTable( symbolTable: ts.SymbolTable | undefined):{
+                          name:string,
+                          type: ts.Type,
+                          node: ts.Declaration | undefined
+                     }[] {
+                        if (!symbolTable) {
+                            return [];
+                        }
+                        return [...symbolTable.entries()].flatMap(([name, symbol]) => {
+                            const type = checker.getDeclaredTypeOfSymbol(symbol);
+                             
+                             return{
+                                 name: name.toString()  ,
+                                 type,
+                                 node: symbol.valueDeclaration,
+                                 symbol
+                             }
+                        });
+                        
+                   }                        
+                    
+
+                    /**
+                     * @type {ts.HeritageClause} heritage
+                     * */
+                    function heritageToSymbol(heritage: ts.HeritageClause):ts.Symbol[] {
+                        const prettyTypes = heritage.types?.map(checker.getTypeAtLocation)
+                            .map(t=>  {
+                                return {
+                                    name: t.symbol?.name,
+                                    alias: t.aliasSymbol?.name,
+                                    flags: t.flags,
+                                    aliasFlags: t.aliasSymbol?.flags,
+                                   }
+                            });
+                        console.log("heritageToSymbol ", name, heritage.token, prettyTypes,prettyTypes?.length);
+                        if (heritage.token !== ts.SyntaxKind.ExtendsKeyword || !heritage.types) {
+                            return [];
+                        }
+
+                        const heritages = heritage.types.map(function(expression) {
+                            return checker.getTypeAtLocation(expression).getSymbol();
+                        })as ts.Symbol[];
+                        
+ 
+                        return heritages.reduce(function(dependencies, current) {
+                            return dependencies.concat(current);
+                        }, [] as ts.Symbol[]);
+                    }
+
+
+                    const visit_node = (node: ts.Node) => {
                          console.log("visit_node ",name, ts.SyntaxKind[node.kind]);
                          if (ts.isInterfaceDeclaration(node) ){
                              console.log("visit-interface-dec ", node.name.getText(), node.getChildren()?.map((d)=>ts.SyntaxKind[d.kind]));
@@ -104,72 +201,115 @@ function  createDeclarationFileTransformer (program: ts.Program) {
                             
                             if(ts.isTypeReferenceNode(node) && !types.has(node.typeName.getText())) {
                                 console.log("visit-type-reference-node ", node.typeName.getText());
-                                visitTypeReferenceNode(node);
-                                return node;
-                            }
+                                return visitTypeReferenceNode(node);
+                             }
                             if(ts.isClassDeclaration(node) ){
-                                const membersLog = node.members.map((m)=> {
-                                    return {
-                                        name: m.name?.getText(),
-                                        kind: ts.SyntaxKind[m.kind],
-                                        alias: checker.getTypeAtLocation(m)?.aliasSymbol?.name,
-                                        type: ts.isPropertySignature(m) && m.type && ts.isTypeReferenceNode(m.type) && m.type.typeName.getText(),
-                                        typeKind: ts.isPropertySignature(m) && m.type && ts.SyntaxKind[m.type.kind],
-                                    }
-                                });
-                                console.log("visit-class-dec ",name, node.name?.getText(), node.getChildren()?.map((d)=>ts.SyntaxKind[d.kind]), membersLog, membersLog.length);
-  
-                                
-                                 
-                                const typeElements = node.members.flatMap(member => {
-                                    if (ts.isPropertyDeclaration(member)) {
-                                        return ts.factory.createPropertySignature(
-                                            [],
-                                            member.name,
-                                            member.questionToken,
-                                            member.type
-                                        );
-                                    }
-                                    if (ts.isMethodDeclaration(member)) {
-                                        return ts.factory.createMethodSignature(
-                                            [],
-                                            member.name,
-                                            member.questionToken,
-                                            member.typeParameters,
-                                            member.parameters,
-                                            member.type
-                                        );
-                                    }
-                                    if (ts.isGetAccessorDeclaration(member)) {
-                                        return ts.factory.createPropertySignature(
-                                            [],
-                                            member.name,
-                                            member.questionToken,
-                                            member.type 
-                                        );
-                                    }
-                                    if (ts.isSetAccessorDeclaration(member)) {
-                                        return ts.factory.createSetAccessorDeclaration(
-                                            member.modifiers,
-                                            member.name,
-                                            member.parameters,
-                                            member.body
-                                        );
-                                    }
-                                    if (ts.isConstructorDeclaration(member)) {
-                                        return ts.factory.createConstructorDeclaration(
-                                             member.modifiers,
-                                            member.parameters,
-                                            member.body
-                                        );
-                                    }
+                                types.set(name, visitClass(node)); 
+                                return types.get(name);
+                                function visitClass(node: ts.ClassDeclaration){
+
+
+                                    const classToTypeElements =(node: ts.ClassDeclaration):ts.TypeElement[] => {
+                                        return  node.members.flatMap(member => {
+                                            if (ts.isPropertyDeclaration(member)) {
+                                                return ts.factory.createPropertySignature(
+                                                    [],
+                                                    member.name,
+                                                    member.questionToken,
+                                                    member.type
+                                                );
+                                            }
+                                            if (ts.isMethodDeclaration(member)) {
+                                                return ts.factory.createMethodSignature(
+                                                    [],
+                                                    member.name,
+                                                    member.questionToken,
+                                                    member.typeParameters,
+                                                    member.parameters,
+                                                    member.type
+                                                );
+                                            }
+                                            if (ts.isGetAccessorDeclaration(member)) {
+                                                return ts.factory.createPropertySignature(
+                                                    [],
+                                                    member.name,
+                                                    member.questionToken,
+                                                    member.type
+                                                );
+                                            }
+                                            if (ts.isSetAccessorDeclaration(member)) {
+                                                return ts.factory.createSetAccessorDeclaration(
+                                                    member.modifiers,
+                                                    member.name,
+                                                    member.parameters,
+                                                    member.body
+                                                );
+                                            }
+                                            if (ts.isConstructorDeclaration(member)) {
+                                                return ts.factory.createConstructorDeclaration(
+                                                    member.modifiers,
+                                                    member.parameters,
+                                                    member.body
+                                                );
+                                            }
+
+
+                                            // Add other cases if needed (e.g., for methods)
+                                            return []
+                                        }) as ts.TypeElement[]}
                                     
+
                                     
-                                    // Add other cases if needed (e.g., for methods)
-                                    return []
-                                }) as ts.TypeElement[]
-                                   ;
+                                    const heritageTypes= node.heritageClauses?.flatMap(
+                                        heritageToSymbol
+                                    ) ||[];
+                                    const members = classToTypeElements(node);
+                                    log(node, checker, heritageTypes, name); 
+                                    heritageTypes
+                                        
+                                        .forEach(
+                                        s=> s.valueDeclaration && visit_node(s.valueDeclaration)
+                                    )
+                                     
+                                    members.filter(m=>m.name && !types.has(m.name.getText()))
+                                        .forEach(m=>visit_node(m))
+                                    const typeLiteral=context.factory.createTypeLiteralNode(classToTypeElements(node));
+
+                                     return  context.factory.createIntersectionTypeNode(heritageTypes
+                                        .map(s=>context.factory.createTypeReferenceNode(s.name) as ts.TypeNode)
+                                        .concat(typeLiteral)
+                                    )
+                                    
+                                   
+                                       
+                                     
+
+                                }
+                               
+                                   
+                                // //concat   type elements from base classes
+                                // const baseClasssDeps = visitHeritageClauses(node);
+                                //
+                                // baseClasssDeps
+                                //     // .forEach((baseClass) => {
+                                //     //     visit_node(baseClass);
+                                //     // });
+                                //     //    
+                                //    .flatMap(visitSymbolTable)
+                                //     .forEach(({ node}) => {
+                                //          node && visit_node(node);
+                                //      });
+
+
+
+
+                               // const extnededType= baseClasssDeps 
+                               //      .flatMap(visitSymbolTable)
+                               //     .map(({type, node})=> visitType(name,type))
+                               //     .map(literal=> context.factory.createTypeReferenceNode(name, [literal]));
                                 
+                                
+                                  
 
                                 // const typeElements = node.members.map(member => {
                                 //     if (ts.isPropertyDeclaration(member)) {
@@ -192,9 +332,9 @@ function  createDeclarationFileTransformer (program: ts.Program) {
                                 //     node.heritageClauses,
                                 //     node.members
                                 // );
-                                
-                                 const typeLiteralNode = context.factory.createTypeLiteralNode(typeElements);
-                                types.set(name, typeLiteralNode);
+
+
+
                                 
                                 
 
@@ -203,6 +343,7 @@ function  createDeclarationFileTransformer (program: ts.Program) {
                                 // const type = checker.getDeclaredTypeOfSymbol(symbol);
                                 // visitType(name, type);
                             }
+                           
                             return ts.visitEachChild(node, visit_node, context);
   
                      }
