@@ -8,7 +8,7 @@
       "executor": "@nx/vite:build",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/libs/types"
+        "outputPath": "dist/libs/types",
       }
     },
     "lint": {
@@ -19,7 +19,7 @@
       }
     },
     "print": {
-      "command": "pnpm tsc libs/types/src/type-printer.ts --noEmit"
+      "command": "pnpm tsc libs/types/src/type-printer.ts "
     },
     "tsc": {
       "executor": "@nx/js:tsc",
