@@ -9,6 +9,7 @@ export class GigyaModuleElement extends GigyaConsumerElement {
 
     public initialized = false;
     private moduleJavascript: string | null = null;
+    private outputElement: Element;
     constructor() {
         super();
         this.generateCode.bind(this);
@@ -23,7 +24,7 @@ export class GigyaModuleElement extends GigyaConsumerElement {
     }
     
     generateCode() {
-        this.textContent= this.moduleJavascript = this.moduleJavascript ?? exportGigyaModule(this.gigya);
+        this.outputElement.setAttribute('value', this.moduleJavascript = this.moduleJavascript ?? exportGigyaModule(this.gigya));
         this.broadcastMessage(this.moduleJavascript);
     }
     
@@ -41,9 +42,18 @@ export class GigyaModuleElement extends GigyaConsumerElement {
         this.setAttribute('contenteditable', 'true');
         this.addEventListener('export-gigya',  this.generateCode.bind(this));
         this.setAttribute('class', 'editor');
-         
+        this.innerHTML = `
+        <wc-monaco-editor
+        id="module"
+           folding
+           minimap
+           theme="vs-light"
+           language="javascript"></wc-monaco-editor>
+         `;
+        this.outputElement = this.querySelector('#module')!;
 
- 
+
+
     }
 
      

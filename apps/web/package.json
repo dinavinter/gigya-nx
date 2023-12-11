@@ -16,6 +16,9 @@
     "@gigya/types": "workspace:*",
     "@gigya/wc": "workspace:*",
     "@swc/wasm-web": "^1.3.99",
-    "halting-problem": "^1.1.0"
+    "@vanillawc/wc-monaco-editor": "^1.10.15",
+    "dts-dom": "^3.7.0",
+    "halting-problem": "^1.1.0",
+    "monaco-editor-polymer": "github:PolymerVis/monaco-editor"
   }
 }

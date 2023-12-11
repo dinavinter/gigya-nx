@@ -1,13 +1,15 @@
 import {  transform} from './transformer';
 // import type {Script} from "@swc/wasm-web";
-import {AstDetails} from "../swc-compiler-element.ts";
 
+declare type MonacoEditor = HTMLElement & {
+    set value(v: string) ;
+}
 export class TsTransformerElement extends HTMLElement {
-    private outputElement: HTMLPreElement;
+    private outputElement: MonacoEditor;
 
     constructor() {
         super();
-        this.outputElement = document.createElement('pre');
+        // this.outputElement = document.createElement('wc-monaco-editor') as MonacoEditor;
     }
 
     static get observedAttributes() {
@@ -24,9 +26,17 @@ export class TsTransformerElement extends HTMLElement {
         this.setAttribute('class', 'editor');
         this.setAttribute('contenteditable', 'true');
         this.innerHTML = `
-            <pre contenteditable id="ts-output"  ></pre>
+        <wc-monaco-editor
+        id="ts-output"
+           folding
+           minimap
+           theme="vs-light"
+           language="javascript"></wc-monaco-editor>
+
+
+<!--            <pre contenteditable id="ts-output"  ></pre>-->
         `;
-        this.outputElement = this.querySelector<HTMLPreElement>('#ts-output')!;
+        this.outputElement = this.querySelector('#ts-output')!;
     }
 
     async compileCode(code:string) {
@@ -35,10 +45,10 @@ export class TsTransformerElement extends HTMLElement {
             const {programTransformer} = await import('./transformer/transform-code.ts');
             const compiled = await transform(programTransformer ,   code)
            
-            this.outputElement.textContent = compiled;
+            this.outputElement.value = compiled;
         } catch (error) {
             console.log(error);
-            this.outputElement.textContent = error instanceof Error ? error.message : `${error}`;
+            this.outputElement.value = error instanceof Error ? error.message : `${error}`;
         }
     }
 
@@ -48,16 +58,16 @@ export class TsTransformerElement extends HTMLElement {
             // const {programTransformer: transformCode} = await import('./transformer/transform-code.ts?raw');
             const {transform} = await import('./transformer/index.ts');
             const {programTransformer} = await import('./transformer/transform-code');
-            const {default: code }  =await import ('@gigya/types/src/type-maker.ts?raw');
+            // const {default: code }  =await import ('@gigya/types/src/type-maker.ts?raw');
 
             // const ts = await import('typescript');
             // const transpile =(c: string)=>  ast(c).then(print).then((c)=>c.code)
             const compiled = await transform(programTransformer ,   code)
 
-            this.outputElement.textContent = compiled;
+            this.outputElement.value = compiled;
         } catch (error) {
             console.log(error);
-            this.outputElement.textContent = error instanceof Error ? error.message : `${error}`;
+            this.outputElement.value = JSON.stringify(error, null, 2);
         }
     }
 }

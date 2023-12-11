@@ -2,6 +2,8 @@ import compileModule from './compileModule';
 import {Awaitable} from "vitest";
 import   {type ProgramTransformer} from "./transform-code.ts";
 import ts from "typescript";
+import {createApiMap, createApiMapFile} from "./api-list.ts";
+import {BaseApi} from '@gigya/types';
 
 const FILENAME = 'astExplorer.tsx';
 declare type Transpile = (program: string) => Awaitable<string> | string;
@@ -19,7 +21,15 @@ export async function loadTransformer() {
 
 export  async function transform(createTransformer:ProgramTransformer, code:string) {
 
-
+    const gigya= (window as unknown as any).gigya as any;
+    const apiList = gigya._.arApiList as BaseApi[];
+   const apiMapFile =  ts.createSourceFile(
+       'api-map.ts',
+        createApiMapFile(apiList), 
+       ts.ScriptTarget.Latest,
+       true,
+   );
+   
     // Create a minimal typescript host object needed for the rest of the compiler api
     const host : ts.CompilerHost = {
         fileExists: () => true,
@@ -28,12 +38,16 @@ export  async function transform(createTransformer:ProgramTransformer, code:stri
         getDefaultLibFileName: () => 'lib.d.ts',
         getNewLine: () => '\n',
         getSourceFile: (filename: any) => {
+            if(filename === FILENAME)
             return ts.createSourceFile(
                 filename,
                 code,
                 ts.ScriptTarget.Latest,
                 true,
             );
+            if(filename == 'api-map.ts')
+                return apiMapFile;
+            
         },
         readFile: () => undefined,
         useCaseSensitiveFileNames: () => true,
@@ -67,12 +81,16 @@ export  async function transform(createTransformer:ProgramTransformer, code:stri
    // const langService= ts.createLanguageService(langServiceHost, ts.createDocumentRegistry());
     // create the program with the provided file as entry point
     const program = ts.createProgram([FILENAME], {
-        noResolve: true,
-        target: ts.ScriptTarget.Latest,
+         target: ts.ScriptTarget.Latest,
         module: ts.ModuleKind.ESNext,
+        declaration: true,
+        emitDeclarationOnly: true,
         esModuleInterop: true,
         experimentalDecorators: true,
-        experimentalAsyncFunctions: true
+        experimentalAsyncFunctions: true,
+        paths:{
+            '@gigya/types': ['../../types/dist/index.d.ts'],
+        }
     }, host);
 
      // console.log(langService.getNavigationTree(FILENAME));
@@ -90,7 +108,9 @@ export  async function transform(createTransformer:ProgramTransformer, code:stri
 
     // create a printer and print the file to a string
     const printer = ts.createPrinter();
-    const result = printer.printFile(resultFile);
+     const apiMap = createApiMapFile(apiList);
+    const result = apiMap + '\n\n ' + printer.printFile(resultFile);
+    
 
     return result;
 }

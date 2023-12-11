@@ -1,3 +1,8 @@
+import {MonacoEditor, TsEditor} from "./code-editor.ts";
+import './code-editor.ts';
+
+
+
 const swc = await import("../../../../node_modules/@swc/wasm-web/wasm-web.js");
 await swc.default();
 
@@ -9,13 +14,16 @@ export interface AstEvent  {
 
 
 }
+
+
+
 export class SwcCompilerElement extends HTMLElement {
-    private outputElement: HTMLPreElement;
+    private outputElement: HTMLElement ;
 
     constructor() {
         super();
-        this.outputElement = document.createElement('pre');
-    }
+        // this.outputElement = document.createElement('wc-monaco-editor')  ;
+     }
 
     static get observedAttributes() {
         return ['code'];
@@ -31,11 +39,16 @@ export class SwcCompilerElement extends HTMLElement {
         this.setAttribute('class', 'editor');
         this.setAttribute('contenteditable', 'true');
         this.innerHTML = `
-            <pre contenteditable id="swc-output"  ></pre>
-        `;
-        this.outputElement = this.querySelector<HTMLPreElement>('#swc-output')!;
-    }
+        <wc-monaco-editor
+        id="swc-output"
+           folding
+           minimap
+           theme="vs-light"
+           language="javascript"></wc-monaco-editor>
+         `;
+        this.outputElement = this.querySelector('#swc-output')!;
 
+    }
     compileCode(code:string) {
         try {
             const compiled = swc.transformSync(code, {
@@ -47,7 +60,7 @@ export class SwcCompilerElement extends HTMLElement {
                     target: "es2015"
                 }
             });
-            this.outputElement.textContent = compiled.code;
+            this.outputElement.setAttribute('value', compiled.code ) ;
             this.dispatchEvent(new CustomEvent('code', {detail: compiled.code}));
             this.dispatchEvent(new CustomEvent<AstEvent>('ast', {detail: {
                 code: compiled.code, 
@@ -57,8 +70,9 @@ export class SwcCompilerElement extends HTMLElement {
                 }}));
             
          } catch (error) {
-            this.outputElement.textContent = error instanceof Error ? error.message : `${error}`;
-        }
+            this.outputElement.setAttribute('value', `error: ${JSON.stringify(error)}` ) ;
+
+         }
     }
 }
 

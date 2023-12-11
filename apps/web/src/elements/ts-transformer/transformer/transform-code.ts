@@ -1,7 +1,6 @@
-import ts, {ModifierFlags, VariableDeclaration} from "typescript";
-import {type GigyaAPI } from "@gigya/types/src";
-import {appendStringElements} from "@gigya/types/src/defs/accounts/Gigya.JS.Plugin.screenSet2/mocks/Utils";
+import ts  from "typescript";
 import {BaseApi} from "@gigya/types/src/defs/core/Gigya.Js/app/API/BaseApi";
+import {getAPIInterfaces} from "./transform-api-list.ts";
 
 // const transformer = sourceFile => {
 //     const visitor = (node: ts.Node): ts.Node => {
@@ -67,8 +66,8 @@ export  function programTransformer(program: ts.Program) {
     const checker = program.getTypeChecker();  
     return (context: ts.TransformationContext) => { 
         return (sourceFile: any) => {
-             const apiType = context.factory.createFunctionTypeNode(
-            // ts.createLanguageService(_program.getSourceFiles()[0], 'test').forEach((f)=>console.log(f));
+             context.factory.updateSourceFile(sourceFile, [context.factory.createImportDeclaration(undefined, context.factory.createImportClause(true,context.factory.createIdentifier('Runner'), undefined), context.factory.createStringLiteral('@gigya/types'))]);
+             // ts.createLanguageService(_program.getSourceFiles()[0], 'test').forEach((f)=>console.log(f));
             const visitor = (node: ts.Node): ts.Node => {
                 // const rootSymbol = checker.getAmbientModules()[0]; 
                 // checker.getExportsOfModule(rootSymbol).forEach((m)=>console.log(m));
@@ -105,25 +104,70 @@ export  function programTransformer(program: ts.Program) {
 
                     const expressions = getExpressions(node).map((e)=>e.getText()).reverse().join('.');
                     const api:BaseApi =gigya._.getApi(expressions);
-                    if(api){
-                        console.log(node.name.getText(), expressions,api, node);
-                        const typeApi=checker.getStringLiteralType(api.methodName);
-                          const typeApiNode=checker.cr(GigyaAPI, undefined, ts.NodeBuilderFlags.IgnoreErrors);
-                           ts.transform(typeof typeApiNode,  , program.getCompilerOptions());   
-                        context.factory.updatePropertyAssignment(node, node.name,context.factory.createArrowFunction( undefined, undefined, [], undefined, undefined, ts.creTE(typeApiNode, undefined), node.initializer));
-                         context.factory.updateTypeParameterDeclaration(node.initializer, node.name, ts.createArrowFunction(
+                    if(api) {
+                        // console.log(node.name.getText(), expressions, api, node);
+                        try {
+                            const apiObjectLiteral = context.factory
+                                .createAsExpression(createObjectLiteral(api),
+                                    context.factory.createTypeReferenceNode('const'));
+                            context.factory.updatePropertyAssignment(node, node.name, apiObjectLiteral);
+
+                            // const variable =context.factory.createVariableDeclaration(expressions, undefined, undefined,apiObjectLiteral)
+                            // const apiTypeOf= context.factory.createTypeOfExpression(apiObjectLiteral);
+                            // const apiReferncedType=   context.factory.createTypeParameterDeclaration([],expressions, apiTypeOf);
+                            // const type= checker.getTypeOfAssignmentPattern(createObjectLiteral(api));
+                            const typeNode = checker.typeToTypeNode(checker.getContextualType(apiObjectLiteral)!, undefined, undefined);
+                            console.log(node.name.getText(), expressions, api, node, apiObjectLiteral, checker.getContextualType(apiObjectLiteral), typeNode);
+
+                            const apiReferncedType = context.factory.createTypeReferenceNode('Runner', []);
+                            // return context.factory.updatePropertyAssignment(node, node.name, apiObjectLiteral);
+                            //   return  context.factory.createPropertyAssignment(  node.name, apiObjectLiteral);
+                            return context.factory.createFunctionDeclaration( undefined, undefined, node.name.getText(), undefined, [
+                                context.factory.createParameterDeclaration(undefined, undefined, 'params', undefined, typeNode, undefined),
+                            ], undefined, context.factory.createBlock([]) );
+                             
+                        }
+                        catch (e) {
+                            console.log(e);
+                        }
                     }
                     
-                     
-                  mi0p
                 }
                 return ts.visitEachChild(node, visitor, context);
             };
 
-            return ts.visitNode(sourceFile, visitor);
-        };
+              ts.visitNode(sourceFile, visitor);
+            const apiIterfaces = getAPIInterfaces(gigya, context);
+              // const source= ts.createSourceFile("file.ts",`import Runner from '@gigya/types'; 
+              //     import {Gigya} from '@gigya/types';
+              // `    
+              //    , ts.ScriptTarget.Latest, false, ts.ScriptKind.TS);
+              
+             const apiListRefe= context.factory.createTypeReferenceNode("ApiList"  );
+            const GigyaAPI = context.factory.createTypeAliasDeclaration(undefined, 'GigyaAPI',  undefined, context.factory.createTypeReferenceNode("ApiMap" , context.factory.createTypeLiteralNode(apiListRefe)),) 
+            return context.factory.updateSourceFile(sourceFile, [context.factory.createImportDeclaration(undefined, context.factory.createImportClause(true, context.factory.createIdentifier("ApiMap"), undefined), context.factory.createStringLiteral('@gigya/types')),
+                GigyaAPI,...Object.values(apiIterfaces)]); 
+         };
+        function createObjectLiteral   (obj:object):ts.ObjectLiteralExpression {
+            return context.factory.createObjectLiteralExpression(Object.entries(obj).map(([k, v]) => createAssignment(k, v)), true);
+        }
+
+        function createAssignment  (name: string, value:any) {
+            switch (typeof value) {
+                case "string":
+                    return context.factory.createPropertyAssignment(name, context.factory.createStringLiteral(value));
+                case "number":
+                    return context.factory.createPropertyAssignment(name, context.factory.createNumericLiteral(value));
+                case "object":
+                    return context.factory.createPropertyAssignment(name, createObjectLiteral(value));
+                default:
+                    return context.factory.createPropertyAssignment(name, context.factory.createStringLiteral(value));
+            }
+        }
     };
-};
+}
+
+
 
 export default programTransformer;
 export type ProgramTransformer = typeof programTransformer;

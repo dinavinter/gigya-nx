@@ -12,6 +12,20 @@ p {
   language: javascript;
   background-color: #f4f4f4;
 }
+
+"monaco-editor" {
+    grid-column-end: auto;
+    overflow: scroll;
+    language: javascript;
+    background-color: #f4f4f4;
+}
+"wc-monaco-editor" {
+  grid-column-end: auto;
+  overflow: scroll;
+  language: javascript;
+  background-color: #f4f4f4;
+}
+
 pre {
   grid-column-end: auto;
   overflow: scroll;
