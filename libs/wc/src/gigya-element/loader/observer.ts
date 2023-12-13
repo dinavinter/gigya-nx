@@ -1,7 +1,7 @@
 import {assign, createMachine, interpret} from '@xstate/fsm';
 import type gigya from '@gigya/types/src/index';
 
-function waitForGigya(): Promise<gigya> {
+export function waitForGigya(): Promise<gigya> {
   return new Promise((resolve) => {
     const interval = setInterval(() => {
       const gigya = (window as any).gigya as any;
