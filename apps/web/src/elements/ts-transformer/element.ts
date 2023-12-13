@@ -27,15 +27,12 @@ export class TsTransformerElement extends HTMLElement {
         this.setAttribute('contenteditable', 'true');
         this.innerHTML = `
         <wc-monaco-editor
-        id="ts-output"
+           id="ts-output"
            folding
            minimap
            theme="vs-light"
            language="javascript"></wc-monaco-editor>
-
-
-<!--            <pre contenteditable id="ts-output"  ></pre>-->
-        `;
+         `;
         this.outputElement = this.querySelector('#ts-output')!;
     }
 

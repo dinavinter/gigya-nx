@@ -102,8 +102,8 @@ export  function programTransformer(program: ts.Program) {
 
                     ;
 
-                    const expressions = getExpressions(node).map((e)=>e.getText()).reverse().join('.');
-                    const api:BaseApi =gigya._.getApi(expressions);
+                    const apiName = getExpressions(node).map((e)=>e.getText()).reverse().join('.');
+                    const api:BaseApi =gigya._.getApi(apiName);
                     if(api) {
                         // console.log(node.name.getText(), expressions, api, node);
                         try {
@@ -117,26 +117,26 @@ export  function programTransformer(program: ts.Program) {
                             // const apiReferncedType=   context.factory.createTypeParameterDeclaration([],expressions, apiTypeOf);
                             // const type= checker.getTypeOfAssignmentPattern(createObjectLiteral(api));
                             const typeNode = checker.typeToTypeNode(checker.getContextualType(apiObjectLiteral)!, undefined, undefined);
-                            console.log(node.name.getText(), expressions, api, node, apiObjectLiteral, checker.getContextualType(apiObjectLiteral), typeNode);
+                            console.log(node.name.getText(), apiName, api, node, apiObjectLiteral, checker.getContextualType(apiObjectLiteral), typeNode);
 
-                            const apiReferncedType = context.factory.createTypeReferenceNode('Runner', []);
+                           
+                            const apiReferncedType = context.factory.createTypeReferenceNode(`APIMap["${apiName}"]`  );
                             // return context.factory.updatePropertyAssignment(node, node.name, apiObjectLiteral);
-                            //   return  context.factory.createPropertyAssignment(  node.name, apiObjectLiteral);
-                            return context.factory.createFunctionDeclaration( undefined, undefined, node.name.getText(), undefined, [
-                                context.factory.createParameterDeclaration(undefined, undefined, 'params', undefined, typeNode, undefined),
-                            ], undefined, context.factory.createBlock([]) );
+                              return  context.factory.createPropertySignature(  undefined, node.name.getText(), undefined, apiReferncedType);
+                            // return apiReferncedType;
                              
                         }
                         catch (e) {
                             console.log(e);
                         }
                     }
-                    
+                    return undefined;
+
                 }
                 return ts.visitEachChild(node, visitor, context);
             };
 
-              ts.visitNode(sourceFile, visitor);
+             const transformed= ts.visitNode(sourceFile, visitor);
             const apiIterfaces = getAPIInterfaces(gigya, context);
               // const source= ts.createSourceFile("file.ts",`import Runner from '@gigya/types'; 
               //     import {Gigya} from '@gigya/types';
@@ -146,7 +146,7 @@ export  function programTransformer(program: ts.Program) {
              const apiListRefe= context.factory.createTypeReferenceNode("ApiList"  );
             const GigyaAPI = context.factory.createTypeAliasDeclaration(undefined, 'GigyaAPI',  undefined, context.factory.createTypeReferenceNode("ApiMap" , context.factory.createTypeLiteralNode(apiListRefe)),) 
             return context.factory.updateSourceFile(sourceFile, [context.factory.createImportDeclaration(undefined, context.factory.createImportClause(true, context.factory.createIdentifier("ApiMap"), undefined), context.factory.createStringLiteral('@gigya/types')),
-                GigyaAPI,...Object.values(apiIterfaces)]); 
+                GigyaAPI,...transformed.statements]) 
          };
         function createObjectLiteral   (obj:object):ts.ObjectLiteralExpression {
             return context.factory.createObjectLiteralExpression(Object.entries(obj).map(([k, v]) => createAssignment(k, v)), true);

@@ -12,18 +12,22 @@ export function getAPIInterfaces(gigya, context: ts.TransformationContext) {
         const apiNode = context.factory.createIdentifier(apiIdentifiers.pop()!)
         const apiType =context.factory.createTypeReferenceNode(`ApiMap["${apiName}"]`  )
         const propertyNode = context.factory.createPropertySignature([], apiNode, undefined, apiType);
-        const interfaceName = apiIdentifiers.join('.');
+        const interfaceName = apiIdentifiers.length ? apiIdentifiers.join('.') : 'gigya';
         // interfaceMap[interfaceName] = interfaceMap[interfaceName] ?? context.factory.createInterfaceDeclaration([], interfaceName, [], [], context.factory.createNodeArray([propertyNode]));
         const existingInterface = interfaceMap[interfaceName];
         if (existingInterface) {
             interfaceMap[interfaceName] = context.factory.updateInterfaceDeclaration(existingInterface, existingInterface.modifiers, existingInterface.name, existingInterface.typeParameters, existingInterface.heritageClauses, [...existingInterface.members, propertyNode]);
-        } else interfaceMap[interfaceName] = interfaceMap[interfaceName] ?? context.factory.createInterfaceDeclaration([], interfaceName, [], [], context.factory.createNodeArray([propertyNode]));
+        } else interfaceMap[interfaceName] = interfaceMap[interfaceName] ?? context.factory.createInterfaceDeclaration([], apiIdentifiers.pop() ?? 'gigya', [], [], context.factory.createNodeArray([propertyNode]));
  
         
 
     });
     return interfaceMap;
 }
+
+
+
+ 
 
 // export  function programTransformer(program: ts.Program) {
 //     const gigya= (window as unknown as any).gigya as any;

@@ -109,7 +109,7 @@ export  async function transform(createTransformer:ProgramTransformer, code:stri
     // create a printer and print the file to a string
     const printer = ts.createPrinter();
      const apiMap = createApiMapFile(apiList);
-    const result = apiMap + '\n\n ' + printer.printFile(resultFile);
+    const result = apiMap + '\n\n ' //+ printer.printFile(resultFile);
     
 
     return result;
