@@ -1,5 +1,3 @@
-import * as fs from "fs";
-import * as ts from "typescript";
 
 function watch(rootFileNames: string[], options: ts.CompilerOptions) {
     const files: ts.MapLike<{ version: number }> = {};

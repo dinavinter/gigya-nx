@@ -1,4 +1,4 @@
-import {ApiMap} from "./type-maker";
+import {ApiMap, InferClassName, InferPlugin, InferPluginParams, UiApiParams} from "./type-maker";
 import {apis} from "@gigya/sdk";
 
 export type  GigyaAPI = ApiMap<typeof apis>;
@@ -40,3 +40,21 @@ export type GigyaTree = {
 }
 
    
+const initRegistration:GigyaAPI["accounts.initRegistration"] = (params) => {
+    params.sdk = "js";
+    params.isLite= true;
+  }
+
+const showScreen:GigyaAPI["showScreenSet"] = (params  ) => {
+    params.containerID = "container";
+    params.screenSet = "Default-RegistrationLogin";
+    params.startScreen = "gigya-register-screen";
+    
+ }
+ declare type classN =InferPlugin< {
+     methodName: "showScreenSet",
+     settings: {
+         className: "ScreenSet.ScreenSetPlugin"
+     }
+ }>;
+ 
