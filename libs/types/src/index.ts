@@ -1,6 +1,5 @@
-import type {GigyaService} from "./gigyaService";
-export type { GigyaAPI, ServerApiParams} from "./type-maker";
+ export type { ServerApiParams, Runner} from "./type-maker";
  // export * from './gigyaService';
+export * from "./type-maker";
 
-export default  GigyaService;
- 
+  

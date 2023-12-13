@@ -1,32 +1,37 @@
-import type {ServerApi} from "@defs/core/Gigya.Js/app/API/ServerApi";
-import type {UiApi} from "@defs/core/Gigya.Js/app/API/UiApi";
-import type {BaseApi} from "@defs/core/Gigya.Js/app/API/BaseApi";
-import type {IScreenSetParams} from "@defs/accounts/Gigya.JS.Plugin.screenSet2/app/ScreenSetPlugin";
- declare type BaseApiList =  ReadonlyArray< ApiBase>;
-declare type APIServerMinimum =  Pick<ServerApi,  "schema" | "methodName">  & Partial<ServerApi> & Basic ;
-declare type APIUIBase = Pick<UiApi,  "methodName">  & Partial<UiApi>  & Basic
-declare type Basic={
-    run?: Pick<BaseApi, "run">
-};
-declare type ApiBase = APIServerMinimum | APIUIBase   ;
- export type ApiMap<TArray extends BaseApiList > = {
+import type {ServerApi} from "./defs/core/Gigya.Js/app/API/ServerApi";
+import type {UiApi} from "./defs/core/Gigya.Js/app/API/UiApi";
+import type {BaseApi} from "./defs/core/Gigya.Js/app/API/BaseApi";
+import type {ScreenSetPlugin} from "./defs/accounts/Gigya.JS.Plugin.screenSet2/app/ScreenSetPlugin";
+import {MyPhotoPlugin} from "./defs/accounts/Gigya.Js.Plugin.ProfilePhoto/app/profilePhoto";
+import {LoginPlugin} from "./defs/socialize/Gigya.Js.Login2/app/LoginPlugin";
+import {PagesPlugin} from "./defs/accounts/Gigya.Js.Plugin.Pages/app/PagesPlugin";
+import {EditConnectionPlugin} from "./defs/socialize/Gigya.Js.Plugin.EditConnectionsNew/app/EditConnections";
+import { BasePlugin } from './defs/core/Gigya.Js.Plugin/app/BasePlugin';
+
+
+declare type BaseApiJson = Pick<BaseApi, "methodName"> & Partial<BaseApi> & any;
+declare type BaseApiList = ReadonlyArray<BaseApiJson>;
+declare type APIServerBase = Pick<ServerApi, "schema" > ;
+declare type APIUIBase = Pick<UiApi, "methodName"> & Partial<UiApi> & BaseApiJson
+
+export type ApiMap<TArray extends BaseApiList> = {
     [E in TArray[number] as E["methodName"]]: Runner<E>
 }
 
+export type BaseParams =  {
+    callback?: (response: any) => void,  errorCallback?: (error: any) => void,
+};
 
+declare function runner<Api extends BaseApiJson>(args: APIParams<Api> ): void;
 
+declare type Runner<Api extends BaseApiJson> = typeof runner<Api>;
 
-declare function runner<Api extends ApiBase> (args:Params<Api>): void;
+declare type APIParams<Api extends BaseApiJson> =  InferParams<Api> & BaseParams;
+ declare type InferParams<Api extends BaseApiJson> =
+    Api extends APIServerBase ? ServerApiParams<Api> :
+        Api extends APIUIBase ? UiApiParams<Api> :any ;
 
-declare type Runner<Api extends ApiBase>  = typeof runner<Api>;
-
-declare type Params<Api extends ApiBase> =
-    Api extends APIServerMinimum ? ServerApiParams<Api> :
-        Api extends APIUIBase ? UiApiParams<Api>:
-            InferParams<Api>;
-
-
-declare type ServerApiParams<Api extends APIServerMinimum> = {
+declare type ServerApiParams<Api extends APIServerBase> = {
     [Key in keyof Schema<Api['schema']>]?: any
 }
 
@@ -38,28 +43,47 @@ type Split<S extends string, D extends string> =
         S extends '' ? [] :
             S extends `${infer T}${D}${infer U}` ? [T, ...Split<U, D>] : [S];
 
-type plugins={
-    ["showScreenSet"]: (params:IScreenSetParams)=>void
-};
+type plugins = {
+    ["ScreenSet.ScreenSetPlugin"]: ScreenSetPlugin
+    ["profilePhoto.MyPhotoPlugin"]: MyPhotoPlugin
+    ["login_v2.LoginPlugin"] : LoginPlugin
+    ["Pages.PagesPlugin"] : PagesPlugin
+    ["editConnections.EditConnectionPlugin"]: EditConnectionPlugin
+    
+ };
 
+export declare type InferPlugin<Api extends APIUIBase> =
+    InferClassName<Api> extends keyof plugins? 
+    plugins[InferClassName<Api>]   : never;
 
+export declare type InferPluginParams<Plugin extends BasePlugin<any, any, any>> = Plugin extends BasePlugin<infer Params, infer _CSS, infer _Template> ? Params:any;
+export declare type InferClassName<Api extends APIUIBase, ClassName extends string = string> = Api extends { settings:{ className: infer ClassName } }? ClassName : 
+    Api extends {
+    className: infer ClassName
+    }? ClassName: never;
 type Plugin<API extends APIUIBase> =
-    API extends  {methodName: infer methodName} ?
-        methodName extends keyof plugins?
-            plugins[methodName]
-            : InferParams<API>: InferParams<API>;
+    InferPlugin<API> extends BasePlugin<infer Params, infer _CSS, infer _Template> ? Params:any;
+ 
+ 
+ export declare type UiApiParams<Api extends APIUIBase> = Plugin<Api>  
+ 
 
-declare type UiApiParams<Api extends APIUIBase> =Plugin<Api>;
-declare type InferParams<Api extends ApiBase> =  Api['run'] extends (...args: infer Params) => any ? Params : [];
-
-
-
-declare type Section<name extends string, section extends Record<string, any> , Map extends Record<string, any>> = {
-    [api in keyof section]: api extends string? Map[ Join<name,api>] : never;
+declare type Section<name extends string, section extends Record<string, any>, Map extends Record<string, any>> = {
+    [api in keyof section]: api extends string ? Map[ Join<name, api>] : never;
 }
 
-declare type Join<T extends string, T1 extends string, Seperator extends string ="."> =  `${T}${Seperator}${T1}`;
+declare type Join<T extends string, T1 extends string, Seperator extends string = "."> = `${T}${Seperator}${T1}`;
 
-export declare type Gigya<gigya extends Record<string, Record<string, any>>,   Map extends ApiMap<BaseApiList> = ApiMap<BaseApiList>> = {
-    [plugin in keyof gigya]: plugin extends string ? Section<plugin, gigya[plugin] , Map> : never;
+ declare type Gigya<gigya extends Record<string, Record<string, any>>, Map extends ApiMap<BaseApiList> = ApiMap<BaseApiList>> = {
+    [plugin in keyof gigya]: plugin extends string ? Section<plugin, gigya[plugin], Map> : never;
 }
+
+export type {
+    BaseApi,
+    ServerApi,
+    UiApi,
+    Runner, 
+    ServerApiParams,
+    APIParams,
+    Gigya
+};

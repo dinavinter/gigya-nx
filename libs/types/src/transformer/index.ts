@@ -21,7 +21,9 @@ function isNotPrivate(node: ts.Node) {
         return (file:ts.SourceFile ) => {
             
             const visitImportedType = (name: string) => {
+                console.log("visit-imported-type ", name);
                 return (node: ts.Node) => {
+                    
                     // Check if the node is a specific declaration and its name matches the `name` parameter
                     if ((ts.isInterfaceDeclaration(node) || ts.isTypeAliasDeclaration(node) || ts.isEnumDeclaration(node) || ts.isModuleDeclaration(node) || ts.isNamespaceExportDeclaration(node) || ts.isClassDeclaration(node)) && node.name?.getText() === name) {
                              // If it is, call `visit_node` on the node
@@ -85,11 +87,14 @@ function isNotPrivate(node: ts.Node) {
                    
                  const heritages = node.types
                      // .filter((t) => t.expression.kind === ts.SyntaxKind.ExtendsKeyword)
-                     .map(expression => checker.getTypeAtLocation(expression).getSymbol());
+                     .map(expression => { return{
+                         type: checker.getTypeAtLocation(expression),
+                         symbol: checker.getTypeAtLocation(expression).getSymbol()!,
+                         typeParameters: expression.typeArguments}});
 
                 const typeNodes = heritages.reduce((dependencies, current) => {
-                    if (current) {
-                        const typeRef = context.factory.createTypeReferenceNode(current.name);
+                    if (current.symbol) {
+                        const typeRef = context.factory.createTypeReferenceNode(current.symbol.name , current.typeParameters)
                         dependencies.push(typeRef);
                     }
                     return dependencies;
@@ -112,7 +117,7 @@ function isNotPrivate(node: ts.Node) {
                 console.log("visit-interface-type ", node.name.getText(), type.symbol?.name, type.aliasSymbol?.name, type.aliasSymbol?.valueDeclaration?.kind && ts.SyntaxKind[type.aliasSymbol?.valueDeclaration?.kind]);
                   
                 const typeLiteral= context.factory.createTypeLiteralNode(node.members);
-                 return context.factory.createTypeAliasDeclaration([], node.name.getText(), [], typeLiteral);
+                 return context.factory.createTypeAliasDeclaration([], node.name.getText(), node.typeParameters, typeLiteral);
                  
              }
 
@@ -180,7 +185,7 @@ function isNotPrivate(node: ts.Node) {
                     heritageTypes 
                     .concat(typeLiteral)
                 )
-                return context.factory.createTypeAliasDeclaration([], node.name!.getText(), [], intersectionType);
+                return context.factory.createTypeAliasDeclaration([], node.name!.getText(), node.typeParameters, intersectionType);
  
             }
             function logType (  node: ts.Type) {
@@ -209,7 +214,7 @@ function isNotPrivate(node: ts.Node) {
                     }
                 }));
             }
-            function visitType (name: string, node: ts.Type)  {
+            function visitType(name: string, node: ts.Type)  {
 
                 logType(node);
                 const declarations = checker
@@ -306,7 +311,7 @@ try {
      const result = ts.transform(source, [createDeclarationFileTransformer(program)]);
      const printer = ts.createPrinter();
      
-    const outputDir = path.resolve(__dirname, '../generated');
+    const outputDir = path.resolve(__dirname, './dist');
     if (!fs.existsSync(outputDir)) {
         fs.mkdirSync(outputDir);
     }
@@ -319,6 +324,9 @@ try {
         const outputFilePath = path.resolve(outputDir, path.parse(f.fileName).name + '.d.ts');
         fs.writeFileSync(outputFilePath, code);
     });
+    
+    //save main to index.d.ts
+    fs.writeFileSync(path.resolve(outputDir, 'index.d.ts'), printer.printFile(result.transformed[0]));
   
 
 
