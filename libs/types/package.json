@@ -4,14 +4,15 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:transformer": " tsc src/transformer/index.ts  --esModuleInterop --target es2022 --module nodenext",
+    "transform": "node src/transformer/index"
   },
   "main": "./index.js",
   "module": "./index.mjs",
   "typings": "./index.d.ts",
   "devDependencies": {
-    "-": "^0.0.1",
-    "dts-dom": "^3.7.0",
+     "dts-dom": "^3.7.0",
     "lodash": "^4.17.21"
-  }
+   }
 }

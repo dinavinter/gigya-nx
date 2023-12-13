@@ -19,6 +19,7 @@ import { GSErrors } from '@defs/core/Gigya.Js/app/GSErrors';
 import { TranslationsContainer } from "@defs/core/Gigya.Js.Plugin/app/Utils/languages/language";
 import { ConflictHandling } from './LoginModes';
 import { IFormContext } from "./IFormContext";
+import {BasePlugin} from "@defs/core/Gigya.Js.Plugin/app/BasePlugin";
 export declare type ScreenSet = {
     html: string;
     css: string;
@@ -149,7 +150,7 @@ export declare var ScreenSet_CONSTS: {
     dialogStyle: string;
     dataActiveGroups: string;
 };
-export declare class ScreenSetPlugin extends gigya._.plugins.BasePlugin<IScreenSetParams, IScreenSetTemplates, IScreenSetCSS> implements ITemplateElementParent {
+export declare class ScreenSetPlugin extends  BasePlugin<IScreenSetParams, IScreenSetTemplates, IScreenSetCSS> implements ITemplateElementParent {
     /**
      * Used to cache reference to JavaScript and translations downloaded for each screen-set.
      *

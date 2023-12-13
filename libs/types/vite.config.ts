@@ -13,8 +13,13 @@ export default defineConfig({
     nxViteTsPaths(),
     dts({
       entryRoot: 'src',
+      rollupTypes: false ,
       tsConfigFilePath: path.join(__dirname, 'tsconfig.lib.json'),
-      skipDiagnostics: true,
+      skipDiagnostics: false,
+      copyDtsFiles: true,
+      staticImport: true,
+      insertTypesEntry: true,
+      noEmitOnError:false
     }),
     vitePluginTypescriptTransform({
       enforce: 'pre',
@@ -24,12 +29,11 @@ export default defineConfig({
           include: /\.ts$/,
         },
       },
-      tsconfig: {
-        
+      tsconfig: { 
         location: path.join(__dirname, 'tsconfig.lib.json'),
 
       }
-    })
+    }) 
   ],
 
   // Uncomment this if you are using workers.
@@ -48,6 +52,8 @@ export default defineConfig({
       // Change this to the formats you want to support.
       // Don't forget to update your package.json as well.
       formats: ['es', 'cjs'],
+       
+      
     },
     rollupOptions: {
       // External packages that should not be bundled into your library.
