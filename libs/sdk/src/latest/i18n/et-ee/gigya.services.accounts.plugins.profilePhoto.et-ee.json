@@ -1,0 +1,7 @@
+{
+  "profilePhoto_upload": "Laadi foto üles",
+  "profilePhoto_update": "Uuenda fotot",
+  "profilePhoto_fileSizeInfo": "<b>Foto formaat: </b>JPG/GIF/PNG.<b> Suurus: </b>kuni 3 MB.",
+  "profilePhoto_fileSizeError": "Foto formaat: JPG/GIF/PNG. Suurus: kuni 3 MB.",
+  "profilePhoto_no_file_chosen": "Faili pole valitud"
+}

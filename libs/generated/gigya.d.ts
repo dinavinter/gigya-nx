@@ -1,5 +1,232 @@
+export type BaseParams =  {
+    callback?: (response: any) => void,  errorCallback?: (error: any) => void,
+};
+
 declare module 'gigya' {
-    import {APIParams} from '@gigya/types';
+    type IScreenSetParams = {
+        context?: any;
+        cid?: string;
+        onBeforeSubmit?: (e: any) => void;
+        onAfterSubmit?: (e: any) => void;
+        onSubmit?: (e: any) => void;
+        onAfterValidation?: (e: any) => void;
+        onBeforeValidation?: (e: any) => void;
+        onBeforeScreenLoad?: (e: any) => void;
+        onAfterScreenLoad?: (e: any) => void;
+        onFieldChanged?: (e: any) => void;
+        onHide?: (e: any) => void;
+        apiDomain?: string;
+        regSource?: string;
+        regToken?: string;
+        aToken?: string;
+        finalizeRegistration?: boolean;
+        passwordResetToken?: string;
+        mobileScreenSet?: string;
+        startScreen?: string;
+        initialResponse?: IFormResponse;
+        initialMethod?: string;
+        remember?: boolean;
+        allowAccountsLinking?: boolean;
+        rememberSessionExpiration?: any;
+        sessionExpiration?: any;
+        isChild?: boolean;
+        parentData?: ScreenSetData;
+        cssPrefix?: string;
+        ignoreApiQueue?: boolean;
+        parentTranslations?: object;
+        conflictHandling?: ConflictHandling;
+        providerSessionInfo?: IProviderSessionInfo;
+    };
+    type IFormResponse = {
+        response?: IFormResponse;
+        regToken?: string;
+        aToken?: string;
+        event?: any;
+        autoSkip?: boolean;
+        operation?: string;
+        profile?: IFormData;
+        data?: IFormData;
+        errorDetails?: string;
+        errorMessage?: string[];
+        customMessage?: string;
+        user?: string;
+        secretQuestion?: string;
+        errorDetailsCode?: number;
+        validationErrors?: IErrorInfo[];
+        errorFlags?: string;
+        loginID?: string;
+        childScreenSetCloseReason?: string;
+        providerSessionInfo?: IProviderSessionInfo;
+        gig_provider?: string;
+        errorCode?: GSErrors;
+    };
+    type IFormData = {
+        rememberMe?: boolean;
+    };
+    type IErrorInfo = {
+        fieldName?: string;
+        fieldArrayKeyValue?: string;
+        errorCode: GSErrors;
+        errorType?: ErrorType;
+        errorMessage?: string;
+        customMessage?: string;
+        errorFlags?: string;
+        handled?: boolean;
+        field?: IFormInput;
+        widget?: IFormWidget;
+        isWarn?: boolean;
+    };
+    type GSErrors = {};
+    type ErrorType = {};
+    type IFormInput = {
+        isCaptcha: boolean;
+        getValue(el?: HTMLElement, currentValue?: any): InputValueType;
+        getName(isNormalized: boolean, flatten?: boolean): string;
+        arrayKeyField: string;
+        arrayKeyValue: string;
+        getArrayRoot(flatten?: boolean): string;
+        fieldName: string;
+        normalizedFieldName: string;
+        displayName: string;
+        isInHiddenContainer(): boolean;
+        isHidden(): boolean;
+        required(): boolean;
+        disabled(): boolean;
+        allowEmpty(): boolean;
+        instanceElement: HTMLElement;
+        validate(callback: IValidationCallback, formData?: any): void;
+        validateAsync(formData?: any): Promise<IValidationInfo>;
+        addEventListener(eventName: string, handler: Function): any;
+        removeEventListener(eventName: string, handler: Function): any;
+        getValidityState(): ValidityStates;
+        setValidityState(validityState: ValidityStates): any;
+        addValidityStateListener(listener: IValidityStateListener): any;
+        removeValidityStateListener(listener: IValidityStateListener): any;
+        update(element?: HTMLElement, fieldName?: string, isDataField?: boolean): void;
+        evaluateConditionalAttributes(): void;
+        getMetadata(): {};
+        setValue(dataValue: string | boolean, setByScript: boolean): void;
+        runOnServerDone(callback: ServerDoneFieldCallback): void;
+        fieldNamespace: SchemaName;
+        fieldBaseName: string;
+    };
+    type HTMLElement = {};
+    type InputValueType = {};
+    type IValidationCallback = {};
+    type ValidityStates = {};
+    type IValidityStateListener = {};
+    type ServerDoneFieldCallback = {};
+    type SchemaName = {
+        at(index: number): T | undefined;
+    };
+    type T = {};
+    type IFormWidget = {
+        _form: BaseForm;
+        getFieldsNames(): string[];
+        update(): void;
+        validateAsync(formData: any): Promise<IValidationInfo>;
+        _screen: Screen;
+        linkInstanceElement(parent: HTMLElement): any;
+        unlinkInstanceElement(): any;
+        _parent: ITemplateElementParent;
+        unlinkTemplate(): any;
+        evaluateExpression(conditionalExpression: IConditionalExpression): any;
+        evaluateConditionalAttributes(): any;
+        resetLastConditionalValues(): any;
+        _screenSet: ScreenSetPlugin;
+        warn?(msg: string, id?: string): void;
+    };
+    type BaseForm = {
+        get dataProvider(): IFormDataProvider;
+        get submitButtonClicked(): boolean;
+    };
+    type IFormDataProvider = {
+        defaultSubmitParams: object;
+        hasProviderSessionInfo: boolean;
+        includeParams: string;
+        lang: string;
+    };
+    type IValidationInfo = {
+        errorCode: GSErrors;
+        field?: IFormInput;
+        widget?: IFormWidget;
+        errorType?: ErrorType;
+        setByScript?: boolean;
+        errorMessage?: string;
+        isWarning?: boolean;
+    };
+    type Screen = {
+        get variantGroupId(): string;
+        get abTestId(): string;
+        get abTestingData(): IAbTestingData;
+        get variantPercentage(): number | undefined;
+        get isOriginalVariant(): boolean;
+        get isScreenVariant(): boolean;
+        get requestedScreen(): string;
+    };
+    type IAbTestingData = {
+        testId: string;
+        variantId: string;
+        requestedScreenId: string;
+    };
+    type ITemplateElementParent = {
+        _screenSet: ScreenSetPlugin;
+        warn?(msg: string, id?: string): void;
+    };
+    type ScreenSetPlugin = {
+        get providerSessionInfo(): IProviderSessionInfo;
+        get regToken(): string;
+        get hasProviderSessionInfo(): boolean;
+    };
+    type IProviderSessionInfo = {
+        access_token?: string;
+        provider?: string;
+        provider_uid?: string;
+        idToken?: string;
+        code?: string;
+        lastName?: string;
+        firstName?: string;
+    };
+    type IConditionalExpression = {
+        condition: string;
+        defaultValue?: any;
+        ignoreError?: boolean;
+    };
+    type ScreenSetData = {};
+    type ConflictHandling = {};
+
+    type plugins = {
+        ["showScreenSet"]: (params: IScreenSetParams) => void;
+    };
+    type APIServerBase =  {
+        schema: string
+    } ;
+
+    type ServerApiParams<Api extends APIServerBase> = {
+        [Key in keyof Schema<Api['schema']>]?: any
+    }
+    type APIUIBase =  {
+        methodName: string
+    } ;
+
+    type Plugin<API extends APIUIBase> = API extends {
+        methodName: infer methodName;
+    } ? methodName extends keyof plugins ? plugins[methodName] : InferParams<API> : InferParams<API>;
+    type UiApiParams<Api extends APIUIBase> = Plugin<Api>;
+    type APIParams<Api> =  InferParams<Api> & BaseParams;
+      type InferParams<Api> =
+        Api extends APIServerBase ? ServerApiParams<Api> :
+            Api extends APIUIBase ? UiApiParams<Api> :any ;
+
+
+
+    type Schema<schema extends string> = Record<Split<schema, "|">[number], any>;
+
+
+    type Split<S extends string, D extends string> =
+        string extends S ? string[] :
+            S extends '' ? [] :
+                S extends `${infer T}${D}${infer U}` ? [T, ...Split<U, D>] : [S];
 
     namespace socialize {
         function login(args?: APIParams<{
@@ -3518,4 +3745,4 @@ declare module 'gigya' {
 
 
 
- 
+  

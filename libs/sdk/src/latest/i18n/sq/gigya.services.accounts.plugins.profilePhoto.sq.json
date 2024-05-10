@@ -1,0 +1,7 @@
+{
+  "profilePhoto_upload": "Ngarko Foto",
+  "profilePhoto_update": "Përditëso Foto",
+  "profilePhoto_fileSizeInfo": "<b>Formati i fotos:</b> JPG/GIF/PNG.<b> Madhësia: </b>deri në 3MB.",
+  "profilePhoto_fileSizeError": "Formati i fotos: JPG/GIF/PNG. Madhësia: deri në 3MB.",
+  "profilePhoto_no_file_chosen": "Asnjë skedar nuk u zgjodh"
+}

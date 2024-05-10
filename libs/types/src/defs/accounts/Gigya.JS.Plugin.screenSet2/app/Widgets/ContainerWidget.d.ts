@@ -1,5 +1,5 @@
-import { BaseFormWidget } from 'src/accounts/Gigya.JS.Plugin.screenSet2/app/BaseFormWidget';
-import { BaseForm } from 'src/accounts/Gigya.JS.Plugin.screenSet2/app/BaseForm';
+import { BaseFormWidget } from '../BaseFormWidget';
+import { BaseForm } from '../BaseForm';
 export declare const ContainerWidget_CONSTS: {
     selector: string;
     activeClass: string;

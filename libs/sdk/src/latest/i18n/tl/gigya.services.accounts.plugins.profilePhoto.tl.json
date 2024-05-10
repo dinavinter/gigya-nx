@@ -1,0 +1,7 @@
+{
+  "profilePhoto_upload": "Mag-upload ng Larawan",
+  "profilePhoto_update": "Mag-update ng Larawan",
+  "profilePhoto_fileSizeInfo": "<b>Format ng larawan: </b>JPG/GIF/PNG.<b> Laki:\n</b>hanggang 3MB.",
+  "profilePhoto_fileSizeError": "Format ng larawan: JPG/GIF/PNG. Laki:\nhanggang 3MB.",
+  "profilePhoto_no_file_chosen": "Walang napiling file"
+}

@@ -717,816 +717,816 @@ export const gigya = {
             AsyncManager: function AsyncManager() {},
             LoadDimmer: function LoadDimmer() {},
             ScreenSet: {
-                consent: {
-                    consentFieldName: "isConsentGranted",
-                    namespace: "preferences",
-                    postProcessForm: function postProcessForm() {}
-                },
-                SwitchScreen_CONSTS: {
-                    selector: "[data-switch-screen]",
-                    switchScreen: "data-switch-screen",
-                    successScreen: "data-on-success-screen",
-                    screenSetSkippedScreen: "data-on-screenset-skipped-screen"
-                },
-                SwitchScreenWidget: function SwitchScreenWidget() {},
-                Form_CONSTS: {
-                    originalSuccessScreen: "data-original-success-screen",
-                    successScreen: "data-on-success-screen",
-                    autoSkipScreen: "data-on-auto-skip-screen",
-                    autoSkipFlag: "data-auto-skip",
-                    screenSetSkippedScreen: "data-on-screenset-skipped-screen",
-                    formErrorClass: "gigya-form-error",
-                    defaultCheckedAttribute: "data-checked"
-                },
-                CUSTOM_VALIDATION_TIMEOUT_WARNING: 10000,
-                BaseForm: function BaseForm() {},
-                BaseFormWidget: function BaseFormWidget() {},
-                BaseScreenWidget: function BaseScreenWidget() {},
-                ServerStates: {
-                    0: "NotStarted",
-                    1: "InProgress",
-                    2: "Done",
-                    3: "Error",
-                    NotStarted: 0,
-                    InProgress: 1,
-                    Done: 2,
-                    Error: 3
-                },
-                BaseServerWidget: function BaseServerWidget() {},
-                BaseUploadWidget_CONSTS: {
-                    setDimentionsDelay: 500,
-                    uploadCheckInterval: 500,
-                    uploading: "data-upload-status",
-                    uploadForm: "screenSetUploadForm"
-                },
-                BaseUploadWidget: function BaseUploadWidget() {},
-                BaseWidget: function BaseWidget() {},
-                warn: function warn() {},
-                ErrorScopes: {
-                    0: "bound-object-error",
-                    1: "first-error",
-                    2: "any-error",
-                    3: "all-errors",
-                    boundObjectError: 0,
-                    firstError: 1,
-                    anyError: 2,
-                    allErrors: 3,
-                    "bound-object-error": 0,
-                    "first-error": 1,
-                    "any-error": 2,
-                    "all-errors": 3
-                },
-                ErrorDisplayElement_CONSTS: {
-                    gigyaClasses: [
-                        "gigya-error-display",
-                        "gigya-error-msg"
-                    ],
-                    boundedTo: "data-bound-to",
-                    errorCodes: "data-error-codes",
-                    scope: "data-scope",
-                    flags: "data-error-flags",
-                    errorClassPrefix: "gigya-error-code-",
-                    errorType: "gigya-error-type-"
-                },
-                ErrorDisplayElement: function ErrorDisplayElement() {},
-                ErrorType: {
-                    0: "client",
-                    1: "custom",
-                    2: "server",
-                    client: 0,
-                    custom: 1,
-                    server: 2
-                },
-                PendingErrorAttributes: {
-                    200009: {
-                        name: "data-on-accounts-linked-screen",
-                        nextScreen: function nextScreen() {},
-                        requiresFinalize: true
-                    },
-                    200010: {
-                        name: "data-on-existing-login-identifier-screen",
-                        nextScreen: function nextScreen() {},
-                        requiresFinalize: true
-                    },
-                    206001: {
-                        name: "data-on-pending-registration-screen",
-                        nextScreen: function nextScreen() {},
-                        requiresFinalize: true
-                    },
-                    206002: {
-                        name: "data-on-pending-verification-screen",
-                        nextScreen: function nextScreen() {},
-                        resetFinalizeNeededState: true
-                    },
-                    206003: {
-                        name: "data-on-missing-loginid-screen",
-                        nextScreen: function nextScreen() {}
-                    },
-                    206006: {
-                        name: "data-on-pending-email-verification-code",
-                        requiresFinalize: true,
-                        nextScreen: function nextScreen() {}
-                    },
-                    403100: {
-                        name: "data-on-pending-password-change-screen",
-                        nextScreen: function nextScreen() {},
-                        requiresFinalize: true
-                    },
-                    403101: {
-                        name: "data-on-pending-tfa-verification-screen",
-                        nextScreen: function nextScreen() {},
-                        requiresFinalize: true
-                    },
-                    403102: {
-                        name: "data-on-pending-tfa-registration-screen",
-                        nextScreen: function nextScreen() {},
-                        requiresFinalize: true
-                    },
-                    403110: {
-                        name: "data-on-pending-recent-login-screen",
-                        nextScreen: function nextScreen() {}
-                    },
-                    409003: {
-                        name: "data-on-existing-login-identifier-screen",
-                        nextScreen: function nextScreen() {},
-                        requiresFinalize: true
-                    }
-                },
-                notImplementerAbstract: function notImplementerAbstract() {},
-                ConflictHandling: {
-                    0: "fail",
-                    1: "saveProfileAndFail",
-                    fail: 0,
-                    saveProfileAndFail: 1
-                },
-                LoginModes: {
-                    connect: {
-                        name: "connect"
-                    },
-                    standard: {
-                        name: "standard",
-                        getLoginProviders: function getLoginProviders() {},
-                        filterParams: function filterParams() {}
-                    },
-                    reAuth: {
-                        name: "reAuth",
-                        getLoginProviders: function getLoginProviders() {},
-                        filterParams: function filterParams() {}
-                    },
-                    link: {
-                        name: "link",
-                        getLoginProviders: function getLoginProviders() {},
-                        filterParams: function filterParams() {}
-                    }
-                },
-                Screen: function Screen() {},
-                Screen_CONSTS: {
-                    gigyaClass: "gigya-screen",
-                    conditionalAttributePrefix: "gigya-conditional",
-                    expressionAttributePrefix: "gigya-expression",
-                    cssClass: "data-css-class",
-                    dataVariantPercentage: "data-variant-percentage",
-                    dataVariantGroup: "data-variant-group",
-                    dataVariantOriginalScreen: "data-variant-original-screen",
-                    dataVariantTestId: "data-variant-test-id"
-                },
-                ScreenOptions_CONSTS: {
-                    accountsLinkedScreen: "data-on-accounts-linked-screen",
-                    pendingTfaRegistrationScreen: "data-on-pending-tfa-registration-screen",
-                    pendingTfaVerificationScreen: "data-on-pending-tfa-verification-screen",
-                    pendingRegistrationScreen: "data-on-pending-registration-screen",
-                    existingLoginIdentifierScreen: "data-on-existing-login-identifier-screen",
-                    pendingVerificationScreen: "data-on-pending-verification-screen",
-                    pendingCodeVerificationScreen: "data-on-pending-email-verification-code",
-                    missingLoginIdScreen: "data-on-missing-loginid-screen",
-                    pendingPasswordChangeScreen: "data-on-pending-password-change-screen",
-                    pendingReAuthenticationScreen: "data-on-pending-recent-login-screen",
-                    width: "data-width",
-                    height: "data-height",
-                    caption: "data-caption"
-                },
-                ScreenOptions: function ScreenOptions() {},
-                ScreenSetData: function ScreenSetData() {},
-                EndFlowScreens: {
-                    _skip: 6,
-                    _finish: 2,
-                    _cancel: 8
-                },
-                ScreenSet_CONSTS: {
-                    gigyaClass: "gigya-screen-set",
-                    mobileDialogClass: "gigya-screen-dialog-mobile",
-                    webDialogClass: "gigya-screen-dialog",
-                    contentClass: "gigya-screen-dialog-content",
-                    topElementClass: "gigya-screen-dialog-top",
-                    calculateSizeClass: "gigya-calculate-size",
-                    gigyaHidden: "gigya-hidden",
-                    startScreen: "data-start-screen",
-                    isResponsive: "data-responsive",
-                    dialogStyle: "data-dialog-style",
-                    dataActiveGroups: "data-active-groups"
-                },
-                ScreenSetPlugin: function ScreenSetPlugin() {},
-                ElementRoles: {
-                    0: "_undefined",
-                    1: "template",
-                    2: "instance",
-                    _undefined: 0,
-                    template: 1,
-                    instance: 2
-                },
-                TemplateElement_CONSTS: {
-                    elementId: "data-screenset-element-id",
-                    elementFor: "data-screenset-element-for",
-                    publishElementId: "data-screenset-element-id-publish",
-                    templateForArray: "screenSetTemplateFor",
-                    instanceOfArray: "screenSetInstanceOf",
-                    screenSetRoles: "data-screenset-roles"
-                },
-                TemplateElement: function TemplateElement() {},
-                TemplatesCache: function TemplatesCache() {},
-                createDefaultTemplates: function createDefaultTemplates() {},
-                isHidden: function isHidden() {},
-                inIFrame: function inIFrame() {},
-                isFieldInHiddenContainer: function isFieldInHiddenContainer() {},
-                hasParentAttribute: function hasParentAttribute() {},
-                firstPart: function firstPart() {},
-                LastIndexOf: function LastIndexOf() {},
-                ForEach: function ForEach() {},
-                ForEachProp: function ForEachProp() {},
-                Some: function Some() {},
-                Every: function Every() {},
-                EveryProp: function EveryProp() {},
-                Map: function Map() {},
-                DeepFreeze: function DeepFreeze() {},
-                getElementsByHavingAttribute: function getElementsByHavingAttribute() {},
-                getElementsByHavingAttributePrefix: function getElementsByHavingAttributePrefix() {},
-                isElementContainAttributePrefix: function isElementContainAttributePrefix() {},
-                getConditionalAttributeExpressions: function getConditionalAttributeExpressions() {},
-                setupConditionalExpressionValue: function setupConditionalExpressionValue() {},
-                isKeyCodeDisplayable: function isKeyCodeDisplayable() {},
-                UnitMeasurementType: {
-                    pixel: "px",
-                    percentage: "%",
-                    auto: ""
-                },
-                getUnitMeasurementType: function getUnitMeasurementType() {},
-                getAttributesAsArray: function getAttributesAsArray() {},
-                endsWith: function endsWith() {},
-                hasIndex: function hasIndex() {},
-                removeSerializedKeyLastEnumerator: function removeSerializedKeyLastEnumerator() {},
-                removeSerializedKeyEdgeProperty: function removeSerializedKeyEdgeProperty() {},
-                IETemplateElementPolyfill: function IETemplateElementPolyfill() {},
-                replaceAttribute: function replaceAttribute() {},
-                isDOMXSS: function isDOMXSS() {},
-                delayedFocus: function delayedFocus() {},
-                LinkAccountsForm_CONSTS: {
-                    gigyaClass: "gigya-link-accounts-form"
-                },
-                LinkAccountsForm: function LinkAccountsForm() {},
-                LoginForm_CONSTS: {
-                    gigyaClass: "gigya-login-form"
-                },
-                LoginForm: function LoginForm() {},
-                PasswordlessLoginForm_CONSTS: {
-                    gigyaClass: "gigya-passwordless-login-form"
-                },
-                PasswordlessLoginForm: function PasswordlessLoginForm() {},
-                PasswordlessRegisterForm_CONSTS: {
-                    gigyaClass: "gigya-passwordless-register-form"
-                },
-                PasswordlessRegisterForm: function PasswordlessRegisterForm() {},
-                AuthMethodsForm_CONSTS: {
-                    gigyaClass: "gigya-auth-methods-form",
-                    authMethodSelector: "[data-auth-method]",
-                    authMethod: "data-auth-method"
-                },
-                AuthMethodsForm: function AuthMethodsForm() {},
-                PasswordAuthMethodForm_CONSTS: {
-                    gigyaClass: "gigya-password-auth-method-form",
-                    authMethod: "password"
-                },
-                PasswordAuthMethodForm: function PasswordAuthMethodForm() {},
-                PushAuthMethodForm_CONSTS: {
-                    gigyaClass: "gigya-push-auth-method-form",
-                    authMethod: "push"
-                },
-                PushAuthMethodForm: function PushAuthMethodForm() {},
-                MagicLinkMethodForm_CONSTS: {
-                    gigyaClass: "gigya-magic-link-auth-method-form",
-                    authMethod: "magicLink"
-                },
-                MagicLinkAuthMethodForm: function MagicLinkAuthMethodForm() {},
-                EmaiLCodeAuthMethodForm_CONSTS: {
-                    gigyaClass: "gigya-email-code-auth-method-form",
-                    authMethod: "emailOtp"
-                },
-                EmailCodeAuthMethodForm: function EmailCodeAuthMethodForm() {},
-                CONSTS: {
-                    selector: ".gigya-composite-control.gigya-login-user-enabled-tfa-widget",
-                    toggleSelector: ".gigya-switch-control .gigya-switch-toggle",
-                    widgetStateAttr: "data-widget-state-active",
-                    rbaRuleAttr: "data-rba-rule",
-                    errorDisplaySelector: ".gigya-error-display",
-                    errorMessageSelector: ".gigya-error-msg",
-                    errorActiveClass: "gigya-error-display-active",
-                    errorMessageActiveClass: "gigya-error-msg-active",
-                    bindingNameErrorAttrValue: "userEnabled2fa",
-                    successMessageKey: "user_enable_2fa_success",
-                    errorMessageKey: "user_enable_2fa_error",
-                    switcherWrapperSelector: ".gigya-switch-control",
-                    labelActiveState: ".gigya-user-enabled-tfa-label-enabled-state",
-                    labelDisableState: ".gigya-user-enabled-tfa-label-disabled-state",
-                    alertRole: "alert",
-                    roleAttribute: "role"
-                },
-                NewsletterSignup_CONSTS: {
-                    gigyaClass: "gigya-subscribe-with-email-form"
-                },
-                NewsletterSignupForm: function NewsletterSignupForm() {},
-                ProfileForm_CONSTS: {
-                    gigyaClass: "gigya-profile-form",
-                    specialFields: {
-                        username: true,
-                        oldPassword: true,
-                        password: true,
-                        newPassword: true,
-                        passwordRetype: true,
-                        secretQuestion: true,
-                        secretAnswer: true,
-                        addLoginEmails: true,
-                        removeLoginEmails: true,
-                        phoneNumber: true
-                    }
-                },
-                ProfileForm: function ProfileForm() {},
-                ReauthenticationForm_CONSTS: {
-                    gigyaClass: "gigya-reauthentication-form"
-                },
-                ReauthenticationForm: function ReauthenticationForm() {},
-                RegisterForm_CONSTS: {
-                    gigyaClass: "gigya-register-form"
-                },
-                RegisterForm: function RegisterForm() {},
-                ProgressionForm_CONSTS: {
-                    gigyaClass: "gigya-lite-account-progression-form"
-                },
-                ProgressionForm: function ProgressionForm() {},
-                ResendVerificationCodeForm_CONSTS: {
-                    gigyaClass: "gigya-resend-verification-code-form"
-                },
-                ResendVerificationCodeForm: function ResendVerificationCodeForm() {},
-                ResetPasswordForm_CONSTS: {
-                    gigyaClass: "gigya-reset-password-form"
-                },
-                ResetPasswordForm: function ResetPasswordForm() {},
-                OrgRegisterForm_CONSTS: {
-                    gigyaClass: "gigya-org-register-form"
-                },
-                OrgRegisterForm: function OrgRegisterForm() {},
-                ButtonInput: function ButtonInput() {},
-                CheckboxInput_CONSTS: {
-                    errorClass: "gigya-terms-error",
-                    validClass: "gigya-terms-valid",
-                    dataValueInArray: "data-value-in-array"
-                },
-                CheckboxInput: function CheckboxInput() {},
-                CommunicationCheckboxInput: function CommunicationCheckboxInput() {},
-                EmailInput: function EmailInput() {},
-                ValidityStates: {
-                    0: "_undefined",
-                    1: "valid",
-                    2: "error",
-                    3: "pending",
-                    _undefined: 0,
-                    valid: 1,
-                    error: 2,
-                    pending: 3
-                },
-                fieldsNameData: {
-                    loginID: {
-                        autoFillName: "username",
-                        paramName: "loginID"
-                    },
-                    passwordRetype: {
-                        autoFillName: "",
-                        paramName: ""
-                    }
-                },
-                WriteAccessModes: {
-                    0: "clientModify",
-                    1: "clientCreate",
-                    clientModify: 0,
-                    clientCreate: 1
-                },
-                FormInput_CONSTS: {
-                    fieldName: "data-gigya-name",
-                    displayName: "data-display-name",
-                    captcha: "gigya-captcha",
-                    allowEmpty: "data-allow-empty",
-                    required: "data-required",
-                    originalValue: "data-original-value",
-                    serverValidation: "data-invalid-error-code",
-                    showValidCheckmark: "show-valid-checkmark",
-                    showCheckmarkClass: "gigya-show-checkmark",
-                    validityBorderClass: "gigya-show-validity-border",
-                    showValidityBorderAttr: "show-validity-border",
-                    errorClass: "gigya-error",
-                    warnClass: "gigya-warn",
-                    validClass: "gigya-valid",
-                    pendingClass: "gigya-pending",
-                    emptyClass: "gigya-empty",
-                    placeholderAttribute: "data-gigya-placeholder",
-                    arrayRootAttribute: "data-array-root",
-                    arrayKeyFieldAttribute: "data-array-key-field",
-                    arrayKeyValueAttribute: "data-array-key-value",
-                    identifierType: "data-identifier-type"
-                },
-                FormInputPriorities: {
-                    0: "_start",
-                    1: "Important",
-                    2: "Normal",
-                    3: "Fallback",
-                    4: "_end",
-                    _start: 0,
-                    Important: 1,
-                    Normal: 2,
-                    Fallback: 3,
-                    _end: 4
-                },
-                FieldType: {
-                    hidden: "hidden"
-                },
-                FormInput: function FormInput() {},
-                AddressInput: function AddressInput() {},
-                LoginIdInput: function LoginIdInput() {},
-                BasePasswordInput_CONSTS: {
-                    showPasswordStrength: "show-password-strength"
-                },
-                BasePasswordInput: function BasePasswordInput() {},
-                PasswordInput: function PasswordInput() {},
-                NewPasswordInput: function NewPasswordInput() {},
-                gigyaPhoneNumberInput: "gigya-phone-number-input",
-                PhoneInput_Attributes: {
-                    countryCodesSelection: "data-country-codes-selection",
-                    countryCodes: "data-country-codes"
-                },
-                PhoneNumberInput: function PhoneNumberInput() {},
-                RadioInput_CONSTS: {
-                    wrapperSelector: ".gigya-composite-control-multi-choice",
-                    displayNameExpressionAttr: "gigya-expression:data-display-name"
-                },
-                RadioInput: function RadioInput() {},
-                RememeberInput: function RememeberInput() {},
-                RetypePasswordInput: function RetypePasswordInput() {},
-                ArrayManager_CONST: {
-                    selector: ".gigya-composite-control-array-widget",
-                    containerSelector: ".gigya-array-manager",
-                    formElSelector: "input,select, fieldset, .gigya-array-manager",
-                    addButtonSelector: "button.gigya-array-add-btn",
-                    removeButtonSelector: "button.gigya-array-remove-btn",
-                    itemWrapperClass: "gigya-array-template",
-                    inputsWrapperClass: "inputs-wrapper",
-                    buttonsWrapperClass: "buttons-wrapper",
-                    templateItemAttr: "data-array-template-id",
-                    arrayManagerRootAttr: "data-array-manager-root",
-                    deleteDisabledClass: "disable-delete",
-                    indexMatcher: {}
-                },
-                ArrayManagerItem: function ArrayManagerItem() {},
-                ArrayManagerWidget: function ArrayManagerWidget() {},
-                addIndex: function addIndex() {},
-                Binding_CONSTS: {
-                    selector: "*[data-binding]",
-                    dataBindingAttribute: "data-binding"
-                },
-                BindingWidget: function BindingWidget() {},
-                CaptchaWidget_CONSTS: {
-                    selector: "div.gigya-captcha"
-                },
-                CaptchaWidget: function CaptchaWidget() {},
-                Consent_CONSTS: {
-                    selector: "div.gigya-consent",
-                    titleAttr: "data-label",
-                    approvedOnLabelAttr: "data-approved-on-label",
-                    versionAttr: "data-version",
-                    versionLabelAttr: "data-version-title-label",
-                    localeLabelAttr: "data-locale-label"
-                },
-                ConsentWidget: function ConsentWidget() {},
-                ContainerWidget_CONSTS: {
-                    selector: "div.gigya-container",
-                    activeClass: "gigya-container-enabled",
-                    emptyFields: "data-empty-fields",
-                    loginIdentities: "data-login-idenities",
-                    conditionAttr: "data-condition",
-                    onRenderAttr: "data-on-render"
-                },
-                ContainerWidget: function ContainerWidget() {},
-                Image_CONSTS: {
-                    selector: "div.gigya-image",
-                    srcAttribute: "data-src",
-                    widthAttribute: "data-width",
-                    heightAttribute: "data-height",
-                    backgroundSizeAttribute: "data-background-size"
-                },
-                ImageWidget: function ImageWidget() {},
-                LoginAvailabilityWidget_CONSTS: {
-                    selector: "div.gigya-loginID-availability",
-                    boundTo: "data-bound-to"
-                },
-                LoginAvailabilityWidget: function LoginAvailabilityWidget() {},
-                MyPhotoWidget_CONSTS: {
-                    selector: "div.gigya-myPhoto"
-                },
-                MyPhotoWidget: function MyPhotoWidget() {},
-                DisplayModes: {
-                    policy: {
-                        hasMinimumRequirements: true,
-                        hasStrengthMeter: false,
-                        getTemplate: function getTemplate() {}
-                    },
-                    meter: {
-                        hasMinimumRequirements: false,
-                        hasStrengthMeter: true,
-                        getTemplate: function getTemplate() {}
-                    },
-                    combined: {
-                        hasMinimumRequirements: true,
-                        hasStrengthMeter: true,
-                        getTemplate: function getTemplate() {}
-                    }
-                },
-                BubbleOrientations: {
-                    0: "right",
-                    1: "left",
-                    2: "up",
-                    3: "down",
-                    4: "none",
-                    right: 0,
-                    left: 1,
-                    up: 2,
-                    down: 3,
-                    none: 4
-                },
-                PasswordStrengthWidget_CONSTS: {
-                    selector: "div.gigya-password-strength",
-                    bubbleClass: "gigya-password-strength-bubble",
-                    mobileClass: "mobile-bubble",
-                    desktopClass: "desktop-bubble",
-                    displayMode: "data-display-mode",
-                    bubble: "data-on-focus-bubble",
-                    bubbleOrientation: "data-bubble-orientation"
-                },
-                PasswordStrengthWidget: function PasswordStrengthWidget() {},
-                getPasswordStrengthData: function getPasswordStrengthData() {},
-                isPasswordStrengthValid: function isPasswordStrengthValid() {},
-                PhotoUploadWidget_CONSTS: {
-                    selector: "div.gigya-photo-upload"
-                },
-                PhotoUploadWidget: function PhotoUploadWidget() {},
-                ProfilePhotoWidget_CONSTS: {
-                    selector: "div.gigya-profile-photo"
-                },
-                ProfilePhotoWidget: function ProfilePhotoWidget() {},
-                RequiredDisplayWidget_CONSTS: {
-                    selector: ".gigya-required-display",
-                    boundTo: "data-bound-to",
-                    alwaysVisible: "gigya-required-display-always-visible"
-                },
-                RequiredDisplayWidget: function RequiredDisplayWidget() {},
-                SecretQuestionWidget_CONSTS: {
-                    selector: "div.gigya-secret-question",
-                    allowEmpty: "data-allow-empty"
-                },
-                SecretQuestionWidget: function SecretQuestionWidget() {},
-                SocialLoginWidget_CONSTS: {
-                    selector: "div.gigya-social-login"
-                },
-                SocialLoginWidget: function SocialLoginWidget() {},
-                SubscriptionWidget_CONSTS: {
-                    selector: "div.gigya-subscription",
-                    subscriptionName: "name"
-                },
-                SubscriptionWidget: function SubscriptionWidget() {},
-                PhoneNumberWidget_CONSTS: {
-                    selector: ".gigya-phone-number-widget",
-                    verifyButtonClass: "gigya-phone-verify-button",
-                    resendButtonCLass: "gigya-phone-resend-button",
-                    phonePreviewClass: "gigya-phone-number-preview",
-                    useAsIdentifierAttr: "data-use-as-identifier",
-                    codeInputClass: "gigya-phone-number-verification-code",
-                    phoneInputNumberClass: "gigya-subscriber-phone-number-input",
-                    countryCodeInputClass: "gigya-country-code-select",
-                    verifiedStatusClass: "gigya-phone-verified-status",
-                    resendBlockedLabelClass: "gigya-phone-resend-blocked",
-                    linkDisabledClass: "gigya-disabled",
-                    errorMessageClass: "gigya-error-msg",
-                    placeholderTextAttribute: "data-gigya-placeholder",
-                    gigyaHiddenClass: "gigya-hidden",
-                    placeholderAttribute: "placeholder",
-                    widgetStateAttribute: "data-widget-state",
-                    requiredAttribute: "data-widget-required",
-                    codeStateAttributes: "data-widget-code-state",
-                    displayNameAttribute: "data-display-name",
-                    translationKeyAttribute: "data-translation-key",
-                    resendBlockDefaultLabelAttr: "data-resend-blocked-default-label",
-                    phoneNumberFieldName: "phoneNumber",
-                    resendCountTemplate: "%sec",
-                    disableVerifyInSeconds: 10,
-                    otpCodeLength: 6,
-                    deps: [
-                        function() {}
-                    ]
-                },
-                PhoneNumberWidget: function PhoneNumberWidget() {},
-                Channel_Status: {
-                    noticed: "noticed",
-                    OptIn: "OptIn",
-                    optIn: "optIn",
-                    OptOut: "OptOut",
-                    optOut: "optOut"
-                },
-                CommunicationWidget_CONSTS: {
-                    selector: "div.gigya-communication",
-                    channel: "data-communication-channel",
-                    topic: "data-communication-topic",
-                    status: "data-communication-status",
-                    subscriptionName: "name",
-                    communicationsPrefix: "communications.",
-                    subscriptionType: "data-subscription-type",
-                    subscriptionTopic: "data-subscription-topic",
-                    communicationChannel: "data-subscription-channel"
-                },
-                CommunicationWidget: function CommunicationWidget() {},
-                TfaWidget_CONSTS: {
-                    selector: "div.gigya-tfa"
-                },
-                TfaWidget: function TfaWidget() {},
-                Translated_CONSTS: {
-                    selector: "*[data-translation-key]",
-                    translationKeyAttribute: "data-translation-key"
-                },
-                TranslatedWidget: function TranslatedWidget() {},
-                CaptchaHandlers: {
-                    FunCaptcha: function FunCaptcha() {},
-                    Google: function Google() {}
-                },
-                CaptchaMode: {
-                    visible: "visible",
-                    invisible: "invisible"
-                },
-                BaseCaptchaHandler: function BaseCaptchaHandler() {},
-                FunCaptchaHandler: function FunCaptchaHandler() {},
-                GoogleCaptchaHandler: function GoogleCaptchaHandler() {},
-                RegisterDeviceRequestParam: {
-                    UserCode: "user_code"
-                },
-                RegisterDeviceFormParam: {
-                    UserCode: "userCode"
-                },
-                DeviceCodeForm_CONSTS: {
-                    gigyaClass: "gigya-device-code-form"
-                },
-                DeviceCodeForm: function DeviceCodeForm() {},
-                PasskeyLogin_CONSTS: {
-                    selector: ".gigya-composite-control-passkey-login-widget"
-                },
-                PasskeyLoginWidget: function PasskeyLoginWidget() {},
-                PasskeyRegister_CONSTS: {
-                    selector: ".gigya-composite-control-passkey-register-widget",
-                    behaviorAttr: "data-passkey-behavior"
-                },
-                PasskeyRegisterMode: {
-                    Connect: "connect",
-                    Submit: "submit"
-                },
-                PasskeyRegisterWidget: function PasskeyRegisterWidget() {},
-                PasskeyManager_CONSTS: {
-                    selector: ".gigya-composite-control-passkey-manager-widget"
-                },
-                PasskeyManagerWidget: function PasskeyManagerWidget() {},
-                TFAVerification_CONSTS: {
-                    selector: ".gigya-composite-control-tfa-verification-widget"
-                },
-                TFAVerificationWidget: function TFAVerificationWidget() {},
-                TFAPhoneList_CONSTS: {
-                    selector: ".gigya-tfa-verification-method.tfa-phone-method"
-                },
-                TFAVerificationPhoneListWidget: function TFAVerificationPhoneListWidget() {},
-                TFAPhoneItem_CONSTS: {
-                    sendButtonSelector: ".gigya-tfa-verification-action-btn",
-                    submitButtonSelector: ".gigya-input-submit",
-                    expandedAttribute: "data-device-expanded",
-                    errorMessageSelector: '.gigya-error-msg[data-bound-to="tfaVerificationWidget"]',
-                    errorActiveMessageClass: "gigya-error-msg-active",
-                    rememberDeviceSelector: ".gigya-remember-device-checkbox input",
-                    codeInputSelector: ".gigya-code-input",
-                    nameAttr: "name",
-                    boundToAttr: "data-bound-to",
-                    inputErrorSelector: ".gigya-input-error",
-                    ariaLabelAttr: "aria-label",
-                    deviceLabelSelector: ".gigya-tfa-verification-device-label",
-                    titleAttr: "title",
-                    symbolsPlaceholder: "%lastSymbols",
-                    resendButtonSelector: ".gigya-tfa-resend-code",
-                    selector: '.gigya-tfa-verification-method[data-tfa-method="phone"] .gigya-card',
-                    sendSMSButtonSelector: '.gigya-tfa-verification-action-btn[data-method="sms"]',
-                    sendVoiceButtonSelector: '.gigya-tfa-verification-action-btn[data-method="voice"]',
-                    resendButtonSelectorSms: '.gigya-tfa-resend-code[data-method="sms"]',
-                    resendButtonSelectorVoice: '.gigya-tfa-resend-code[data-method="voice"]',
-                    countDownSelector: ".gigya-api-countdown",
-                    gigyaHiddenClass: "gigya-hidden"
-                },
-                TFAVerificationPhoneItemWidget: function TFAVerificationPhoneItemWidget() {},
-                TFATotpItem_CONSTS: {
-                    sendButtonSelector: ".gigya-tfa-verification-action-btn",
-                    submitButtonSelector: ".gigya-input-submit",
-                    expandedAttribute: "data-device-expanded",
-                    errorMessageSelector: '.gigya-error-msg[data-bound-to="tfaVerificationWidget"]',
-                    errorActiveMessageClass: "gigya-error-msg-active",
-                    rememberDeviceSelector: ".gigya-remember-device-checkbox input",
-                    codeInputSelector: ".gigya-code-input",
-                    nameAttr: "name",
-                    boundToAttr: "data-bound-to",
-                    inputErrorSelector: ".gigya-input-error",
-                    ariaLabelAttr: "aria-label",
-                    deviceLabelSelector: ".gigya-tfa-verification-device-label",
-                    titleAttr: "title",
-                    selector: '.gigya-tfa-verification-method[data-tfa-method="totp"] .gigya-card',
-                    namePlaceholder: "%name"
-                },
-                TFAVerificationTotpItemWidget: function TFAVerificationTotpItemWidget() {},
-                TFATotpList_CONSTS: {
-                    selector: '.gigya-tfa-verification-method[data-tfa-method="totp"]',
-                    deps: [
-                        function() {}
-                    ]
-                },
-                TFAVerificationTotpListWidget: function TFAVerificationTotpListWidget() {},
-                TFAVerificationBackupCodesWidget_CONSTS: {
-                    selector: '.gigya-tfa-verification-method[data-tfa-method="backup-codes"]',
-                    expandButtonSelector: ".gigya-tfa-verification-action-btn",
-                    submitButtonSelector: ".gigya-input-submit",
-                    codeInputSelector: ".gigya-code-input",
-                    cardItemSelector: ".gigya-tfa-verification-device",
-                    cardBodySelector: ".gigya-card-body"
-                },
-                TFAVerificationBackupCodesWidget: function TFAVerificationBackupCodesWidget() {},
-                PasskeyCard_CONSTS: {
-                    selector: "li.gigya-passkey-card",
-                    deleteButtonSelector: ".gigya-remove-passkey-icon",
-                    newCardClass: "gigya-card-new",
-                    deps: [
-                        function() {}
-                    ]
-                },
-                PasskeyCardWidget: function PasskeyCardWidget() {},
-                TfaManagementWidget: function TfaManagementWidget() {},
-                TfaPhoneManagement_CONSTS: {
-                    selector: ' .gigya-tfa-management-method[data-tfa-method="phone"]'
-                },
-                TfaManagementPhoneListWidget: function TfaManagementPhoneListWidget() {},
-                TfaManagementPhoneItemWidget: function TfaManagementPhoneItemWidget() {},
-                TfaEmailManagement_CONSTS: {
-                    selector: '.gigya-tfa-management-method[data-tfa-method="email"]'
-                },
-                TfaManagementEmailListWidget: function TfaManagementEmailListWidget() {},
-                TfaManagementEmailItemWidget: function TfaManagementEmailItemWidget() {},
-                TfaRegistrationWidget: function TfaRegistrationWidget() {},
-                TfaRegistrationPhoneWidget: function TfaRegistrationPhoneWidget() {},
-                TFABackupCodes_CONSTS: {
-                    selector: ".gigya-composite-control-tfa-backup-codes-widget",
-                    backupCodesListEl: ".gigya-tfa-backup-codes-content",
-                    backupCodesListContainerEl: ".gigya-backup-codes-list-container",
-                    printButtonEl: ".gigya-tfa-print-button",
-                    downloadButtonEl: ".gigya-tfa-download-button",
-                    generateBackupCodesButtonEl: ".gigya-generate-code-button",
-                    downloadHeader: "Backup Codes",
-                    downloadFileTitle: "backup-codes.txt",
-                    downloadTextContent: "Download Backup Codes",
-                    backupCodeListItemClass: "gigya-backup-code-item"
-                },
-                TFABackupCodesWidget: function TFABackupCodesWidget() {},
-                CustomForm_CONSTS: {
-                    gigyaClass: "gigya-custom-form"
-                },
-                CustomForm: function CustomForm() {},
-                TfaForm_CONSTS: {
-                    gigyaClass: "gigya-tfa-form"
-                },
-                TfaForm: function TfaForm() {},
-                OrganizationContextConsts: {
-                    selector: ".gigya-organization-context-widget",
-                    dropdownSelector: ".gigya-organization-context-dropdown",
-                    buttonSelector: ".gigya-organization-context-control-link-button",
-                    errorDisplayClass: ".gigya-error-display",
-                    errorMessageClass: ".gigya-error-msg",
-                    errorActiveClass: "gigya-error-display-active",
-                    disabledClass: "gigya-disabled",
-                    noDataAvailableMessage: "no_data_available"
-                },
-                OrganizationContextWidget: function OrganizationContextWidget() {}
-            },
+    consent: {
+        consentFieldName: "isConsentGranted",
+            namespace: "preferences",
+            postProcessForm: function postProcessForm() {}
+    },
+    SwitchScreen_CONSTS: {
+        selector: "[data-switch-screen]",
+            switchScreen: "data-switch-screen",
+            successScreen: "data-on-success-screen",
+            screenSetSkippedScreen: "data-on-screenset-skipped-screen"
+    },
+    SwitchScreenWidget: function SwitchScreenWidget() {},
+    Form_CONSTS: {
+        originalSuccessScreen: "data-original-success-screen",
+            successScreen: "data-on-success-screen",
+            autoSkipScreen: "data-on-auto-skip-screen",
+            autoSkipFlag: "data-auto-skip",
+            screenSetSkippedScreen: "data-on-screenset-skipped-screen",
+            formErrorClass: "gigya-form-error",
+            defaultCheckedAttribute: "data-checked"
+    },
+    CUSTOM_VALIDATION_TIMEOUT_WARNING: 10000,
+        BaseForm: function BaseForm() {},
+    BaseFormWidget: function BaseFormWidget() {},
+    BaseScreenWidget: function BaseScreenWidget() {},
+    ServerStates: {
+        0: "NotStarted",
+            1: "InProgress",
+            2: "Done",
+            3: "Error",
+            NotStarted: 0,
+            InProgress: 1,
+            Done: 2,
+            Error: 3
+    },
+    BaseServerWidget: function BaseServerWidget() {},
+    BaseUploadWidget_CONSTS: {
+        setDimentionsDelay: 500,
+            uploadCheckInterval: 500,
+            uploading: "data-upload-status",
+            uploadForm: "screenSetUploadForm"
+    },
+    BaseUploadWidget: function BaseUploadWidget() {},
+    BaseWidget: function BaseWidget() {},
+    warn: function warn() {},
+    ErrorScopes: {
+        0: "bound-object-error",
+            1: "first-error",
+            2: "any-error",
+            3: "all-errors",
+            boundObjectError: 0,
+            firstError: 1,
+            anyError: 2,
+            allErrors: 3,
+            "bound-object-error": 0,
+            "first-error": 1,
+            "any-error": 2,
+            "all-errors": 3
+    },
+    ErrorDisplayElement_CONSTS: {
+        gigyaClasses: [
+            "gigya-error-display",
+            "gigya-error-msg"
+        ],
+            boundedTo: "data-bound-to",
+            errorCodes: "data-error-codes",
+            scope: "data-scope",
+            flags: "data-error-flags",
+            errorClassPrefix: "gigya-error-code-",
+            errorType: "gigya-error-type-"
+    },
+    ErrorDisplayElement: function ErrorDisplayElement() {},
+    ErrorType: {
+        0: "client",
+            1: "custom",
+            2: "server",
+            client: 0,
+            custom: 1,
+            server: 2
+    },
+    PendingErrorAttributes: {
+        200009: {
+            name: "data-on-accounts-linked-screen",
+                nextScreen: function nextScreen() {},
+            requiresFinalize: true
+        },
+        200010: {
+            name: "data-on-existing-login-identifier-screen",
+                nextScreen: function nextScreen() {},
+            requiresFinalize: true
+        },
+        206001: {
+            name: "data-on-pending-registration-screen",
+                nextScreen: function nextScreen() {},
+            requiresFinalize: true
+        },
+        206002: {
+            name: "data-on-pending-verification-screen",
+                nextScreen: function nextScreen() {},
+            resetFinalizeNeededState: true
+        },
+        206003: {
+            name: "data-on-missing-loginid-screen",
+                nextScreen: function nextScreen() {}
+        },
+        206006: {
+            name: "data-on-pending-email-verification-code",
+                requiresFinalize: true,
+                nextScreen: function nextScreen() {}
+        },
+        403100: {
+            name: "data-on-pending-password-change-screen",
+                nextScreen: function nextScreen() {},
+            requiresFinalize: true
+        },
+        403101: {
+            name: "data-on-pending-tfa-verification-screen",
+                nextScreen: function nextScreen() {},
+            requiresFinalize: true
+        },
+        403102: {
+            name: "data-on-pending-tfa-registration-screen",
+                nextScreen: function nextScreen() {},
+            requiresFinalize: true
+        },
+        403110: {
+            name: "data-on-pending-recent-login-screen",
+                nextScreen: function nextScreen() {}
+        },
+        409003: {
+            name: "data-on-existing-login-identifier-screen",
+                nextScreen: function nextScreen() {},
+            requiresFinalize: true
+        }
+    },
+    notImplementerAbstract: function notImplementerAbstract() {},
+    ConflictHandling: {
+        0: "fail",
+            1: "saveProfileAndFail",
+            fail: 0,
+            saveProfileAndFail: 1
+    },
+    LoginModes: {
+        connect: {
+            name: "connect"
+        },
+        standard: {
+            name: "standard",
+                getLoginProviders: function getLoginProviders() {},
+            filterParams: function filterParams() {}
+        },
+        reAuth: {
+            name: "reAuth",
+                getLoginProviders: function getLoginProviders() {},
+            filterParams: function filterParams() {}
+        },
+        link: {
+            name: "link",
+                getLoginProviders: function getLoginProviders() {},
+            filterParams: function filterParams() {}
+        }
+    },
+    Screen: function Screen() {},
+    Screen_CONSTS: {
+        gigyaClass: "gigya-screen",
+            conditionalAttributePrefix: "gigya-conditional",
+            expressionAttributePrefix: "gigya-expression",
+            cssClass: "data-css-class",
+            dataVariantPercentage: "data-variant-percentage",
+            dataVariantGroup: "data-variant-group",
+            dataVariantOriginalScreen: "data-variant-original-screen",
+            dataVariantTestId: "data-variant-test-id"
+    },
+    ScreenOptions_CONSTS: {
+        accountsLinkedScreen: "data-on-accounts-linked-screen",
+            pendingTfaRegistrationScreen: "data-on-pending-tfa-registration-screen",
+            pendingTfaVerificationScreen: "data-on-pending-tfa-verification-screen",
+            pendingRegistrationScreen: "data-on-pending-registration-screen",
+            existingLoginIdentifierScreen: "data-on-existing-login-identifier-screen",
+            pendingVerificationScreen: "data-on-pending-verification-screen",
+            pendingCodeVerificationScreen: "data-on-pending-email-verification-code",
+            missingLoginIdScreen: "data-on-missing-loginid-screen",
+            pendingPasswordChangeScreen: "data-on-pending-password-change-screen",
+            pendingReAuthenticationScreen: "data-on-pending-recent-login-screen",
+            width: "data-width",
+            height: "data-height",
+            caption: "data-caption"
+    },
+    ScreenOptions: function ScreenOptions() {},
+    ScreenSetData: function ScreenSetData() {},
+    EndFlowScreens: {
+        _skip: 6,
+            _finish: 2,
+            _cancel: 8
+    },
+    ScreenSet_CONSTS: {
+        gigyaClass: "gigya-screen-set",
+            mobileDialogClass: "gigya-screen-dialog-mobile",
+            webDialogClass: "gigya-screen-dialog",
+            contentClass: "gigya-screen-dialog-content",
+            topElementClass: "gigya-screen-dialog-top",
+            calculateSizeClass: "gigya-calculate-size",
+            gigyaHidden: "gigya-hidden",
+            startScreen: "data-start-screen",
+            isResponsive: "data-responsive",
+            dialogStyle: "data-dialog-style",
+            dataActiveGroups: "data-active-groups"
+    },
+    ScreenSetPlugin: function ScreenSetPlugin() {},
+    ElementRoles: {
+        0: "_undefined",
+            1: "template",
+            2: "instance",
+            _undefined: 0,
+            template: 1,
+            instance: 2
+    },
+    TemplateElement_CONSTS: {
+        elementId: "data-screenset-element-id",
+            elementFor: "data-screenset-element-for",
+            publishElementId: "data-screenset-element-id-publish",
+            templateForArray: "screenSetTemplateFor",
+            instanceOfArray: "screenSetInstanceOf",
+            screenSetRoles: "data-screenset-roles"
+    },
+    TemplateElement: function TemplateElement() {},
+    TemplatesCache: function TemplatesCache() {},
+    createDefaultTemplates: function createDefaultTemplates() {},
+    isHidden: function isHidden() {},
+    inIFrame: function inIFrame() {},
+    isFieldInHiddenContainer: function isFieldInHiddenContainer() {},
+    hasParentAttribute: function hasParentAttribute() {},
+    firstPart: function firstPart() {},
+    LastIndexOf: function LastIndexOf() {},
+    ForEach: function ForEach() {},
+    ForEachProp: function ForEachProp() {},
+    Some: function Some() {},
+    Every: function Every() {},
+    EveryProp: function EveryProp() {},
+    Map: function Map() {},
+    DeepFreeze: function DeepFreeze() {},
+    getElementsByHavingAttribute: function getElementsByHavingAttribute() {},
+    getElementsByHavingAttributePrefix: function getElementsByHavingAttributePrefix() {},
+    isElementContainAttributePrefix: function isElementContainAttributePrefix() {},
+    getConditionalAttributeExpressions: function getConditionalAttributeExpressions() {},
+    setupConditionalExpressionValue: function setupConditionalExpressionValue() {},
+    isKeyCodeDisplayable: function isKeyCodeDisplayable() {},
+    UnitMeasurementType: {
+        pixel: "px",
+            percentage: "%",
+            auto: ""
+    },
+    getUnitMeasurementType: function getUnitMeasurementType() {},
+    getAttributesAsArray: function getAttributesAsArray() {},
+    endsWith: function endsWith() {},
+    hasIndex: function hasIndex() {},
+    removeSerializedKeyLastEnumerator: function removeSerializedKeyLastEnumerator() {},
+    removeSerializedKeyEdgeProperty: function removeSerializedKeyEdgeProperty() {},
+    IETemplateElementPolyfill: function IETemplateElementPolyfill() {},
+    replaceAttribute: function replaceAttribute() {},
+    isDOMXSS: function isDOMXSS() {},
+    delayedFocus: function delayedFocus() {},
+    LinkAccountsForm_CONSTS: {
+        gigyaClass: "gigya-link-accounts-form"
+    },
+    LinkAccountsForm: function LinkAccountsForm() {},
+    LoginForm_CONSTS: {
+        gigyaClass: "gigya-login-form"
+    },
+    LoginForm: function LoginForm() {},
+    PasswordlessLoginForm_CONSTS: {
+        gigyaClass: "gigya-passwordless-login-form"
+    },
+    PasswordlessLoginForm: function PasswordlessLoginForm() {},
+    PasswordlessRegisterForm_CONSTS: {
+        gigyaClass: "gigya-passwordless-register-form"
+    },
+    PasswordlessRegisterForm: function PasswordlessRegisterForm() {},
+    AuthMethodsForm_CONSTS: {
+        gigyaClass: "gigya-auth-methods-form",
+            authMethodSelector: "[data-auth-method]",
+            authMethod: "data-auth-method"
+    },
+    AuthMethodsForm: function AuthMethodsForm() {},
+    PasswordAuthMethodForm_CONSTS: {
+        gigyaClass: "gigya-password-auth-method-form",
+            authMethod: "password"
+    },
+    PasswordAuthMethodForm: function PasswordAuthMethodForm() {},
+    PushAuthMethodForm_CONSTS: {
+        gigyaClass: "gigya-push-auth-method-form",
+            authMethod: "push"
+    },
+    PushAuthMethodForm: function PushAuthMethodForm() {},
+    MagicLinkMethodForm_CONSTS: {
+        gigyaClass: "gigya-magic-link-auth-method-form",
+            authMethod: "magicLink"
+    },
+    MagicLinkAuthMethodForm: function MagicLinkAuthMethodForm() {},
+    EmaiLCodeAuthMethodForm_CONSTS: {
+        gigyaClass: "gigya-email-code-auth-method-form",
+            authMethod: "emailOtp"
+    },
+    EmailCodeAuthMethodForm: function EmailCodeAuthMethodForm() {},
+    CONSTS: {
+        selector: ".gigya-composite-control.gigya-login-user-enabled-tfa-widget",
+            toggleSelector: ".gigya-switch-control .gigya-switch-toggle",
+            widgetStateAttr: "data-widget-state-active",
+            rbaRuleAttr: "data-rba-rule",
+            errorDisplaySelector: ".gigya-error-display",
+            errorMessageSelector: ".gigya-error-msg",
+            errorActiveClass: "gigya-error-display-active",
+            errorMessageActiveClass: "gigya-error-msg-active",
+            bindingNameErrorAttrValue: "userEnabled2fa",
+            successMessageKey: "user_enable_2fa_success",
+            errorMessageKey: "user_enable_2fa_error",
+            switcherWrapperSelector: ".gigya-switch-control",
+            labelActiveState: ".gigya-user-enabled-tfa-label-enabled-state",
+            labelDisableState: ".gigya-user-enabled-tfa-label-disabled-state",
+            alertRole: "alert",
+            roleAttribute: "role"
+    },
+    NewsletterSignup_CONSTS: {
+        gigyaClass: "gigya-subscribe-with-email-form"
+    },
+    NewsletterSignupForm: function NewsletterSignupForm() {},
+    ProfileForm_CONSTS: {
+        gigyaClass: "gigya-profile-form",
+            specialFields: {
+            username: true,
+                oldPassword: true,
+                password: true,
+                newPassword: true,
+                passwordRetype: true,
+                secretQuestion: true,
+                secretAnswer: true,
+                addLoginEmails: true,
+                removeLoginEmails: true,
+                phoneNumber: true
+        }
+    },
+    ProfileForm: function ProfileForm() {},
+    ReauthenticationForm_CONSTS: {
+        gigyaClass: "gigya-reauthentication-form"
+    },
+    ReauthenticationForm: function ReauthenticationForm() {},
+    RegisterForm_CONSTS: {
+        gigyaClass: "gigya-register-form"
+    },
+    RegisterForm: function RegisterForm() {},
+    ProgressionForm_CONSTS: {
+        gigyaClass: "gigya-lite-account-progression-form"
+    },
+    ProgressionForm: function ProgressionForm() {},
+    ResendVerificationCodeForm_CONSTS: {
+        gigyaClass: "gigya-resend-verification-code-form"
+    },
+    ResendVerificationCodeForm: function ResendVerificationCodeForm() {},
+    ResetPasswordForm_CONSTS: {
+        gigyaClass: "gigya-reset-password-form"
+    },
+    ResetPasswordForm: function ResetPasswordForm() {},
+    OrgRegisterForm_CONSTS: {
+        gigyaClass: "gigya-org-register-form"
+    },
+    OrgRegisterForm: function OrgRegisterForm() {},
+    ButtonInput: function ButtonInput() {},
+    CheckboxInput_CONSTS: {
+        errorClass: "gigya-terms-error",
+            validClass: "gigya-terms-valid",
+            dataValueInArray: "data-value-in-array"
+    },
+    CheckboxInput: function CheckboxInput() {},
+    CommunicationCheckboxInput: function CommunicationCheckboxInput() {},
+    EmailInput: function EmailInput() {},
+    ValidityStates: {
+        0: "_undefined",
+            1: "valid",
+            2: "error",
+            3: "pending",
+            _undefined: 0,
+            valid: 1,
+            error: 2,
+            pending: 3
+    },
+    fieldsNameData: {
+        loginID: {
+            autoFillName: "username",
+                paramName: "loginID"
+        },
+        passwordRetype: {
+            autoFillName: "",
+                paramName: ""
+        }
+    },
+    WriteAccessModes: {
+        0: "clientModify",
+            1: "clientCreate",
+            clientModify: 0,
+            clientCreate: 1
+    },
+    FormInput_CONSTS: {
+        fieldName: "data-gigya-name",
+            displayName: "data-display-name",
+            captcha: "gigya-captcha",
+            allowEmpty: "data-allow-empty",
+            required: "data-required",
+            originalValue: "data-original-value",
+            serverValidation: "data-invalid-error-code",
+            showValidCheckmark: "show-valid-checkmark",
+            showCheckmarkClass: "gigya-show-checkmark",
+            validityBorderClass: "gigya-show-validity-border",
+            showValidityBorderAttr: "show-validity-border",
+            errorClass: "gigya-error",
+            warnClass: "gigya-warn",
+            validClass: "gigya-valid",
+            pendingClass: "gigya-pending",
+            emptyClass: "gigya-empty",
+            placeholderAttribute: "data-gigya-placeholder",
+            arrayRootAttribute: "data-array-root",
+            arrayKeyFieldAttribute: "data-array-key-field",
+            arrayKeyValueAttribute: "data-array-key-value",
+            identifierType: "data-identifier-type"
+    },
+    FormInputPriorities: {
+        0: "_start",
+            1: "Important",
+            2: "Normal",
+            3: "Fallback",
+            4: "_end",
+            _start: 0,
+            Important: 1,
+            Normal: 2,
+            Fallback: 3,
+            _end: 4
+    },
+    FieldType: {
+        hidden: "hidden"
+    },
+    FormInput: function FormInput() {},
+    AddressInput: function AddressInput() {},
+    LoginIdInput: function LoginIdInput() {},
+    BasePasswordInput_CONSTS: {
+        showPasswordStrength: "show-password-strength"
+    },
+    BasePasswordInput: function BasePasswordInput() {},
+    PasswordInput: function PasswordInput() {},
+    NewPasswordInput: function NewPasswordInput() {},
+    gigyaPhoneNumberInput: "gigya-phone-number-input",
+        PhoneInput_Attributes: {
+        countryCodesSelection: "data-country-codes-selection",
+            countryCodes: "data-country-codes"
+    },
+    PhoneNumberInput: function PhoneNumberInput() {},
+    RadioInput_CONSTS: {
+        wrapperSelector: ".gigya-composite-control-multi-choice",
+            displayNameExpressionAttr: "gigya-expression:data-display-name"
+    },
+    RadioInput: function RadioInput() {},
+    RememeberInput: function RememeberInput() {},
+    RetypePasswordInput: function RetypePasswordInput() {},
+    ArrayManager_CONST: {
+        selector: ".gigya-composite-control-array-widget",
+            containerSelector: ".gigya-array-manager",
+            formElSelector: "input,select, fieldset, .gigya-array-manager",
+            addButtonSelector: "button.gigya-array-add-btn",
+            removeButtonSelector: "button.gigya-array-remove-btn",
+            itemWrapperClass: "gigya-array-template",
+            inputsWrapperClass: "inputs-wrapper",
+            buttonsWrapperClass: "buttons-wrapper",
+            templateItemAttr: "data-array-template-id",
+            arrayManagerRootAttr: "data-array-manager-root",
+            deleteDisabledClass: "disable-delete",
+            indexMatcher: {}
+    },
+    ArrayManagerItem: function ArrayManagerItem() {},
+    ArrayManagerWidget: function ArrayManagerWidget() {},
+    addIndex: function addIndex() {},
+    Binding_CONSTS: {
+        selector: "*[data-binding]",
+            dataBindingAttribute: "data-binding"
+    },
+    BindingWidget: function BindingWidget() {},
+    CaptchaWidget_CONSTS: {
+        selector: "div.gigya-captcha"
+    },
+    CaptchaWidget: function CaptchaWidget() {},
+    Consent_CONSTS: {
+        selector: "div.gigya-consent",
+            titleAttr: "data-label",
+            approvedOnLabelAttr: "data-approved-on-label",
+            versionAttr: "data-version",
+            versionLabelAttr: "data-version-title-label",
+            localeLabelAttr: "data-locale-label"
+    },
+    ConsentWidget: function ConsentWidget() {},
+    ContainerWidget_CONSTS: {
+        selector: "div.gigya-container",
+            activeClass: "gigya-container-enabled",
+            emptyFields: "data-empty-fields",
+            loginIdentities: "data-login-idenities",
+            conditionAttr: "data-condition",
+            onRenderAttr: "data-on-render"
+    },
+    ContainerWidget: function ContainerWidget() {},
+    Image_CONSTS: {
+        selector: "div.gigya-image",
+            srcAttribute: "data-src",
+            widthAttribute: "data-width",
+            heightAttribute: "data-height",
+            backgroundSizeAttribute: "data-background-size"
+    },
+    ImageWidget: function ImageWidget() {},
+    LoginAvailabilityWidget_CONSTS: {
+        selector: "div.gigya-loginID-availability",
+            boundTo: "data-bound-to"
+    },
+    LoginAvailabilityWidget: function LoginAvailabilityWidget() {},
+    MyPhotoWidget_CONSTS: {
+        selector: "div.gigya-myPhoto"
+    },
+    MyPhotoWidget: function MyPhotoWidget() {},
+    DisplayModes: {
+        policy: {
+            hasMinimumRequirements: true,
+                hasStrengthMeter: false,
+                getTemplate: function getTemplate() {}
+        },
+        meter: {
+            hasMinimumRequirements: false,
+                hasStrengthMeter: true,
+                getTemplate: function getTemplate() {}
+        },
+        combined: {
+            hasMinimumRequirements: true,
+                hasStrengthMeter: true,
+                getTemplate: function getTemplate() {}
+        }
+    },
+    BubbleOrientations: {
+        0: "right",
+            1: "left",
+            2: "up",
+            3: "down",
+            4: "none",
+            right: 0,
+            left: 1,
+            up: 2,
+            down: 3,
+            none: 4
+    },
+    PasswordStrengthWidget_CONSTS: {
+        selector: "div.gigya-password-strength",
+            bubbleClass: "gigya-password-strength-bubble",
+            mobileClass: "mobile-bubble",
+            desktopClass: "desktop-bubble",
+            displayMode: "data-display-mode",
+            bubble: "data-on-focus-bubble",
+            bubbleOrientation: "data-bubble-orientation"
+    },
+    PasswordStrengthWidget: function PasswordStrengthWidget() {},
+    getPasswordStrengthData: function getPasswordStrengthData() {},
+    isPasswordStrengthValid: function isPasswordStrengthValid() {},
+    PhotoUploadWidget_CONSTS: {
+        selector: "div.gigya-photo-upload"
+    },
+    PhotoUploadWidget: function PhotoUploadWidget() {},
+    ProfilePhotoWidget_CONSTS: {
+        selector: "div.gigya-profile-photo"
+    },
+    ProfilePhotoWidget: function ProfilePhotoWidget() {},
+    RequiredDisplayWidget_CONSTS: {
+        selector: ".gigya-required-display",
+            boundTo: "data-bound-to",
+            alwaysVisible: "gigya-required-display-always-visible"
+    },
+    RequiredDisplayWidget: function RequiredDisplayWidget() {},
+    SecretQuestionWidget_CONSTS: {
+        selector: "div.gigya-secret-question",
+            allowEmpty: "data-allow-empty"
+    },
+    SecretQuestionWidget: function SecretQuestionWidget() {},
+    SocialLoginWidget_CONSTS: {
+        selector: "div.gigya-social-login"
+    },
+    SocialLoginWidget: function SocialLoginWidget() {},
+    SubscriptionWidget_CONSTS: {
+        selector: "div.gigya-subscription",
+            subscriptionName: "name"
+    },
+    SubscriptionWidget: function SubscriptionWidget() {},
+    PhoneNumberWidget_CONSTS: {
+        selector: ".gigya-phone-number-widget",
+            verifyButtonClass: "gigya-phone-verify-button",
+            resendButtonCLass: "gigya-phone-resend-button",
+            phonePreviewClass: "gigya-phone-number-preview",
+            useAsIdentifierAttr: "data-use-as-identifier",
+            codeInputClass: "gigya-phone-number-verification-code",
+            phoneInputNumberClass: "gigya-subscriber-phone-number-input",
+            countryCodeInputClass: "gigya-country-code-select",
+            verifiedStatusClass: "gigya-phone-verified-status",
+            resendBlockedLabelClass: "gigya-phone-resend-blocked",
+            linkDisabledClass: "gigya-disabled",
+            errorMessageClass: "gigya-error-msg",
+            placeholderTextAttribute: "data-gigya-placeholder",
+            gigyaHiddenClass: "gigya-hidden",
+            placeholderAttribute: "placeholder",
+            widgetStateAttribute: "data-widget-state",
+            requiredAttribute: "data-widget-required",
+            codeStateAttributes: "data-widget-code-state",
+            displayNameAttribute: "data-display-name",
+            translationKeyAttribute: "data-translation-key",
+            resendBlockDefaultLabelAttr: "data-resend-blocked-default-label",
+            phoneNumberFieldName: "phoneNumber",
+            resendCountTemplate: "%sec",
+            disableVerifyInSeconds: 10,
+            otpCodeLength: 6,
+            deps: [
+            function() {}
+        ]
+    },
+    PhoneNumberWidget: function PhoneNumberWidget() {},
+    Channel_Status: {
+        noticed: "noticed",
+            OptIn: "OptIn",
+            optIn: "optIn",
+            OptOut: "OptOut",
+            optOut: "optOut"
+    },
+    CommunicationWidget_CONSTS: {
+        selector: "div.gigya-communication",
+            channel: "data-communication-channel",
+            topic: "data-communication-topic",
+            status: "data-communication-status",
+            subscriptionName: "name",
+            communicationsPrefix: "communications.",
+            subscriptionType: "data-subscription-type",
+            subscriptionTopic: "data-subscription-topic",
+            communicationChannel: "data-subscription-channel"
+    },
+    CommunicationWidget: function CommunicationWidget() {},
+    TfaWidget_CONSTS: {
+        selector: "div.gigya-tfa"
+    },
+    TfaWidget: function TfaWidget() {},
+    Translated_CONSTS: {
+        selector: "*[data-translation-key]",
+            translationKeyAttribute: "data-translation-key"
+    },
+    TranslatedWidget: function TranslatedWidget() {},
+    CaptchaHandlers: {
+        FunCaptcha: function FunCaptcha() {},
+        Google: function Google() {}
+    },
+    CaptchaMode: {
+        visible: "visible",
+            invisible: "invisible"
+    },
+    BaseCaptchaHandler: function BaseCaptchaHandler() {},
+    FunCaptchaHandler: function FunCaptchaHandler() {},
+    GoogleCaptchaHandler: function GoogleCaptchaHandler() {},
+    RegisterDeviceRequestParam: {
+        UserCode: "user_code"
+    },
+    RegisterDeviceFormParam: {
+        UserCode: "userCode"
+    },
+    DeviceCodeForm_CONSTS: {
+        gigyaClass: "gigya-device-code-form"
+    },
+    DeviceCodeForm: function DeviceCodeForm() {},
+    PasskeyLogin_CONSTS: {
+        selector: ".gigya-composite-control-passkey-login-widget"
+    },
+    PasskeyLoginWidget: function PasskeyLoginWidget() {},
+    PasskeyRegister_CONSTS: {
+        selector: ".gigya-composite-control-passkey-register-widget",
+            behaviorAttr: "data-passkey-behavior"
+    },
+    PasskeyRegisterMode: {
+        Connect: "connect",
+            Submit: "submit"
+    },
+    PasskeyRegisterWidget: function PasskeyRegisterWidget() {},
+    PasskeyManager_CONSTS: {
+        selector: ".gigya-composite-control-passkey-manager-widget"
+    },
+    PasskeyManagerWidget: function PasskeyManagerWidget() {},
+    TFAVerification_CONSTS: {
+        selector: ".gigya-composite-control-tfa-verification-widget"
+    },
+    TFAVerificationWidget: function TFAVerificationWidget() {},
+    TFAPhoneList_CONSTS: {
+        selector: ".gigya-tfa-verification-method.tfa-phone-method"
+    },
+    TFAVerificationPhoneListWidget: function TFAVerificationPhoneListWidget() {},
+    TFAPhoneItem_CONSTS: {
+        sendButtonSelector: ".gigya-tfa-verification-action-btn",
+            submitButtonSelector: ".gigya-input-submit",
+            expandedAttribute: "data-device-expanded",
+            errorMessageSelector: '.gigya-error-msg[data-bound-to="tfaVerificationWidget"]',
+            errorActiveMessageClass: "gigya-error-msg-active",
+            rememberDeviceSelector: ".gigya-remember-device-checkbox input",
+            codeInputSelector: ".gigya-code-input",
+            nameAttr: "name",
+            boundToAttr: "data-bound-to",
+            inputErrorSelector: ".gigya-input-error",
+            ariaLabelAttr: "aria-label",
+            deviceLabelSelector: ".gigya-tfa-verification-device-label",
+            titleAttr: "title",
+            symbolsPlaceholder: "%lastSymbols",
+            resendButtonSelector: ".gigya-tfa-resend-code",
+            selector: '.gigya-tfa-verification-method[data-tfa-method="phone"] .gigya-card',
+            sendSMSButtonSelector: '.gigya-tfa-verification-action-btn[data-method="sms"]',
+            sendVoiceButtonSelector: '.gigya-tfa-verification-action-btn[data-method="voice"]',
+            resendButtonSelectorSms: '.gigya-tfa-resend-code[data-method="sms"]',
+            resendButtonSelectorVoice: '.gigya-tfa-resend-code[data-method="voice"]',
+            countDownSelector: ".gigya-api-countdown",
+            gigyaHiddenClass: "gigya-hidden"
+    },
+    TFAVerificationPhoneItemWidget: function TFAVerificationPhoneItemWidget() {},
+    TFATotpItem_CONSTS: {
+        sendButtonSelector: ".gigya-tfa-verification-action-btn",
+            submitButtonSelector: ".gigya-input-submit",
+            expandedAttribute: "data-device-expanded",
+            errorMessageSelector: '.gigya-error-msg[data-bound-to="tfaVerificationWidget"]',
+            errorActiveMessageClass: "gigya-error-msg-active",
+            rememberDeviceSelector: ".gigya-remember-device-checkbox input",
+            codeInputSelector: ".gigya-code-input",
+            nameAttr: "name",
+            boundToAttr: "data-bound-to",
+            inputErrorSelector: ".gigya-input-error",
+            ariaLabelAttr: "aria-label",
+            deviceLabelSelector: ".gigya-tfa-verification-device-label",
+            titleAttr: "title",
+            selector: '.gigya-tfa-verification-method[data-tfa-method="totp"] .gigya-card',
+            namePlaceholder: "%name"
+    },
+    TFAVerificationTotpItemWidget: function TFAVerificationTotpItemWidget() {},
+    TFATotpList_CONSTS: {
+        selector: '.gigya-tfa-verification-method[data-tfa-method="totp"]',
+            deps: [
+            function() {}
+        ]
+    },
+    TFAVerificationTotpListWidget: function TFAVerificationTotpListWidget() {},
+    TFAVerificationBackupCodesWidget_CONSTS: {
+        selector: '.gigya-tfa-verification-method[data-tfa-method="backup-codes"]',
+            expandButtonSelector: ".gigya-tfa-verification-action-btn",
+            submitButtonSelector: ".gigya-input-submit",
+            codeInputSelector: ".gigya-code-input",
+            cardItemSelector: ".gigya-tfa-verification-device",
+            cardBodySelector: ".gigya-card-body"
+    },
+    TFAVerificationBackupCodesWidget: function TFAVerificationBackupCodesWidget() {},
+    PasskeyCard_CONSTS: {
+        selector: "li.gigya-passkey-card",
+            deleteButtonSelector: ".gigya-remove-passkey-icon",
+            newCardClass: "gigya-card-new",
+            deps: [
+            function() {}
+        ]
+    },
+    PasskeyCardWidget: function PasskeyCardWidget() {},
+    TfaManagementWidget: function TfaManagementWidget() {},
+    TfaPhoneManagement_CONSTS: {
+        selector: ' .gigya-tfa-management-method[data-tfa-method="phone"]'
+    },
+    TfaManagementPhoneListWidget: function TfaManagementPhoneListWidget() {},
+    TfaManagementPhoneItemWidget: function TfaManagementPhoneItemWidget() {},
+    TfaEmailManagement_CONSTS: {
+        selector: '.gigya-tfa-management-method[data-tfa-method="email"]'
+    },
+    TfaManagementEmailListWidget: function TfaManagementEmailListWidget() {},
+    TfaManagementEmailItemWidget: function TfaManagementEmailItemWidget() {},
+    TfaRegistrationWidget: function TfaRegistrationWidget() {},
+    TfaRegistrationPhoneWidget: function TfaRegistrationPhoneWidget() {},
+    TFABackupCodes_CONSTS: {
+        selector: ".gigya-composite-control-tfa-backup-codes-widget",
+            backupCodesListEl: ".gigya-tfa-backup-codes-content",
+            backupCodesListContainerEl: ".gigya-backup-codes-list-container",
+            printButtonEl: ".gigya-tfa-print-button",
+            downloadButtonEl: ".gigya-tfa-download-button",
+            generateBackupCodesButtonEl: ".gigya-generate-code-button",
+            downloadHeader: "Backup Codes",
+            downloadFileTitle: "backup-codes.txt",
+            downloadTextContent: "Download Backup Codes",
+            backupCodeListItemClass: "gigya-backup-code-item"
+    },
+    TFABackupCodesWidget: function TFABackupCodesWidget() {},
+    CustomForm_CONSTS: {
+        gigyaClass: "gigya-custom-form"
+    },
+    CustomForm: function CustomForm() {},
+    TfaForm_CONSTS: {
+        gigyaClass: "gigya-tfa-form"
+    },
+    TfaForm: function TfaForm() {},
+    OrganizationContextConsts: {
+        selector: ".gigya-organization-context-widget",
+            dropdownSelector: ".gigya-organization-context-dropdown",
+            buttonSelector: ".gigya-organization-context-control-link-button",
+            errorDisplayClass: ".gigya-error-display",
+            errorMessageClass: ".gigya-error-msg",
+            errorActiveClass: "gigya-error-display-active",
+            disabledClass: "gigya-disabled",
+            noDataAvailableMessage: "no_data_available"
+    },
+    OrganizationContextWidget: function OrganizationContextWidget() {}
+},
             login_v2: {
                 ButtonStyles: {
                     fulllogocolored: {

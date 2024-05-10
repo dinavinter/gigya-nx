@@ -1,0 +1,20 @@
+{
+  "recent_user_activity_colon": "Activitate recentă utilizator",
+  "no_friends_actions_are_available": "Nu sunt disponibile acţiunile prietenilor",
+  "an_hour_ago": "acum o oră",
+  "less_than_an_hour_ago": "acum mai puţin de o oră",
+  "invites_sent": "Invitaţii trimise",
+  "num_hours_ago": "În urmă cu %num ore",
+  "everyone": "Toată lumea",
+  "friends": "Prieteni",
+  "me": "Mă",
+  "everyoneHeader": "Activitate recentă a utilizatorului pe ${siteName}:",
+  "friendsHeaderLoggedOut": "Conectează-te pentru a vedea activitatea prietenilor tăi pe ${siteName}:",
+  "friendsHeader": "Activitate recentă a prietenilor pe ${siteName}:",
+  "friendsHeaderInvite": "Nu sunt disponibile acțiunile prietenilor. Invită prieteni la ${siteName}:",
+  "friendsHeaderNoItems": "Nu sunt disponibile acțiunile prietenilor pe ${siteName}",
+  "meHeaderLoggedOut": "Conectează-te pentru a-ți revizui activitatea pe ${siteName}:",
+  "meHeader": "Activitatea ta pe ${siteName}:",
+  "meHeaderNoItems": "Nu ai înregistrate încă activităţi pe acest site",
+  "invitationText": "Bună - Am vizitat acest site și cred că ți se va părea interesant: ${invitationURL}"
+}

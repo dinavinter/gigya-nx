@@ -1,0 +1,10 @@
+{
+  "i_just_achieved_leveltitle": "Most értem el a(z) „%leveltitle” szintet",
+  "learn_how_to_unlock_the_leveltitle_badge": "Így kaphatja meg a(z) „%leveltitle” jelvényt",
+  "actions": "tevékenységek",
+  "points": "pontok",
+  "num_more_achievement_to_unlock_leveltitle_level": "Még %num %achievement a(z) „%leveltitle” szint feloldásához",
+  "youve_unlocked_the_leveltitle_level": "Feloldotta a(z) „%level” szintet",
+  "congratulations": "Gratulálunk!",
+  "alert_new_level_reached": "FIGYELEM! ELÉRTÉL EGY ÚJ PÁLYÁT!"
+}

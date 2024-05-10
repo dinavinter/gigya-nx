@@ -1,0 +1,20 @@
+{
+  "recent_user_activity_colon": "Legutóbbi felhasználói tevékenységek",
+  "no_friends_actions_are_available": "Barátaid tevékenységei nem elérhetőek",
+  "an_hour_ago": "egy órával ezelőtt",
+  "less_than_an_hour_ago": "kevesebb mint egy órával ezelőtt",
+  "invites_sent": "Meghívók elküldve",
+  "num_hours_ago": "%num órája",
+  "everyone": "Mindenki",
+  "friends": "Barátok",
+  "me": "Én",
+  "everyoneHeader": "Legutóbbi felhasználói tevékenység a(z) „${siteName}” oldalon:",
+  "friendsHeaderLoggedOut": "Jelentkezzen be, ha látni szeretné barátai tevékenységét a(z) „${siteName}” oldalon:",
+  "friendsHeader": "Barátai legutóbbi tevékenysége a(z) „${siteName}” oldalon:",
+  "friendsHeaderInvite": "Nincs nyoma barátai tevékenységének. Hívja meg barátait a(z) „${siteName}” oldalra:",
+  "friendsHeaderNoItems": "Nincs nyoma barátai tevékenységének a(z) „${siteName}” oldalon.",
+  "meHeaderLoggedOut": "Jelentkezzen be, ha szeretné áttekinteni tevékenységét a(z) „${siteName}” oldalon:",
+  "meHeader": "Tevékenységei a(z) „${siteName}” oldalon:",
+  "meHeaderNoItems": "Eddig még semmit sem csináltál ezen az oldalon.",
+  "invitationText": "Szia! Most jártam ezen az oldalon, és szerintem te is érdekesnek fogod találni: ${invitationURL}"
+}

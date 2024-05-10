@@ -1,0 +1,20 @@
+{
+  "recent_user_activity_colon": "Atividade recente do usuário:",
+  "no_friends_actions_are_available": "Nenhuma ação de seus amigos está disponível",
+  "an_hour_ago": "há uma hora",
+  "less_than_an_hour_ago": "há menos de uma hora",
+  "invites_sent": "Convites Enviados",
+  "num_hours_ago": "%num horas atrás",
+  "everyone": "Todos",
+  "friends": "Amigos",
+  "me": "Eu",
+  "everyoneHeader": "Atividades recente do usuário em ${siteName}:",
+  "friendsHeaderLoggedOut": "Conecte-se para ver as ações de seus amigos em ${siteName}:",
+  "friendsHeader": "Atividades recentes de amigos em ${siteName}:",
+  "friendsHeaderInvite": "Nenhuma ação de amigos disponível. Convide seus amigos para o ${siteName}.",
+  "friendsHeaderNoItems": "Nenhuma ação de amigos disponível em ${siteName}",
+  "meHeaderLoggedOut": "Conecte-se para revisar suas ações em ${siteName}:",
+  "meHeader": "Suas atividades em ${siteName}:",
+  "meHeaderNoItems": "Voce ainda não fez nenhuma atividade neste site",
+  "invitationText": "Oi - Acabo de visitar este site e achei que você poderia se interessar: ${invitationURL}"
+}

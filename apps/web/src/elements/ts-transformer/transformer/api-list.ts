@@ -154,7 +154,7 @@ export function createModule(apiList: BaseApi[]) {
         const name = identifiers.pop()!;
         const parent = identifiers.join('.');
         const parentName= defaultIfNullOrEmpty(parent, 'root');
-        interfaces[parent] = interfaces[parent] ?? dom.create.namespace(parentName);
+        interfaces[parent] = interfaces[parent] ?? dom.create.module(parentName);
         interfaces[parent].members.push( value);
     }
     

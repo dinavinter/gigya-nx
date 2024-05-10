@@ -1,0 +1,20 @@
+{
+  "recent_user_activity_colon": "Nedavne aktivnosti korisnika:",
+  "no_friends_actions_are_available": "Nijedna radnja prijatelja nije dostupna",
+  "an_hour_ago": "prije jednog sata",
+  "less_than_an_hour_ago": "prije manje od jednog sata",
+  "invites_sent": "Pozivnice poslane",
+  "num_hours_ago": "Prije %num h",
+  "everyone": "Svi",
+  "friends": "Prijatelji",
+  "me": "Ja",
+  "everyoneHeader": "Nedavne aktivnosti korisnika na ${siteName}:",
+  "friendsHeaderLoggedOut": "Prijavite se kako biste vidjeli radnje svojih prijatelja na ${siteName}:",
+  "friendsHeader": "Nedavne aktivnosti prijatelja na ${siteName}:",
+  "friendsHeaderInvite": "Nijedna radnja prijatelja nije dostupna. Pozovite prijatelje na ${siteName}:",
+  "friendsHeaderNoItems": "Nijedna radnja prijatelja nije dostupna na ${siteName}",
+  "meHeaderLoggedOut": "Prijavite se kako biste ocijenili svoje radnje na ${siteName}:",
+  "meHeader": "Vaše radnje na ${siteName}:",
+  "meHeaderNoItems": "Na ovoj web-stranici još niste poduzeli nikakve radnje.",
+  "invitationText": "Bok - Baš sam posjetio ovu web-stranicu i mislio sam da bi ti mogla biti zanimljiva: ${invitationURL}"
+}

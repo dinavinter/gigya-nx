@@ -1,0 +1,10 @@
+{
+  "i_just_achieved_leveltitle": "我刚刚完成了 %leveltitle",
+  "learn_how_to_unlock_the_leveltitle_badge": "了解如何解锁 %leveltitle 徽章",
+  "actions": "动作",
+  "points": "点数",
+  "num_more_achievement_to_unlock_leveltitle_level": "再多 %num 个 %achievement 即可解锁 %leveltitle 级别",
+  "youve_unlocked_the_leveltitle_level": "您已解锁 %level 标题级别",
+  "congratulations": "恭喜您！",
+  "alert_new_level_reached": "注意！达到新级别"
+}

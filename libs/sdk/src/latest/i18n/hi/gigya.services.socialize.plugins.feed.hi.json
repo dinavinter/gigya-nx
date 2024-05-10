@@ -1,0 +1,20 @@
+{
+  "recent_user_activity_colon": "हाल के उपयोगकर्ता गतिविधिः",
+  "no_friends_actions_are_available": "कोई मित्र कार्रवाईयां उपलब्ध नहीं",
+  "an_hour_ago": "एक घंटा पहले",
+  "less_than_an_hour_ago": "एक घंटे से कम समय पहले",
+  "invites_sent": "आमंत्रण भेजें",
+  "num_hours_ago": "%num घंटे पहले",
+  "everyone": "प्रत्येक",
+  "friends": "मित्र",
+  "me": "मेरा",
+  "everyoneHeader": "${siteName} पर हाल की उपयोगकर्ता गतिविधिः",
+  "friendsHeaderLoggedOut": "${siteName} पर अपने मित्रों की कार्रवाई देखने के लिए लॉगइन करें:",
+  "friendsHeader": "${siteName} पर हाल की मित्र गतिविधिः",
+  "friendsHeaderInvite": "कोई मित्र कार्रवाई उपलब्ध नहीं है. ${siteName} पर अपने मित्रों को आमंत्रित करें:",
+  "friendsHeaderNoItems": "${siteName} पर कोई मित्र कार्रवाईयां उपलब्ध नहीं",
+  "meHeaderLoggedOut": "${siteName} पर अपने कार्रवाई पूर्वावलोकन के लिए लॉगइन करें:",
+  "meHeader": "${siteName} पर आपकी कार्रवाईयां:",
+  "meHeaderNoItems": "आपने अभी तक इस साइट पर कोई कार्रवाई नहीं की है",
+  "invitationText": "हाय - मैंने अभी इस साइट को विजिट किया और सोचा कि आपको यह दिलचस्प लगेगा: ${invitationURL}"
+}

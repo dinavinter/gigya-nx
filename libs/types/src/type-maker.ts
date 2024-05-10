@@ -1,12 +1,13 @@
+import type {ScreenSetPlugin} from "./defs/accounts/Gigya.JS.Plugin.screenSet2/app/ScreenSetPlugin";
+import { BasePlugin } from './defs/core/Gigya.Js.Plugin/app/BasePlugin';
+
 import type {ServerApi} from "./defs/core/Gigya.Js/app/API/ServerApi";
 import type {UiApi} from "./defs/core/Gigya.Js/app/API/UiApi";
 import type {BaseApi} from "./defs/core/Gigya.Js/app/API/BaseApi";
-import type {ScreenSetPlugin} from "./defs/accounts/Gigya.JS.Plugin.screenSet2/app/ScreenSetPlugin";
 import {MyPhotoPlugin} from "./defs/accounts/Gigya.Js.Plugin.ProfilePhoto/app/profilePhoto";
 import {LoginPlugin} from "./defs/socialize/Gigya.Js.Login2/app/LoginPlugin";
 import {PagesPlugin} from "./defs/accounts/Gigya.Js.Plugin.Pages/app/PagesPlugin";
 import {EditConnectionPlugin} from "./defs/socialize/Gigya.Js.Plugin.EditConnectionsNew/app/EditConnections";
-import { BasePlugin } from './defs/core/Gigya.Js.Plugin/app/BasePlugin';
 
 
 declare type BaseApiJson = Pick<BaseApi, "methodName"> & Partial<BaseApi> & any;

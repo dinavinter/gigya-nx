@@ -1,0 +1,10 @@
+{
+  "i_just_achieved_leveltitle": "मैंने अभी %leveltitle उपलब्धि प्राप्त की",
+  "learn_how_to_unlock_the_leveltitle_badge": "बैज %leveltitle कैसे अनलॉक करें इसके बारे में जानकारी प्राप्त करें",
+  "actions": "कार्रवाई",
+  "points": "बिंदु",
+  "num_more_achievement_to_unlock_leveltitle_level": "%num %leveltitle स्तर अनलॉक करने के लिए और अधिक %achievement",
+  "youve_unlocked_the_leveltitle_level": "आपने %level शीर्षक स्तर को अनलॉक कर दिया है",
+  "congratulations": "बधाई!",
+  "alert_new_level_reached": "अलर्ट! नई स्तर पहुंच"
+}

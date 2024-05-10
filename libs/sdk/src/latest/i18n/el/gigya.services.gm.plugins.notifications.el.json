@@ -1,0 +1,10 @@
+{
+  "i_just_achieved_leveltitle": "Μόλις πέτυχα %leveltitle",
+  "learn_how_to_unlock_the_leveltitle_badge": "Μάθετε πώς να ξεκλειδώσετε το σήμα %leveltitle",
+  "actions": "ενέργειες",
+  "points": "πόντοι",
+  "num_more_achievement_to_unlock_leveltitle_level": "%num περισσότερα %achievement για να ξεκλειδώσετε το επίπεδο %leveltitle",
+  "youve_unlocked_the_leveltitle_level": "Έχετε ξεκλειδώσει το επίπεδο %levelTitle",
+  "congratulations": "Συγχαρητήρια!",
+  "alert_new_level_reached": "ΣΥΝΑΓΕΡΜΟΣ! ΕΠΙΤΕΥΞΗ ΝΕΟΥ ΕΠΙΠΕΔΟΥ."
+}
