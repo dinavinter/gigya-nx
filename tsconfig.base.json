@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@gigya/js": ["libs/js/src/index.ts"],
+      "@gigya/web": ["libs/web/src/index.ts"],
       "@gigya/loader": ["libs/loader/src/index.ts"],
       "@gigya/types": ["libs/types/src/index.ts"]
     }

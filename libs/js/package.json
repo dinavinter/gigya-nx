@@ -1,5 +1,5 @@
 {
-  "name": "@gigya/js",
+  "name": "@gigya/web",
   "version": "0.0.1",
   "dependencies": {},
   "main": "./index.js",

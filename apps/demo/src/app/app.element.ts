@@ -1,6 +1,6 @@
 import './app.element.css';
-import '@gigya/js';
-import {useGigya} from "@gigya/loader";
+import '@gigya/web';
+import { useGigya } from '@gigya/loader';
 
 export class AppElement extends HTMLElement {
   constructor() {
