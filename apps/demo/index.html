@@ -13,8 +13,8 @@
   <body>
   <div>
     <gigya-js api-key="%GIGYA_API_KEY%" domain="%GIGYA_DOMAIN%">
+      <registration-screen> </registration-screen>
       <div slot="loading" ><span>loading..</span></div>
-      <div slot="ready" > <registration-screen> </registration-screen></div>
       <span slot="error" >An error occurred while loading the Gigya script.</span>
     </gigya-js>
     <script type="module" src="/src/main.ts"></script>

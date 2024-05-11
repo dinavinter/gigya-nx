@@ -4,6 +4,7 @@ import {GigyaScriptService, GigyaScriptState, script} from "@gigya/loader";
 import {asyncReplace} from "lit/directives/async-replace.js";
 import { Gigya } from "@gigya/types";
 
+import {when} from 'lit/directives/when.js';
 
 
 // add summary and example
@@ -60,24 +61,26 @@ class GigyaStore extends LitElement {
   @state()
   private state = GigyaScriptState();
 
-    @state()
-    private ready  = false;
-
 
   @query('template')
   public accessor template: HTMLTemplateElement[] = [];
   override render() {
     console.log('render', this.apiKey, this.domain, this.template);
     return html`
-          ${ this.stateSlot()}
-          ${ this.script()}
+      ${this.readySlot()}
+      ${ this.stateSlot()}
+       ${ this.script()}
     `
 
   }
 
+  private readySlot() {
+    return html`
+      ${when(this.gigya, gigya=> html`<slot ></slot>`)}`;
+  }
+
   private stateSlot() {
     return html`
-      <slot ></slot>
       ${asyncReplace(this.state, state => html`<slot name="${state}"></slot>`)}`;
   }
 
