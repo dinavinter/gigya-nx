@@ -31,7 +31,7 @@ class ScriptDirective extends Directive {
         script.async = this.async;
         script.defer = this.defer;
 
-        script.src = `https://${domain}/js/gigya.js?apiKey=${apiKey}&pretty=true&debug=true`;
+        script.src = `https://cdns.${domain}/js/gigya.js?apiKey=${apiKey}&pretty=true&debug=true`;
         document.head.appendChild(script);
         return nothing;
 

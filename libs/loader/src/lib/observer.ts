@@ -1,5 +1,5 @@
 import {assign, createMachine, interpret} from "@xstate/fsm";
-import { Gigya } from "../../gigya-service/service";
+import { Gigya } from "@gigya/types";
 function waitForGigya ():Promise<Gigya> {
     return new Promise((resolve) => {
         const interval = setInterval(() => {
@@ -10,8 +10,8 @@ function waitForGigya ():Promise<Gigya> {
 
                 clearInterval(interval);
                 resolve(gigya);
-            }  
-            
+            }
+
         }, 100);
     });
 }
@@ -19,7 +19,7 @@ function waitForGigya ():Promise<Gigya> {
 export async function* GigyaScriptState() {
     yield 'loading';
     await waitForGigya()
-    yield 'ready'; 
+    yield 'ready';
 }
 
 
@@ -48,7 +48,7 @@ export type GigyaDomain =
     | GigyaStagingDomain;
 
 export type GigyaServiceState = "idle" | "loading" | "loaded" | "error";
-export type GigyaServiceProps = { apikey?: string; domain?: GigyaDomain };
+export type GigyaServiceProps = { apikey?: string; domain?: GigyaDomain , gigya?: Gigya};
   type  Context = GigyaServiceProps & {
     error?: string;
 } & Record<string, unknown>;
@@ -68,7 +68,7 @@ const scriptMachine = createMachine<Context, Events>({
                 LOADED: {target: 'ready', actions: ['assignGigya']},
             }
         },
-        ready: { 
+        ready: {
              entry: 'onReady',
         }
     }

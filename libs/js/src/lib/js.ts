@@ -1,9 +1,9 @@
 import {css, html, LitElement} from "lit";
 import {customElement, property, query, state} from 'lit/decorators.js';
-import {GigyaScriptService, GigyaScriptState, script} from "./loader";
+import {GigyaScriptService, GigyaScriptState, script} from "@gigya/loader";
 import {asyncReplace} from "lit/directives/async-replace.js";
+import { Gigya } from "@gigya/types";
 
-import {readyTemplate} from "./directives";
 
 
 // add summary and example
@@ -30,15 +30,15 @@ class GigyaStore extends LitElement {
   static override shadowRootOptions = {
     ...LitElement.shadowRootOptions,
   delegatesFocus: true};
- 
+
   static override styles = css`
     :host {
       display: block;
       color: var(--gigya-loader-text-color, black);
-    }`; 
+    }`;
 
   service = GigyaScriptService;
-  
+
   constructor() {
     super();
     this.service.subscribe((state) => {
@@ -47,51 +47,48 @@ class GigyaStore extends LitElement {
          this.gigya = state.context["gigya"];
     }});
   }
-  
+
   @property({type: String, attribute: 'api-key' }) apiKey: string | undefined =  undefined;
 
-  @property({type: String, attribute: 'domain'}) domain: string | undefined = undefined;
+  @property({type: String, attribute: 'domain'}) domain: string | undefined = "gigya.com";
 
-  @property({type: Boolean, attribute: 'debug'}) debug: boolean = true;
-  
-  @state() 
-  private gigya: any; 
+  @property({type: Boolean, attribute: 'debug'}) debug = true;
+
+  @state()
+  private gigya: Gigya | undefined;
 
   @state()
   private state = GigyaScriptState();
-  
+
     @state()
     private ready  = false;
-    
- 
+
+
   @query('template')
   public accessor template: HTMLTemplateElement[] = [];
   override render() {
     console.log('render', this.apiKey, this.domain, this.template);
-    return html`  
+    return html`
           ${ this.stateSlot()}
-          ${ this.templateContent()}
-          ${ this.script()} 
+          ${ this.script()}
     `
 
   }
 
   private stateSlot() {
     return html`
-      <slot ></slot> 
+      <slot ></slot>
       ${asyncReplace(this.state, state => html`<slot name="${state}"></slot>`)}`;
   }
-  private templateContent() {
-    return html`${readyTemplate(this.gigya ,  'template#ready') }`;
-  }
+
   private script() {
     return html`${script(this.apiKey, this.domain)}`;
   }
- 
-  
+
+
 }
 
-  
+
 
 
 export { GigyaStore };

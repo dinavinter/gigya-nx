@@ -1,33 +1,66 @@
 import './app.element.css';
-import  '@gigya/store';
+import '@gigya/js';
+
 export class AppElement extends HTMLElement {
-  public static observedAttributes = [];
-string = "hello";
   constructor() {
     super();
-    console.log("ctor", import.meta.env.GIGYA_DOMAIN, import.meta.env.GIGYA_API_KEY);
+    console.log(
+      'screen:ctor',
+      import.meta.env.GIGYA_DOMAIN,
+      import.meta.env.GIGYA_API_KEY,
+      window.gigya
+    );
+    const button = this.appendChild(document.createElement('button'));
+    button.innerHTML = 'Register...';
 
-}
+    button.onclick = () => {
+      console.debug(
+        'screen:button',
+        import.meta.env.GIGYA_DOMAIN,
+        import.meta.env.GIGYA_API_KEY,
+        window.gigya
+      );
+      window.gigya?.accounts.showScreenSet({
+        screenSet: 'Default-RegistrationLogin',
+        startScreen: 'gigya-register-screen',
+        containerID: 'screen-container',
+      });
+    };
+
+    const div = this.appendChild(document.createElement('div'));
+    div.id = 'screen-container';
+
+
+
+  }
+
   connectedCallback() {
-    console.log("store", import.meta.env.GIGYA_DOMAIN, import.meta.env.GIGYA_API_KEY);
+    // const div =this.appendChild(document.createElement('div'));
+    // div.id="screen-container";
+    // div.innerHTML = "Loaded.";
 
-    const {GIGYA_DOMAIN, GIGYA_API_KEY} = import.meta.env;
+    console.debug(
+      'screen:connectedCallback',
+      import.meta.env.GIGYA_DOMAIN,
+      import.meta.env.GIGYA_API_KEY,
+      window.gigya,
+      this.parentNode
+    );
+    window.gigya?.accounts.showScreenSet({
+      screenSet: 'Default-RegistrationLogin',
+      startScreen: 'gigya-register-screen',
+      containerID: 'screen-container',
+    });
 
-    this.string = `
-    <div class="wrapper">
-    <gigya-js api-key="${GIGYA_API_KEY}" domain="${GIGYA_DOMAIN}">
-          <span slot="loading">Loading...</span>
-        <div slot="loaded">
-          <h1>
-            <span> Gigya script loaded successfully 👋 </span>
-                      </h1>
-        </div>
-<span slot="error">An error occurred while loading the Gigya script.</span>
-    </gigya-js>
+  }
 
-
-    </div>
-      `;
+  disconnectedCallback() {
+    console.debug(
+      'screen:disconnectedCallback',
+      import.meta.env.GIGYA_DOMAIN,
+      import.meta.env.GIGYA_API_KEY,
+      window.gigya
+    );
   }
 }
-customElements.define('app-root', AppElement);
+customElements.define('registration-screen', AppElement);

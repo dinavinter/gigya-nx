@@ -12,9 +12,7 @@ export interface IBaseEvent {
     context: any;
 }
 
-export interface IBaseGlobalEvent extends IBaseEvent {
-
-}
+export type IBaseGlobalEvent = IBaseEvent
 
 export interface ILoginEvent extends IBaseGlobalEvent {
     UID: string;
@@ -139,7 +137,7 @@ export type SubmitEventHandler = (e: ISubmitEvent) => void | Promise<Object>;
 export type ErrorEventHandler = (e: IErrorEvent) => void;
 export type HideEventHandler = (e: IHideEvent) => void;
 
- 
+
 
 export interface ScreenSetHooks {
     onHide: Array<HideEventHandler>;
@@ -242,7 +240,7 @@ export type TranslationWrapper = {
     langKey: string,
     translations: Translations
 };
- 
+
     type IScreenSetParams = {
         context?: any;
         cid?: string;
@@ -266,7 +264,7 @@ export type TranslationWrapper = {
         mobileScreenSet?: string;
         screenSet: string;
         startScreen?: string;
-        
+
         initialResponse?: IFormResponse;
         initialMethod?: string;
         remember?: boolean;
@@ -325,7 +323,7 @@ export type TranslationWrapper = {
 
      remove(handler: T): void;
  }
- 
+
 
  export interface IPlugin  extends IDisposable {
      containerID: string;
@@ -354,7 +352,7 @@ export type TranslationWrapper = {
      _allowMultipleInstances?: boolean;
  }
 
- 
+
  export interface IMap<T> {
      [key: string]: T;
  }
@@ -2151,7 +2149,7 @@ export namespace session {
 export namespace socialize {
     export declare function addEventHandlers(param: { [event:string]: <TEvent extends  IBaseEvent>(event: TEvent) => void } & { onLogin?: (event: ILoginEvent) => void; onLogout?: (event:ILogoutEvent) => void }) : void;
 
-    
+
 export declare function login(args?: APIParams<{
         methodName: "socialize.login";
         settings: {
@@ -2476,7 +2474,7 @@ export declare function notifySSOLogin(args?: APIParams<{
 
 }
 
- 
+
 export namespace gcs {
   export declare function getUserData(args?: APIParams<{
         methodName: "gcs.getUserData";
@@ -4215,6 +4213,6 @@ export namespace accounts.auth.magiclink {
 
     }
 };
- 
+
  export declare function hasSession(): Promise<boolean>
 
