@@ -1,6 +1,6 @@
 import './app.element.css';
-import '@gigya/js';
-import {useGigya} from "@gigya/loader";
+import '@g-nx/web';
+import { useGigya } from '@gigya/loader';
 
 export class AppElement extends HTMLElement {
   constructor() {
@@ -30,22 +30,17 @@ export class AppElement extends HTMLElement {
 
     const div = this.appendChild(document.createElement('div'));
     div.id = 'screen-container';
-
-
-
   }
 
   connectedCallback() {
-
-    useGigya(gigya => {
+    useGigya((gigya) => {
       console.log('app:loaded  🥳', gigya);
-       gigya.accounts.showScreenSet({
+      gigya.accounts.showScreenSet({
         screenSet: 'Default-RegistrationLogin',
         startScreen: 'gigya-register-screen',
         containerID: 'screen-container',
       });
-      }
-    ).catch(console.error);
+    }).catch(console.error);
 
     console.debug(
       'screen:connectedCallback',
@@ -54,7 +49,6 @@ export class AppElement extends HTMLElement {
       window.gigya,
       this.parentNode
     );
-
   }
 
   disconnectedCallback() {
