@@ -10,10 +10,15 @@
   },
   "private": true,
   "dependencies": {
+    "@atomico/hooks": "^4.2.0",
     "@xstate/fsm": "^2.1.0",
+    "atomico": "^1.79.2",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
+    "@atomico/scaffold": "^2.9.5",
+    "@atomico/tsconfig": "^1.1.2",
+    "@atomico/vite": "^2.18.0",
     "@nx/devkit": "19.0.2",
     "@nx/eslint": "19.0.2",
     "@nx/eslint-plugin": "19.0.2",

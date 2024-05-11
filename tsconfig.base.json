@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@gigya/loader": ["libs/loader/src/index.ts"],
+      "@gigya/screen": ["libs/screen/src/index.ts"],
       "@gigya/screen-set": ["libs/screen-set/src/index.ts"],
       "@gigya/types": ["libs/types/src/index.ts"],
       "@gigya/web": ["libs/web/src/index.ts"]
