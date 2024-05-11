@@ -1,23 +1,16 @@
 import {assign, createMachine, interpret} from "@xstate/fsm";
-import {gigya} from "@gigya/types";
-
-function waitForGigya ():Promise<gigya> {
+import { Gigya } from "../../gigya-service/service";
+function waitForGigya ():Promise<Gigya> {
     return new Promise((resolve) => {
         const interval = setInterval(() => {
-            const gigya = (window as any).gigya as any;
+            const gigya =  window.gigya as Gigya;
 
-            if (gigya && gigya.thisScript && gigya.thisScript.APIKey) {
-                console.log(`Gigya loaded with APIKey ${gigya.thisScript.APIKey} 🥳`);
+            if (gigya && gigya.isReady) {
+                console.log(`Gigya loaded  🥳`);
 
                 clearInterval(interval);
                 resolve(gigya);
-            } else
-            if (gigya && gigya.thisScript) {
-                console.log('Gigya loaded 🥳');
-                clearInterval(interval);
-                resolve(gigya);
-
-            }
+            }  
             
         }, 100);
     });
@@ -37,7 +30,7 @@ type ErrorEvent = {
 
 type LoadedEvent = {
     type: "LOADED";
-    gigya: gigya;
+    gigya: Gigya;
 };
 
 declare type GigyaStagingDomain =
@@ -66,7 +59,7 @@ const scriptMachine = createMachine<Context, Events>({
     id: 'script',
     initial: 'loading',
     context: {
-        gigya: undefined as gigya | undefined,
+        gigya: undefined as Gigya | undefined,
     },
     states: {
         loading: {

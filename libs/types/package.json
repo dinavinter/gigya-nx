@@ -1,0 +1,7 @@
+{
+  "name": "@gigya/types",
+  "version": "0.0.1",
+  "type": "module",
+  "dependencies": {},
+  "types": "./gigya.d.ts"
+}
