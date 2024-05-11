@@ -1,40 +1,49 @@
 /// <reference types='vitest' />
-import {defineConfig, loadEnv} from 'vite';
+import { defineConfig } from 'vite';
 
-import {nxViteTsPaths} from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
+import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 
-export default defineConfig(({mode}) => {
-    const env = loadEnv(mode, process.cwd(), '');
-    console.log('env', env);
-    return {
-        envPrefix: ['GIGYA_', 'PUBLIC_', 'VITE_'],
-        cacheDir: '../../node_modules/.vite/demo',
-        envDir: '../..',
-   
-        server: {
-            port: 4200,
-            host: 'localhost',
-        },
+export default defineConfig({
+  root: __dirname,
+  cacheDir: '../../node_modules/.vite/apps/demo',
 
-        preview: {
-            port: 4300,
-            host: 'localhost',
-        },
+  server: {
+    port: 4200,
+    host: 'localhost',
+  },
 
-        plugins: [nxViteTsPaths()],
+  preview: {
+    port: 4300,
+    host: 'localhost',
+  },
 
-        // Uncomment this if you are using workers.
-        // worker: {
-        //  plugins: [ nxViteTsPaths() ],
-        // },
+  plugins: [nxViteTsPaths()],
 
-        test: {
-            globals: true,
-            cache: {
-                dir: '../../node_modules/.vitest',
-            },
-            environment: 'jsdom',
-            include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
-        },
-    }
+  // Uncomment this if you are using workers.
+  // worker: {
+  //  plugins: [ nxViteTsPaths() ],
+  // },
+
+  build: {
+    outDir: '../../dist/apps/demo',
+    reportCompressedSize: true,
+    commonjsOptions: {
+      transformMixedEsModules: true,
+    },
+  },
+
+  test: {
+    globals: true,
+    cache: {
+      dir: '../../node_modules/.vitest',
+    },
+    environment: 'jsdom',
+    include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+
+    reporters: ['default'],
+    coverage: {
+      reportsDirectory: '../../coverage/apps/demo',
+      provider: 'v8',
+    },
+  },
 });

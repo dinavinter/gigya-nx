@@ -15,9 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@gigya/store": ["libs/store/src/index.ts"],
-      "@gigya/types": ["libs/types/gigya.d.ts"],
-      "@defs/*": ["libs/types/src/defs/*"],
+      "@gigya/js": ["libs/store/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
