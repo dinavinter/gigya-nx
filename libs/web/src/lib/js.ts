@@ -73,7 +73,7 @@ class GigyaStore extends LitElement {
   }
 
   private readySlot() {
-    return html` ${when(this.gigya, (gigya) => html`<slot></slot>`)}`;
+    return html` ${when(this.gigya, (_) => html`<slot></slot>`)}`;
   }
 
   private stateSlot() {

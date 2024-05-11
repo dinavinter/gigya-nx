@@ -1,7 +1,7 @@
-import { js } from './js';
+import { GigyaStore } from './js';
 
 describe('js', () => {
   it('should work', () => {
-    expect(js()).toEqual('js');
+    expect(new GigyaStore()).not.toBeNull()
   });
 });
