@@ -93,7 +93,7 @@ GigyaScriptService.start();
 
 type Callback<T extends any = any> = (gigya: Gigya) => T;
 type Result<T > = Promise<T extends Callback ? ReturnType<T> : Gigya>;
-export const useGigya = <TCallback extends Callback | undefined>(callback: TCallback):Promise<Result<TCallback>> => {
+export const useGigya = <TCallback extends Callback | undefined>(callback?: TCallback):Promise<Result<TCallback>> => {
   return new Promise((resolve) => {
     GigyaScriptService.subscribe((state) => {
       if (state.matches('ready')) {

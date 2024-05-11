@@ -2,9 +2,12 @@
   "name": "@g-nx/source",
   "version": "0.0.0",
   "license": "MIT",
+
   "scripts": {
     "build": "nx run-many --target=build --all",
-    "serve": "nx run-many --target=serve --all"
+    "serve": "nx run-many --target=serve --all",
+    "test": "nx run-many --target=test --all",
+    "e2e": "nx run-many --target=e2e --all"
   },
   "private": true,
   "dependencies": {
