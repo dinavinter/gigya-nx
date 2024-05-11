@@ -1,7 +1,7 @@
 import {Directive, directive, DirectiveParameters} from 'lit/directive.js';
 import {ChildPart, noChange, nothing} from "lit";
 class ScriptDirective extends Directive {
-    i: number = 0;
+    i = 0;
     async = false;
     defer = false;
     crossOrigin? = 'anonymous';
@@ -13,7 +13,7 @@ class ScriptDirective extends Directive {
     };
     onErrorHandler: OnErrorEventHandler = ( ) => {};
      private apiKey: string | undefined;
-     private domain: string | undefined; 
+     private domain: string | undefined;
      override update(_: ChildPart, [apiKey, domain]: DirectiveParameters<this>) {
          if (this.apiKey === apiKey && this.domain === domain) {
              return noChange;
@@ -21,16 +21,16 @@ class ScriptDirective extends Directive {
          return this.render(apiKey, domain);
      }
     render(apiKey?: string, domain = 'eu1.gigya.com' as string | undefined,) {
-        console.log('ScriptDirective render', apiKey, domain); 
+        console.log('ScriptDirective render', apiKey, domain);
         this.apiKey = apiKey;
-        this.domain = domain;  
+        this.domain = domain;
         const script = document.createElement('script');
         script.id = `gigya-script`;
         // script.onload = this.onLoadHandler.bind(this);
         // script.onerror = this.onErrorHandler?.bind(this) || null;
         script.async = this.async;
         script.defer = this.defer;
-        
+
         script.src = `https://${domain}/js/gigya.js?apiKey=${apiKey}&pretty=true&debug=true`;
         document.head.appendChild(script);
         return nothing;
@@ -40,15 +40,15 @@ class ScriptDirective extends Directive {
 }
 
 
- 
+
 class ScriptValueDirective extends Directive {
     script: HTMLScriptElement | undefined;
     value: string | undefined;
-    
+
     override update(_: ChildPart, [value]: DirectiveParameters<this>) {
         if(this.value === value ) {
             return noChange;
-        } 
+        }
         return this.render(value);
     }
 
@@ -60,6 +60,6 @@ class ScriptValueDirective extends Directive {
         this.value = value;
         return script;
     }
-} 
+}
 export const scriptVal = directive(ScriptValueDirective)
 export const script = directive(ScriptDirective)
