@@ -1,0 +1,16 @@
+lockfileVersion: '6.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+dependencies:
+  '@gigya/loader':
+    specifier: workspace:*
+    version: link:../loader
+  '@gigya/types':
+    specifier: workspace:*
+    version: link:../types
+  '@gigya/web':
+    specifier: workspace:*
+    version: link:../web
