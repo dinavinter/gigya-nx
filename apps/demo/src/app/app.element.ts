@@ -1,5 +1,6 @@
 import './app.element.css';
 import '@gigya/js';
+import {useGigya} from "@gigya/loader";
 
 export class AppElement extends HTMLElement {
   constructor() {
@@ -11,7 +12,7 @@ export class AppElement extends HTMLElement {
       window.gigya
     );
     const button = this.appendChild(document.createElement('button'));
-    button.innerHTML = 'Register...';
+    button.innerHTML = 'Reload...';
 
     button.onclick = () => {
       console.debug(
@@ -35,9 +36,16 @@ export class AppElement extends HTMLElement {
   }
 
   connectedCallback() {
-    // const div =this.appendChild(document.createElement('div'));
-    // div.id="screen-container";
-    // div.innerHTML = "Loaded.";
+
+    useGigya(gigya => {
+      console.log('app:loaded  🥳', gigya);
+       gigya.accounts.showScreenSet({
+        screenSet: 'Default-RegistrationLogin',
+        startScreen: 'gigya-register-screen',
+        containerID: 'screen-container',
+      });
+      }
+    ).catch(console.error);
 
     console.debug(
       'screen:connectedCallback',
@@ -46,11 +54,6 @@ export class AppElement extends HTMLElement {
       window.gigya,
       this.parentNode
     );
-    window.gigya?.accounts.showScreenSet({
-      screenSet: 'Default-RegistrationLogin',
-      startScreen: 'gigya-register-screen',
-      containerID: 'screen-container',
-    });
 
   }
 

@@ -40,6 +40,7 @@ declare type GigyaStagingDomain =
     | "cn1-st1.gigya-api.cn";
 
 export type GigyaDomain =
+    |"gigya.com"
     | "eu1.gigya.com"
     | "eu2.gigya.com"
     | "us1.gigya.com"
@@ -59,7 +60,7 @@ const scriptMachine = createMachine<Context, Events>({
     id: 'script',
     initial: 'loading',
     context: {
-        gigya: undefined as Gigya | undefined,
+        domain: 'gigya.com',
     },
     states: {
         loading: {
@@ -89,3 +90,18 @@ const scriptMachine = createMachine<Context, Events>({
 
 export const GigyaScriptService = interpret(scriptMachine);
 GigyaScriptService.start();
+
+type Callback<T extends any = any> = (gigya: Gigya) => T;
+type Result<T > = Promise<T extends Callback ? ReturnType<T> : Gigya>;
+export const useGigya = <TCallback extends Callback | undefined>(callback: TCallback):Promise<Result<TCallback>> => {
+  return new Promise((resolve) => {
+    GigyaScriptService.subscribe((state) => {
+      if (state.matches('ready')) {
+        resolve(callback ? callback(state.context.gigya!) : state.context.gigya);
+      }
+    });
+  })
+}
+
+
+
