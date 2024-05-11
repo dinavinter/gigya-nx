@@ -3,29 +3,30 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/store/src",
   "projectType": "library",
+  "release": {
+    "version": {
+      "generatorOptions": {
+        "packageRoot": "dist/{projectRoot}",
+        "currentVersionResolver": "git-tag"
+      }
+    }
+  },
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@nx/vite:build",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/libs/store"
+        "outputPath": "dist/libs/store",
+        "main": "libs/store/src/index.ts",
+        "tsConfig": "libs/store/tsconfig.lib.json",
+        "assets": ["libs/store/*.md"]
       }
     },
-    "test": {
-      "executor": "@nx/vite:test",
-      "outputs": ["{options.reportsDirectory}"],
+    "nx-release-publish": {
       "options": {
-        "passWithNoTests": true,
-        "reportsDirectory": "../../coverage/libs/store"
-      }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["libs/store/**/*.ts", "libs/store/package.json"]
+        "packageRoot": "dist/{projectRoot}"
       }
     }
-  },
-  "tags": []
+  }
 }
