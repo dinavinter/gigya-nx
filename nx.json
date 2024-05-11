@@ -1,44 +1,77 @@
 {
-  "targetDefaults": {
-    "executor": "@nx/workspace:run-commands",
-    "builder": "@nx/vite:build",
-    "bundler": "@nx/vite:bundle",
-    "test": {
-      "executor": "@nx/vite:test",
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "namedInputs": {
+    "default": [
+      "{projectRoot}/**/*",
+      "sharedGlobals"
+    ],
+    "production": [
+      "default",
+      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+      "!{projectRoot}/tsconfig.spec.json",
+      "!{projectRoot}/.eslintrc.json",
+      "!{projectRoot}/eslint.config.js"
+    ],
+    "sharedGlobals": []
+  },
+  "plugins": [
+    {
+      "plugin": "@nx/vite/plugin",
       "options": {
-        "config": "apps/my-app/vite.config.ts"
+        "buildTargetName": "build",
+        "testTargetName": "test",
+        "serveTargetName": "serve",
+        "previewTargetName": "preview",
+        "serveStaticTargetName": "serve-static"
       }
     },
-    "@nx/vite:test": {
-      "cache": true,
-      "inputs": ["default", "^default"]
+    {
+      "plugin": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint"
+      }
     },
-    "lint": {
-      "inputs": [
-        "default",
-        "{workspaceRoot}/.eslintrc.json",
-        "{workspaceRoot}/.eslintignore",
-        "{workspaceRoot}/eslint.config.js"
-      ]
+    {
+      "plugin": "@nx/playwright/plugin",
+      "options": {
+        "targetName": "e2e"
+      }
     }
-  },
-  "affected": {
-    "defaultBase": "main"
-  },
-  "workspaceLayout": {
-    "appsDir": "apps",
-    "libsDir": "libs",
-    "toolsDir": "tools",
-    "e2eDir": "e2e",
-    "pluginsDir": "plugins"
-  },
-  "nxCloudAccessToken": "NjI0MWRlZjUtZWI5OS00YmNmLTk5OTctZGY4YzVkNGU4N2I4fHJlYWQtd3JpdGU=",
+  ],
   "generators": {
     "@nx/web:application": {
       "style": "css",
       "linter": "eslint",
       "unitTestRunner": "vitest",
-      "e2eTestRunner": "cypress"
+      "e2eTestRunner": "playwright"
+    }
+  },
+  "nxCloudAccessToken": "YWRhYTdiMGEtZDhjZi00Njg3LWE4YzctOWRhMTM5ZDZiMjRhfHJlYWQtd3JpdGU=",
+  "targetDefaults": {
+    "@nx/vite:build": {
+      "cache": true,
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "production",
+        "^production"
+      ]
+    },
+    "@nx/js:tsc": {
+      "cache": true,
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "production",
+        "^production"
+      ]
+    }
+  },
+  "release": {
+    "version": {
+      "preVersionCommand": "pnpm dlx nx run-many -t build"
     }
   }
 }
