@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "migrate": "nx migrate 17.3.2",
+    "migrate:latest": "nx migrate latest",
+    "migrate:run": "nx migrate --run-migrations"
+
   },
   "keywords": [],
   "author": "",
