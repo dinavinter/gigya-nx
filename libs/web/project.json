@@ -1,7 +1,7 @@
 {
-  "name": "js",
+  "name": "web",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/js/src",
+  "sourceRoot": "libs/web/src",
   "projectType": "library",
   "release": {
     "version": {
@@ -17,10 +17,10 @@
       "executor": "@nx/vite:build",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/libs/js",
-        "main": "libs/js/src/index.ts",
-        "tsConfig": "libs/js/tsconfig.lib.json",
-        "assets": ["libs/js/*.md"]
+        "outputPath": "dist/libs/web",
+        "main": "libs/web/src/index.ts",
+        "tsConfig": "libs/web/tsconfig.lib.json",
+        "assets": ["libs/web/*.md"]
       }
     },
     "nx-release-publish": {

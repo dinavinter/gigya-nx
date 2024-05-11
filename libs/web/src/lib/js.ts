@@ -1,11 +1,10 @@
-import {css, html, LitElement} from "lit";
-import {customElement, property, query, state} from 'lit/decorators.js';
-import {GigyaScriptService, GigyaScriptState, script} from "@gigya/loader";
-import {asyncReplace} from "lit/directives/async-replace.js";
-import { Gigya } from "@gigya/types";
+import { css, html, LitElement } from 'lit';
+import { customElement, property, query, state } from 'lit/decorators.js';
+import { GigyaScriptService, GigyaScriptState, script } from '@gigya/loader';
+import { asyncReplace } from 'lit/directives/async-replace.js';
+import { Gigya } from '@gigya/types';
 
-import {when} from 'lit/directives/when.js';
-
+import { when } from 'lit/directives/when.js';
 
 // add summary and example
 // add description
@@ -30,13 +29,15 @@ import {when} from 'lit/directives/when.js';
 class GigyaStore extends LitElement {
   static override shadowRootOptions = {
     ...LitElement.shadowRootOptions,
-  delegatesFocus: true};
+    delegatesFocus: true,
+  };
 
   static override styles = css`
     :host {
       display: block;
       color: var(--gigya-loader-text-color, black);
-    }`;
+    }
+  `;
 
   service = GigyaScriptService;
 
@@ -44,16 +45,19 @@ class GigyaStore extends LitElement {
     super();
     this.service.subscribe((state) => {
       console.log('GigyaScriptService', state.value);
-      if(state.matches('ready')){
-         this.gigya = state.context["gigya"];
-    }});
+      if (state.matches('ready')) {
+        this.gigya = state.context['gigya'];
+      }
+    });
   }
 
-  @property({type: String, attribute: 'api-key' }) apiKey: string | undefined =  undefined;
+  @property({ type: String, attribute: 'api-key' }) apiKey: string | undefined =
+    undefined;
 
-  @property({type: String, attribute: 'domain'}) domain: string | undefined = "gigya.com";
+  @property({ type: String, attribute: 'domain' }) domain: string | undefined =
+    'gigya.com';
 
-  @property({type: Boolean, attribute: 'debug'}) debug = true;
+  @property({ type: Boolean, attribute: 'debug' }) debug = true;
 
   @state()
   private gigya: Gigya | undefined;
@@ -61,39 +65,27 @@ class GigyaStore extends LitElement {
   @state()
   private state = GigyaScriptState();
 
-
   @query('template')
   public accessor template: HTMLTemplateElement[] = [];
   override render() {
     console.log('render', this.apiKey, this.domain, this.template);
-    return html`
-      ${this.readySlot()}
-      ${ this.stateSlot()}
-       ${ this.script()}
-    `
-
+    return html` ${this.readySlot()} ${this.stateSlot()} ${this.script()} `;
   }
 
   private readySlot() {
-    return html`
-      ${when(this.gigya, gigya=> html`<slot ></slot>`)}`;
+    return html` ${when(this.gigya, (gigya) => html`<slot></slot>`)}`;
   }
 
   private stateSlot() {
-    return html`
-      ${asyncReplace(this.state, state => html`<slot name="${state}"></slot>`)}`;
+    return html` ${asyncReplace(
+      this.state,
+      (state) => html`<slot name="${state}"></slot>`
+    )}`;
   }
 
   private script() {
     return html`${script(this.apiKey, this.domain)}`;
   }
-
-
 }
 
-
-
-
 export { GigyaStore };
-
-
