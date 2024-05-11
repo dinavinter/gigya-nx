@@ -3,17 +3,25 @@ import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 import * as path from 'path';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
+import atomico from "@atomico/vite";
+
 
 export default defineConfig({
   root: __dirname,
   cacheDir: '../../node_modules/.vite/libs/screen-set',
 
   plugins: [
+    ...atomico({
+      cssLiterals: {
+        postcss: true,
+      }
+    }),
     nxViteTsPaths(),
     dts({
       entryRoot: 'src',
       tsconfigPath: path.join(__dirname, 'tsconfig.lib.json'),
     }),
+
   ],
 
   // Uncomment this if you are using workers.

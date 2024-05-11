@@ -1,7 +1,16 @@
 {
   "extends": "../../tsconfig.base.json",
+  "display": "base",
+   "include": ["src/**/*"],
   "compilerOptions": {
-    "module": "commonjs",
+    "jsx": "react-jsx",
+    "jsxImportSource": "atomico",
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "allowJs": true,
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
@@ -10,8 +19,7 @@
     "noFallthroughCasesInSwitch": true
   },
   "files": [],
-  "include": [],
-  "references": [
+   "references": [
     {
       "path": "./tsconfig.lib.json"
     },
