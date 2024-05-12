@@ -82,8 +82,8 @@
     "version": {
       "preVersionCommand": "pnpm dlx nx run-many -t build"
 
-    }
-
+    },
+    "projects": ["@gigya/wc"]
 
   },
   "projectsRelationships": "independent"

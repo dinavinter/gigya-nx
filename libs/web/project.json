@@ -28,9 +28,10 @@
     "publish": {
       "executor": "nx:run-commands",
       "options": {
+        "cwd": "dist/libs/web",
         "commands": [
           {
-            "command": "pnpm publish --access public ../../../tmp/gigya-wc-{projectVersion}.tgz --registry http://localhost:4873/"
+            "command": "pnpm publish --access public gigya-wc-{projectVersion}.tgz --tag pre-alpha  --no-git-checks --registry https://registry.npmjs.org/"
           }
         ]
       }
