@@ -11,11 +11,7 @@ export default defineConfig({
   cacheDir: '../../node_modules/.vite/libs/screen-set',
 
   plugins: [
-    ...atomico({
-      cssLiterals: {
-        postcss: true,
-      }
-    }),
+
     nxViteTsPaths(),
     dts({
       entryRoot: 'src',
