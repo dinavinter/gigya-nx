@@ -13,6 +13,28 @@
   },
   "tags": [],
   "targets": {
+    "pack":{
+      "executor": "nx:run-commands",
+      "outputs": ["{workspaceRoot}/tmp/gigya-wc-{projectVersion}.tgz"],
+      "options": {
+        "cwd": "dist/libs/web",
+        "commands": [
+          {
+            "command": "pnpm pack --pack-destination ../../../tmp/libs"
+          }
+        ]
+      }
+    },
+    "publish": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "pnpm publish --access public ../../../tmp/gigya-wc-{projectVersion}.tgz --registry http://localhost:4873/"
+          }
+        ]
+      }
+    },
     "build": {
       "executor": "@nx/vite:build",
       "outputs": ["{options.outputPath}"],

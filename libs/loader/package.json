@@ -1,6 +1,14 @@
 {
   "name": "@gigya/loader",
-  "dependencies": {},
+  "version": "0.0.0-pre-alpha.0",
+
+  "dependencies": {
+    "@gigya/types": "workspace:*"
+
+  },
+  "devDependencies": {
+    "@gigya/types": "workspace:*"
+  },
   "main": "./src/index.ts",
   "typings": "./index.d.ts",
   "publishConfig": {

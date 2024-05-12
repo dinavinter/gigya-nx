@@ -1,5 +1,5 @@
 import {assign, createMachine, interpret} from "@xstate/fsm";
-import { Gigya } from "@gigya/types";
+import { type Gigya } from "@gigya/types";
 function waitForGigya ():Promise<Gigya> {
     return new Promise((resolve) => {
         const interval = setInterval(() => {

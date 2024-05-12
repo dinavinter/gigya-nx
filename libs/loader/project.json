@@ -3,16 +3,28 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/loader/src",
   "projectType": "library",
+  "version": "0.0.0-pre-alpha.0",
   "release": {
     "version": {
       "generatorOptions": {
-        "packageRoot": "dist/{projectRoot}",
-        "currentVersionResolver": "git-tag"
-      }
+        "packageRoot": "dist/{projectRoot}"
+       }
     }
   },
   "tags": [],
   "targets": {
+    "pack":{
+      "executor": "nx:run-commands",
+      "outputs": ["{workspaceRoot}/tmp/{projectName}-{projectVersion}.tgz"],
+      "options": {
+        "cwd": "dist/libs/loader",
+        "commands": [
+          {
+            "command": "pnpm pack --pack-destination ../../../tmp/libs"
+          }
+        ]
+      }
+    },
     "build": {
       "executor": "@nx/vite:build",
       "outputs": ["{options.outputPath}"],

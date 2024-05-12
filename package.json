@@ -1,13 +1,19 @@
 {
   "name": "gigya",
-  "version": "0.0.0-beta.0",
+  "version": "0.0.0-pre-alpha.0",
   "license": "MIT",
   "scripts": {
     "build": "nx run-many --target=build --all",
     "serve": "nx run-many --target=serve --all",
     "test": "nx run-many --target=test --all",
     "e2e": "nx run-many --target=e2e --all",
-    "demo": "pnpm --filter demo"
+    "demo": "pnpm --filter demo",
+    "pack-all": "pnpm -r exec pnpm pack --pack-destination tmp",
+    "pnpm-pack": "pnpm pack --pack-destination tmp",
+    "release": "nx release  --skip-publish version preid pre-alpha --verbose --projects web types loader --dry-run ",
+    "publish": "vite build && npm publish --access public --tag pre-alpha --workspaces true --dry-run",
+    "version": "npm version minor --preid pre-alpha"
+
   },
   "private": true,
   "dependencies": {
