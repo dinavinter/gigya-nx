@@ -1,5 +1,6 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
+
   "namedInputs": {
     "default": [
       "{projectRoot}/**/*",
@@ -44,6 +45,14 @@
       "linter": "eslint",
       "unitTestRunner": "vitest",
       "e2eTestRunner": "playwright"
+    },
+    "@nx/js:library": {
+       "buildable": true,
+      "publishable": true,
+      "bundler": "vite",
+      "linter": "eslint",
+      "unitTestRunner": "vitest",
+      "module": "esnext"
     }
   },
   "nxCloudAccessToken": "YWRhYTdiMGEtZDhjZi00Njg3LWE4YzctOWRhMTM5ZDZiMjRhfHJlYWQtd3JpdGU=",
