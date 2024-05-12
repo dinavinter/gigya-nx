@@ -7,7 +7,7 @@ This project is a custom web component that dynamically loads the Gigya JavaScri
 First, you need to import the component:
 
 ```javascript
-import '@gigya/web';
+import '@gigya/wc';
 ```
 
 Then you can use the gigya-js component in your HTML file. You need to specify the api-key and domain attributes:

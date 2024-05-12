@@ -1,8 +1,8 @@
 import { css, html, LitElement } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { GigyaScriptService, GigyaScriptState, script } from '@gigya/loader';
+import { GigyaScriptService, GigyaScriptState, script } from '../loader';
 import { asyncReplace } from 'lit/directives/async-replace.js';
-import { Gigya } from '@gigya/types';
+import { Gigya } from '../types'
 
 import { when } from 'lit/directives/when.js';
 

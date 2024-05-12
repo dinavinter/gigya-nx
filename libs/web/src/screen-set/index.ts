@@ -1,7 +1,6 @@
 import {h, html, c, css, useEffect, useState, useRef, useProp} from "atomico";
 import {useChildNodes} from "@atomico/hooks";
-import {useGigya} from "@gigya/loader";
-
+import {useGigya} from "../loader";
 
 export const GigyaScreen = c(({
                                 screenSet, screen,container, ...props
@@ -12,12 +11,12 @@ export const GigyaScreen = c(({
   const ref= useRef();
 
   useEffect(() => {
-    useGigya(gigya => gigya.accounts.showScreenSet({
+    useGigya(({accounts}) => accounts.showScreenSet({
       screenSet: screenSet,
       startScreen: screen,
       containerID: containerId
     })).catch(console.error);
-  }, [template?.content, containerId])
+  },[template?.content, containerId])
 
   useEffect(() => {
     if (template?.content ) {
