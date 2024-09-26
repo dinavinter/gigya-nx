@@ -88,6 +88,7 @@ export interface IAfterSubmitEvent extends IBaseScreenSetEvent {
     profile: any;
     data: any;
     preferences: any;
+    communication: any;
     response: any;
     subscriptions: any;
 }
@@ -99,6 +100,49 @@ export interface IBeforeScreenLoadEvent extends IBaseScreenSetEvent {
     response: any;
     nextScreen: string;
     schema: any;
+    communications:Communications;
+    [key:string]:any;
+}
+
+/*
+{
+  "e_news": {
+    "topic": "news",
+    "doubleOptIn": {
+      "status": "pending",
+      "pendingTime": "2024-09-18T16:57:57.216Z"
+    },
+    "lastModified": "2024-09-18T17:04:24.3Z",
+    "channel": "Email",
+    "lastModifiedTimestamp": 1726679064,
+    "status": "optIn"
+  },
+  "s_news": {
+    "topic": "news",
+    "doubleOptIn": {
+      "status": "pending",
+      "pendingTime": "2024-09-18T16:57:25.595Z"
+    },
+    "lastModified": "2024-09-18T17:04:24.3Z",
+    "channel": "SMS",
+    "lastModifiedTimestamp": 1726679064,
+    "status": "optIn"
+  }
+}
+ */
+export type Communications ={
+    [key:string]:{
+        topic:string;
+        doubleOptIn:{
+            status:"pending"|"confirmed";
+            pendingTime:string;
+        };
+        lastModified:string;
+        channel:string | "email" | "sms";
+        lastModifiedTimestamp:number;
+        status:"optIn"|"optOut" |"noticed";
+    }
+
 }
 
 export interface IAfterScreenLoadEvent extends IBaseScreenSetEvent {
@@ -280,7 +324,8 @@ export type TranslationWrapper = {
         providerSessionInfo?: IProviderSessionInfo;
         containerID?: string;
         include?: string;
-         customLang?: { [key: string]: string };
+        customLang?: { [key: string]: string };
+        callback?: (response: any) => void;
      };
 
  export interface IBaseObjectParam {
@@ -2126,6 +2171,21 @@ export namespace identity {
         };
         altSessionParams: undefined;
     }>): void;
+   export namespace  token{
+     export declare function exchange(args?: APIParams<{
+        methodName: "accounts.identity.token.exchange";
+        settings: {
+        };
+        schema: "resource|subject_token_type|response_type";
+        requiresSession: false;
+        adapterSettings: {
+            forceHttps: true;
+            requiresSession: any;
+        };
+        altSessionParams: undefined;
+        }>): void;
+
+   }
 
 }
 
@@ -2147,7 +2207,9 @@ export namespace session {
 
 }
 export namespace socialize {
-    export declare function addEventHandlers(param: { [event:string]: <TEvent extends  IBaseEvent>(event: TEvent) => void } & { onLogin?: (event: ILoginEvent) => void; onLogout?: (event:ILogoutEvent) => void }) : void;
+    export declare function addEventHandlers(param: {
+
+      [event:string]: <TEvent extends  IBaseEvent>(event: TEvent) => void } & { onLogin?: (event: ILoginEvent) => void; onLogout?: (event:ILogoutEvent) => void ; onAfterSubmit?:AfterSubmitEventHandler}) : void;
 
 
 export declare function login(args?: APIParams<{
