@@ -1,11 +1,27 @@
-# loader
+# @gigya/loader
 
-This library was generated with [Nx](https://nx.dev).
+This package contains the Gigya Web SDK loader.
 
-## Building
 
-Run `nx build loader` to build the library.
+```sh
+npm install @gigya/loader
+```
 
-## Running unit tests
+## Usage
 
-Run `nx test loader` to execute the unit tests via [Vitest](https://vitest.dev/).
+You can use the useGigya function to load the Gigya SDK and execute a callback once the SDK is ready:
+
+```javascript
+import { loader } from '@gigya/loader';
+
+useGigya((gigya) => {
+  // Your code using the gigya object
+  console.log('Gigya is ready:', gigya);
+}).catch((error) => {
+  console.error('Failed to load Gigya:', error);
+});
+```
+
+ 
+ 
+

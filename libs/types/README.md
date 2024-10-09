@@ -1,7 +1,4 @@
-# types
+# @gigya/types
 
-This library was generated with [Nx](https://nx.dev).
+This package contains TypeScript type definitions for Gigya web SDK.
 
-## Building
-
-Run `nx build types` to build the library.
