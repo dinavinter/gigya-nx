@@ -93,6 +93,9 @@ export class AppElement extends HTMLElement {
       import.meta.env.GIGYA_API_KEY,
       window.gigya
     );
+    const tailwind = document.createElement('script');
+    tailwind.src = 'https://cdn.tailwindcss.com?plugins=typography,aspect-ratio,line-clamp,container-queries';
+    document.head.appendChild(tailwind)
     const button = this.appendChild(document.createElement('button'));
     button.innerHTML = 'Reload...';
 
@@ -187,7 +190,7 @@ function showExternalVerificationPopup(access_token: string) {
 
   popup.innerHTML = `
     <dialog id="favDialog" class="absolute top-0 right-0 p-2 font-sans text-sm font-normal break-words whitespace-normal bg-white border rounded-lg shadow-lg w-max border-blue-gray-50 text-blue-gray-500 shadow-blue-gray-500/10 focus:outline-none max-h-[90vh] max-w-[75%]">
-      <form id="form"  method="dialog" class="*:m-4 *:p-4">
+      <form id="form" method="dialog" class="*:m-4 *:p-4">
        <button type="submit" class="flex items-center justify-center w-6 h-6 text-blue-gray-500 bg-white rounded-full shadow-lg cursor-pointer hover:bg-blue-gray-50" onclick="document.querySelector(#popover).hidePopover()">
         Verify
       </button>
@@ -195,6 +198,7 @@ function showExternalVerificationPopup(access_token: string) {
          <pre class="overflow-y-scroll open:max-h-52 max-h-[20vh]" >${tokenApi}</pre>
          <pre > <a href="https://jwt.io?token=${access_token}"><img alt="view on jwt.io" src="https://jwt.io/img/badge.svg"/> </a>${access_token}</pre>
       </form>
+         <script src="https://cdn.tailwindcss.com?plugins=typography,aspect-ratio,line-clamp,container-queries"></script>
       </dialog>
 `;
 
@@ -202,15 +206,10 @@ function showExternalVerificationPopup(access_token: string) {
   const dialog = document.getElementById("favDialog") as HTMLDialogElement;
   dialog.showModal();
   return new Promise((resolve) => {
-    dialog.addEventListener('close', e=>{
-      console.log('close', e);
-      resolve(e);
-    });
     dialog.addEventListener('submit', e=>{
-      console.log('submit', e);
+      console.log('dialog submit', e,dialog.dataset);
       resolve(e);
     })
-
   })
 }
 async function showConfirmationDebug(access_token: string,  pendingEmailVerification: string[]) {
@@ -237,7 +236,7 @@ async function showConfirmationDebug(access_token: string,  pendingEmailVerifica
          <pre >${JSON.stringify({UID, communications})}</pre>
          <pre > <a href="https://jwt.io?token=${access_token}"><img alt="view on jwt.io" src="https://jwt.io/img/badge.svg"/> </a>${access_token}</pre>
       </form>
-      </dialog>
+       </dialog>
 `;
 
   document.body.appendChild(popup);
