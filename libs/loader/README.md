@@ -1,27 +1,38 @@
 # @gigya/loader
 
 This package contains the Gigya Web SDK loader.
-
-
-```sh
-npm install @gigya/loader
-```
+ 
 
 ## Usage
 
-You can use the useGigya function to load the Gigya SDK and execute a callback once the SDK is ready:
+Use promise chaining to load the Gigya SDK and execute code after it is loaded.
 
 ```javascript
-import { loader } from '@gigya/loader';
+import { useGigya } from '@gigya/loader';
+
+async function initializeGigya() {
+    const gigya = await useGigya();
+    console.log('Gigya is ready:', gigya);
+}
+
+```
+
+
+Call the useGigya function with a callback function that receives the Gigya object as a parameter. The callback function is executed once the Gigya SDK is loaded and ready to use.
+
+```javascript
+import { useGigya } from '@gigya/loader';
 
 useGigya((gigya) => {
   // Your code using the gigya object
   console.log('Gigya is ready:', gigya);
-}).catch((error) => {
-  console.error('Failed to load Gigya:', error);
-});
+})
 ```
+ 
 
- 
- 
+## Installation
+
+```sh
+npm install @gigya/loader
+```
 

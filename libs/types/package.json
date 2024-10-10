@@ -1,10 +1,14 @@
 {
   "name": "@gigya/types",
   "version": "0.0.1-bata.0",
+  "publishConfig": {
+    "access": "public",
+    "tag": "beta"
+  },
   "dependencies": {
     "tslib": "^2.3.0"
   },
   "type": "commonjs",
-  "main": "./src/index.js",
-  "typings": "./src/index.d.ts"
+  "main": "./lib/types.js",
+  "typings": "./lib/service.d.ts"
 }

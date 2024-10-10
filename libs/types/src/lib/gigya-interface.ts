@@ -4278,3 +4278,4 @@ export namespace accounts.auth.magiclink {
 
  export declare function hasSession(): Promise<boolean>
 
+export type {IFormResponse} from  '../defs/accounts/Gigya.JS.Plugin.screenSet2/app/ScreenSetPlugin'

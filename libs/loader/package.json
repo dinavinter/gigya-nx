@@ -1,6 +1,10 @@
 {
   "name": "@gigya/loader",
-  "version": "0.0.1-bata.0",
+  "version": "0.0.1-bata.2",
+  "publishConfig": {
+    "access": "public",
+    "tag": "beta"
+  },
   "dependencies": {},
   "main": "./index.js",
   "module": "./index.mjs",
