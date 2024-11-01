@@ -11,15 +11,12 @@
     "pack-all": "pnpm -r exec pnpm pack --pack-destination tmp",
     "pnpm-pack": "pnpm pack --pack-destination tmp",
     "release": "nx release  --skip-publish version preid pre-alpha --verbose --projects web types loader --dry-run ",
-    "publish": "vite build && npm publish --access public --tag pre-alpha --workspaces true --dry-run",
+    "publish": " pnpm publish --access public --tag pre-alpha  --dry-run --tag pre-alpha --no-git-checks --report-summary --filter wc",
     "version": "npm version minor --preid pre-alpha"
-
   },
   "private": true,
-  "dependencies": {
-    "@xstate/fsm": "^2.1.0"
-  },
   "devDependencies": {
+    "@xstate/fsm": "^2.1.0",
     "atomico": "^1.79.2",
     "@atomico/hooks": "^4.2.0",
     "@atomico/scaffold": "^2.9.5",

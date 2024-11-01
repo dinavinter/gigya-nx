@@ -1,6 +1,5 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-
   "namedInputs": {
     "default": [
       "{projectRoot}/**/*",
@@ -47,7 +46,7 @@
       "e2eTestRunner": "playwright"
     },
     "@nx/js:library": {
-       "buildable": true,
+      "buildable": true,
       "publishable": true,
       "bundler": "vite",
       "linter": "eslint",
@@ -81,11 +80,7 @@
   "release": {
     "version": {
       "preVersionCommand": "pnpm dlx nx run-many -t build"
-
     }
-
-
   },
   "projectsRelationships": "independent"
-
 }

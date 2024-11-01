@@ -8,12 +8,12 @@
     "version": {
       "generatorOptions": {
         "packageRoot": "dist/{projectRoot}"
-       }
+      }
     }
   },
   "tags": [],
   "targets": {
-    "pack":{
+    "pack": {
       "executor": "nx:run-commands",
       "outputs": ["{workspaceRoot}/tmp/{projectName}-{projectVersion}.tgz"],
       "options": {

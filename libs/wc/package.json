@@ -1,0 +1,46 @@
+{
+  "name": "@gigya/wc",
+  "version": "0.0.0-pre-alpha.3",
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev"
+
+  },
+
+  "publishConfig": {
+    "access": "public",
+    "default": "module",
+    "module": "./index.js",
+    "typings": "./index.d.ts"
+
+  },
+  "exports": {
+    ".": {
+      "default": "./index.js",
+      "import": "./index.js",
+      "require": "./index.cjs",
+      "types": "./index.d.ts"
+    },
+    "./screen-set": {
+      "import": "./lib/screen-set.js",
+      "require": "./lib/screen-set.cjs",
+      "types": "./screen-set/index.d.ts"
+    },
+    "./store": {
+      "import": "./lib/store.js",
+      "require": "./lib/store.cjs",
+      "types": "./store/index.d.ts"
+    },
+
+    "./loader": {
+      "import": "./lib/loader.js",
+      "require": "./lib/loader.cjs",
+      "types": "./loader/index.d.ts"
+    },
+    "./types/gigya": {
+      "types": "./types/index.d.ts"
+    }
+
+
+  }
+}

@@ -1,5 +1,5 @@
-import {h, html, c, css, useEffect, useState, useRef, useProp} from "atomico";
-import {useChildNodes} from "@atomico/hooks";
+import {html, c, css, useEffect, useState, useRef, useProp} from "atomico";
+import {useChildNodes} from "@atomico/hooks/use-child-nodes";
 import {useGigya} from "../loader";
 
 export const GigyaScreen = c(({

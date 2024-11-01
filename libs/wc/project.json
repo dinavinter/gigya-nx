@@ -1,7 +1,8 @@
 {
-  "name": "web",
+  "name": "wc",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/web/src",
+
+  "sourceRoot": "libs/wc/src",
   "projectType": "library",
   "release": {
     "version": {
@@ -13,11 +14,11 @@
   },
   "tags": [],
   "targets": {
-    "pack":{
+    "pack": {
       "executor": "nx:run-commands",
       "outputs": ["{workspaceRoot}/tmp/gigya-wc-{projectVersion}.tgz"],
       "options": {
-        "cwd": "dist/libs/web",
+        "cwd": "dist/libs/wc",
         "commands": [
           {
             "command": "pnpm pack --pack-destination ../../../tmp/libs"
@@ -26,23 +27,30 @@
       }
     },
     "publish": {
+
       "executor": "nx:run-commands",
       "options": {
+         "cwd": "tmp/libs",
         "commands": [
           {
-            "command": "pnpm publish --access public ../../../tmp/gigya-wc-{projectVersion}.tgz --registry http://localhost:4873/"
+            "command": "pnpm publish gigya-wc-0.0.0-pre-alpha.3.tgz --access public  --tag pre-alpha  --no-git-checks --report-summary"
           }
         ]
-      }
+      },
+      "dependsOn": ["^pack"]
     },
     "build": {
       "executor": "@nx/vite:build",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/libs/web",
-        "main": "libs/web/src/index.ts",
-        "tsConfig": "libs/web/tsconfig.lib.json",
-        "assets": ["libs/web/*.md"]
+        "emptyOutDir": true,
+        "outputPath": "dist/libs/wc",
+        "main": "libs/wc/src/index.ts",
+        "generatePackageJson": true,
+        "includeDevDependenciesInPackageJson": false,
+        "tsConfig": "libs/wc/tsconfig.lib.json",
+        "configFile": "libs/wc/vite.config.ts",
+        "assets": ["libs/wc/README.md", "libs/wc/index.html"]
       }
     },
     "nx-release-publish": {
