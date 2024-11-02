@@ -14,16 +14,18 @@ class ScriptDirective extends Directive {
     onErrorHandler: OnErrorEventHandler = ( ) => {};
      private apiKey: string | undefined;
      private domain: string | undefined;
-     override update(_: ChildPart, [apiKey, domain]: DirectiveParameters<this>) {
-         if (this.apiKey === apiKey && this.domain === domain) {
+     private cname: string | undefined;
+     override update(_: ChildPart, [apiKey, domain, cname]: DirectiveParameters<this>) {
+         if (this.apiKey === apiKey && this.domain === domain && this.cname === cname) {
              return noChange;
          }
-         return this.render(apiKey, domain);
+         return this.render(apiKey, domain, cname);
      }
-    render(apiKey?: string, domain = 'eu1.gigya.com' as string | undefined,) {
+    render(apiKey?: string, domain = 'eu1.gigya.com' as string | undefined,cname= undefined as string | undefined) {
         console.log('ScriptDirective render', apiKey, domain);
         this.apiKey = apiKey;
         this.domain = domain;
+        this.cname = cname;
         const script = document.createElement('script');
         script.id = `gigya-script`;
         // script.onload = this.onLoadHandler.bind(this);
@@ -31,7 +33,8 @@ class ScriptDirective extends Directive {
         script.async = this.async;
         script.defer = this.defer;
 
-        script.src = `https://cdns.${domain}/js/gigya.js?apiKey=${apiKey}&pretty=true&debug=true`;
+        const cdnDomain= `${cname? cname : `cdns.${domain}`}`;
+        script.src = `https://${cdnDomain}/js/gigya.js?apiKey=${apiKey}&pretty=true&debug=true`;
         document.head.appendChild(script);
         return nothing;
 

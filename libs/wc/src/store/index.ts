@@ -59,6 +59,9 @@ class GigyaStore extends LitElement {
 
   @property({ type: Boolean, attribute: 'debug' }) debug = true;
 
+  @property({ type: String, attribute: 'cname' }) cname: string | undefined =
+    undefined;
+
   @state()
   private gigya: Gigya | undefined;
 
@@ -92,7 +95,7 @@ class GigyaStore extends LitElement {
     )}`;
   }
   private script() {
-    return html`${script(this.apiKey, this.domain)}`;
+    return html`${script(this.apiKey, this.domain, this.cname)}`;
   }
 }
 
