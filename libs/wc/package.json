@@ -6,11 +6,14 @@
     "dev": "vite dev"
 
   },
+  "main": "src/index.ts",
+  "module": "src/index.ts",
 
   "publishConfig": {
     "access": "public",
     "default": "module",
     "module": "./index.js",
+    "main": "./index.js",
     "typings": "./index.d.ts"
 
   },

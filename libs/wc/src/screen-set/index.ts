@@ -1,4 +1,4 @@
-import {html, c, css, useEffect, useState, useRef, useProp} from "atomico";
+import {html, c, css, useEffect, useState, useRef} from "atomico";
 import {useChildNodes} from "@atomico/hooks/use-child-nodes";
 import {useGigya} from "../loader";
 
