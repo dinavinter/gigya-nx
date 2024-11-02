@@ -6,6 +6,17 @@
  export interface Profile{
     [key:string]: any
 }
+
+export type Account ={
+  UID: string,
+  profile: Profile & Partial<{
+    firstName: string,
+    lastName: string,
+    email: string;
+    photoURL: string;
+    nickName: string;
+  }>
+}
 export interface IBaseEvent {
     eventName: string;
     source: string;
@@ -14,7 +25,7 @@ export interface IBaseEvent {
 
 export type IBaseGlobalEvent = IBaseEvent
 
-export interface ILoginEvent extends IBaseGlobalEvent {
+export interface ILoginEvent extends IBaseEvent {
     UID: string;
     UIDSignature: string;
     signatureTimestamp: string;
@@ -2147,7 +2158,7 @@ export namespace session {
 
 }
 export namespace socialize {
-    export declare function addEventHandlers(param: { [event:string]: <TEvent extends  IBaseEvent>(event: TEvent) => void } & { onLogin?: (event: ILoginEvent) => void; onLogout?: (event:ILogoutEvent) => void }) : void;
+  export declare function addEventHandlers(param: { onLogin: (event: ILoginEvent) => void | undefined ; onLogout: (event:ILogoutEvent) => void | undefined , [event:string]: <TEvent extends  ILoginEvent>(event: TEvent) => void | undefined}) : void;
 
 
 export declare function login(args?: APIParams<{

@@ -1,18 +1,10 @@
 {
   "name": "@gigya/wc",
-  "version": "0.0.0-pre-alpha.3",
+  "version": "0.0.0-beta.2",
   "type": "module",
-  "scripts": {
-    "dev": "vite dev"
-
-  },
-
   "publishConfig": {
     "access": "public",
-    "default": "module",
-    "module": "./index.js",
-    "typings": "./index.d.ts"
-
+    "default": "module"
   },
   "exports": {
     ".": {
@@ -31,7 +23,11 @@
       "require": "./lib/store.cjs",
       "types": "./store/index.d.ts"
     },
-
+    "./store/auth":{
+      "import": "./lib/store/auth.js",
+      "require": "./lib/store/auth.cjs",
+      "types": "./store/auth.d.ts"
+    },
     "./loader": {
       "import": "./lib/loader.js",
       "require": "./lib/loader.cjs",
@@ -40,7 +36,11 @@
     "./types/gigya": {
       "types": "./types/index.d.ts"
     }
-
-
-  }
+  },
+  "scripts": {
+    "dev": "vite dev"
+  },
+  "module": "./src/index.ts",
+  "typings": "./index.d.ts"
 }
+

@@ -49,6 +49,9 @@ export default defineConfig({
         'lib/loader': 'src/loader/index.ts',
         'lib/loader/observer': 'src/loader/observer.ts',
         'lib/loader/directive': 'src/loader/directive.ts',
+        'lib/store/auth': 'src/store/auth.ts',
+        // 'lib/auth': 'src/auth/index.ts',
+        // 'lib/auth/guard': 'src/auth/guard.ts'
         // 'vendors/@atomico/hooks': '../../node_modules/@atomico/hooks',
         // 'vendors/@atomico/hooks/use-child-nodes': '../../node_modules/@atomico/use-child-nodes',
         // "vendors/atomico/html": "../../node_modules/atomico/html",
@@ -72,9 +75,8 @@ export default defineConfig({
       // External packages that should not be bundled into your library.
       external: [],
       // preserveSymlinks: true,
-      treeshake:"smallest",
-      preserveSymlinks: true,
-      preserveEntrySignatures: 'strict'
+      treeshake:"recommended",
+      preserveSymlinks: true
 
     },
   },

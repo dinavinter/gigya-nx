@@ -1,10 +1,11 @@
 import { css, html, LitElement } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { GigyaScriptService, GigyaScriptState, script } from '../loader';
+import { GigyaScriptService, GigyaScriptState, script} from '../loader';
 import { asyncReplace } from 'lit/directives/async-replace.js';
 import { Gigya } from '../types'
 
 import { when } from 'lit/directives/when.js';
+import {AuthState} from "./auth";
 
 // add summary and example
 // add description
@@ -40,7 +41,6 @@ class GigyaStore extends LitElement {
   `;
 
   service = GigyaScriptService;
-
   constructor() {
     super();
     this.service.subscribe((state) => {
@@ -65,11 +65,14 @@ class GigyaStore extends LitElement {
   @state()
   private state = GigyaScriptState();
 
+  @state()
+  private authState = AuthState();
+
   @query('template')
   public accessor template: HTMLTemplateElement[] = [];
   override render() {
     console.log('render', this.apiKey, this.domain, this.template);
-    return html` ${this.readySlot()} ${this.stateSlot()} ${this.script()} `;
+    return html` ${this.readySlot()} ${this.stateSlot()} ${this.authStateSlot()} ${this.script()} `;
   }
 
   private readySlot() {
@@ -82,7 +85,12 @@ class GigyaStore extends LitElement {
       (state) => html`<slot name="${state}"></slot>`
     )}`;
   }
-
+  private authStateSlot() {
+    return html` ${asyncReplace(
+      this.authState,
+      (state) => html`<slot name="${state}"></slot>`
+    )}`;
+  }
   private script() {
     return html`${script(this.apiKey, this.domain)}`;
   }

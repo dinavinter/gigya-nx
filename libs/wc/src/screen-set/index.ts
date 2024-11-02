@@ -1,35 +1,37 @@
-import {html, c, css, useEffect, useState, useRef, useProp} from "atomico";
+import {html, c, css, useEffect, useState, useRef, useHost} from "atomico";
 import {useChildNodes} from "@atomico/hooks/use-child-nodes";
 import {useGigya} from "../loader";
+import {useMutationObserver, useParent} from "@atomico/hooks";
 
 export const GigyaScreen = c(({
-                                screenSet, screen,container, ...props
+                                screenSet, screen,container, open, ...props
                               }) => {
 
   const [containerId] = useState(container || `screen-container-${screenSet}-${screen}`)
   const template = useChildNodes().find((node) => node.nodeName == "TEMPLATE") as HTMLTemplateElement;;
-  const ref= useRef();
-
+  const host = useHost();
+   const ref= useRef();
   useEffect(() => {
-    useGigya(({accounts}) => accounts.showScreenSet({
+   open && useGigya(({accounts}) => accounts.showScreenSet({
       screenSet: screenSet,
       startScreen: screen,
       containerID: containerId
     })).catch(console.error);
-  },[template?.content, containerId])
+  },[template?.content, containerId, open])
 
   useEffect(() => {
-    if (template?.content ) {
+    if (template?.content  ) {
       ref.current.innerHTML = template.innerHTML
     }
   }, [template?.content])
 
 
+
   return (html`
       <host>
-        <div id=${containerId}></div>
+        <div id=${containerId} class="w-full"></div>
         <div id=${screenSet} class="gigya-screen-set" style=${{display: "none"}}>
-          <div id=${screen} class="gigya-screen" ref="${ref}">
+          <div id=${screen} class="gigya-screen" ref="${ref}" style="height: 100%; width: 100%">
           </div>
         </div>
       </host>`
@@ -49,7 +51,7 @@ export const GigyaScreen = c(({
   props: {
     screenSet: {
       type: String,
-      value: 'default-screen-set',
+      value: ()=>`screen-set-${Math.random().toString(36).substring(7)}`,
       attr: "screen-set"
     },
     screen: {
@@ -62,6 +64,11 @@ export const GigyaScreen = c(({
       value: undefined,
       attr: "container"
 
+    },
+    open: {
+      type: Boolean,
+      value: true,
+      reflect: true
     }
 
   }
