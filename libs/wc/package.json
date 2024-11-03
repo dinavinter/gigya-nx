@@ -1,6 +1,6 @@
 {
   "name": "@gigya/wc",
-  "version": "0.0.0-beta.4",
+  "version": "0.0.0-beta.5",
   "type": "module",
   "publishConfig": {
     "access": "public",
@@ -33,12 +33,23 @@
       "require": "./lib/loader.cjs",
       "types": "./loader/index.d.ts"
     },
+    "./auth": {
+      "import": "./lib/auth.js",
+      "require": "./lib/auth.cjs",
+      "types": "./auth/index.d.ts"
+    },
+    "./auth/service": {
+      "import": "./lib/auth/service.js",
+      "require": "./lib/auth/service.cjs",
+      "types": "./auth/service.d.ts"
+    },
     "./types/gigya": {
       "types": "./types/index.d.ts"
     }
   },
   "scripts": {
-    "dev": "vite dev"
+    "dev": "vite dev",
+    "deploy": "nx build wc && cp libs/wc/README.md dist/libs/wc && nx pack wc && nx publish wc"
   },
   "module": "./src/index.ts",
   "typings": "./index.d.ts"

@@ -50,6 +50,8 @@ export default defineConfig({
         'lib/loader/observer': 'src/loader/observer.ts',
         'lib/loader/directive': 'src/loader/directive.ts',
         'lib/store/auth': 'src/store/auth.ts',
+        'lib/auth': 'src/auth/index.ts',
+        'lib/auth/service': 'src/auth/service.ts',
         // 'lib/auth': 'src/auth/index.ts',
         // 'lib/auth/guard': 'src/auth/guard.ts'
         // 'vendors/@atomico/hooks': '../../node_modules/@atomico/hooks',
