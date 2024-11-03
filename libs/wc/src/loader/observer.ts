@@ -1,6 +1,6 @@
-import {assign, createMachine, interpret} from "@xstate/fsm";
-import { type Gigya } from "@gigya/types";
-function waitForGigya ():Promise<Gigya> {
+import {assign, createMachine, EventObject, interpret, type StateMachine, Typestate} from "@xstate/fsm";
+import {type Gigya, ILoginEvent} from "../types";
+ function waitForGigya ():Promise<Gigya> {
     return new Promise((resolve) => {
         const interval = setInterval(() => {
             const gigya =  window.gigya as Gigya;
@@ -16,11 +16,26 @@ function waitForGigya ():Promise<Gigya> {
     });
 }
 
+
+
+
+
+
+
+
+
 export async function* GigyaScriptState() {
     yield 'loading';
     await waitForGigya()
     yield 'ready';
+
 }
+
+
+
+
+
+
 
 
 type ErrorEvent = {
@@ -71,7 +86,8 @@ const scriptMachine = createMachine<Context, Events>({
         },
         ready: {
              entry: 'onReady',
-        }
+        },
+
     }
 },
     {

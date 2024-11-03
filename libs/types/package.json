@@ -1,8 +1,14 @@
 {
   "name": "@gigya/types",
-  "version": "0.0.1",
-  "dependencies": {
-    "tslib": "^2.3.0"
+  "version": "0.0.0-pre-alpha.0",
+  "publishConfig": {
+    "access": "public",
+    "include": [
+      "src/index.d.ts",
+      "src/lib/*",
+      "src/runtime",
+      "package.json"
+    ]
   },
   "type": "commonjs",
   "main": "./src/index.js",

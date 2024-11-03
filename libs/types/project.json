@@ -13,6 +13,18 @@
   },
   "tags": [],
   "targets": {
+    "pack": {
+      "executor": "nx:run-commands",
+      "outputs": ["{workspaceRoot}/tmp/{projectName}-{projectVersion}.tgz"],
+      "options": {
+        "cwd": "dist/libs/types",
+        "commands": [
+          {
+            "command": "pnpm pack --pack-destination ../../../tmp/libs"
+          }
+        ]
+      }
+    },
     "build": {
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],

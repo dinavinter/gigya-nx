@@ -1,8 +1,20 @@
 {
   "name": "@gigya/loader",
-  "version": "0.0.1",
-  "dependencies": {},
-  "main": "./index.js",
-  "module": "./index.mjs",
-  "typings": "./index.d.ts"
+  "version": "0.0.0-pre-alpha.0",
+
+  "dependencies": {
+    "@gigya/types": "workspace:*"
+
+  },
+  "devDependencies": {
+    "@gigya/types": "workspace:*"
+  },
+  "main": "./src/index.ts",
+  "typings": "./index.d.ts",
+  "publishConfig": {
+    "main": "./index.js",
+    "module": "./index.mjs",
+    "typings": "./index.d.ts"
+  }
+
 }
