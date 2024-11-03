@@ -1,22 +1,11 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Flowbite Forms</title>
-</head>
+<html >
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script type="module" src="https://esm.sh/@gigya/wc"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+  </head>
 <body>
-<div class="hidden sm:mb-8 sm:flex sm:justify-center">
-  <div class="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-    Example of screen set styled with <a href="#" class="font-semibold text-indigo-600" href="https://flowbite.com/docs/components/forms"> <span class="text-blue-500">Flowbite forms <span aria-hidden="true">&rarr;</span> </span></a>
-  </div>
-</div>
-<!--<script type="module" src="https://esm.sh/@gigya/wc@0.0.0-pre-alpha.3"></script>-->
-
-<script type="module" >
-  import '@gigya/wc'
-</script>
-<gigya-js api-key="4_qfguwzMx5jiJuBcKrSZe4w" >
+<gigya-js api-key="4_qfguwzMx5jiJuBcKrSZe4w"   >
   <gigya-screen screen-set="floating" >
     <template>
       <form class="gigya-register-form m-10 shadow-md size-full md:size-auto">
@@ -62,15 +51,7 @@
           </div>
         </div>
         <div class="grid md:grid-cols-2 md:gap-6">
-          <div class="relative z-0 w-full mb-5 group">
-            <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="floating_phone"
-                   id="floating_phone"
-                   class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                   placeholder=" " required/>
-            <label for="floating_phone"
-                   class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Phone
-              number</label>
-          </div>
+
           <div class="relative z-0 w-full mb-5 group">
             <input type="text" name="floating_company" id="floating_company"
                    class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
@@ -81,7 +62,7 @@
           </div>
         </div>
         <button type="submit"
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
           Submit
         </button>
       </form>
@@ -91,10 +72,6 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 
     </template>
-    <!--    </gigya-screen>-->
-    <!--    <button onclick="gigya.accounts.showScreenSet({-->
-    <!--            screenSet: 'floating' -->
-    <!--        })">Show Screen</button>-->
   </gigya-screen>
 </gigya-js>
 </body>

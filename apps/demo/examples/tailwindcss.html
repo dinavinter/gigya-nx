@@ -5,27 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Tailwindcss Forms example</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+  <script type="module" src="https://esm.sh/@gigya/wc"></script>
+  <script src="https://cdn.jsdelivr.net/npm/iconify-icon@2.1.0/dist/iconify-icon.min.js"></script>
 
 </head>
-<body>
-<div class="hidden sm:mb-8 sm:flex sm:justify-center">
-    <span >
-  </span>
-  <div class="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-    Example of screen set styled with <a href="#" class="font-semibold text-indigo-600" href="https://github.com/tailwindlabs/tailwindcss-forms" class="text-blue-500">@tailwindcss/forms <span aria-hidden="true">&rarr;</span> </a>
-  </div>
-</div>
+<body >
 
-
-<script type="module" >
-  import '@gigya/wc'
-</script>
-<gigya-js api-key="4_qfguwzMx5jiJuBcKrSZe4w" domain="eu1.gigya.com">
+<gigya-js api-key="4_qfguwzMx5jiJuBcKrSZe4w" domain="eu1.gigya.com" class="max-h-screen">
   <gigya-screen>
     <template>
-      <div class="p-5 bg-white dark:bg-gray-900 antialiased min-h-svh min-w-svn max-w-[30rem]   ">
+      <div class="p-5 bg-white dark:bg-gray-900 antialiased min-h-svh min-w-svn max-w-[30rem]">
         <form class="gigya-register-form  ">
-          <fieldset class="block *:my-2 *:w-full">
+          <fieldset class="block *:my-2 *:w-full m-4">
             <input type="text" name="firstName" placeholder="First Name" autocomplete="given-name">
             <input type="text" name="lastName" placeholder="Last Name" autocomplete="family-name">
             <input type="email" name="email" placeholder="Email" autocomplete="email">
