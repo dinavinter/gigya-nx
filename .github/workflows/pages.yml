@@ -1,0 +1,40 @@
+name: Deploy Demo to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+on:
+  push:
+    branches:
+      - main  # Change this to the branch you want to trigger the build on
+  workflow_dispatch:
+
+jobs:
+  build:
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.build-publish.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: publish
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          folder: app/demo
+          branch: gh-pages
+          clean: true
+
+
+
+
+
