@@ -3,7 +3,7 @@
   "version": "0.0.0-pre-alpha.0",
   "license": "MIT",
   "scripts": {
-    "build": "nx run-many --target=build --all",
+    "build": "nx build wc",
     "serve": "nx run-many --target=serve --all",
     "test": "nx run-many --target=test --all",
     "e2e": "nx run-many --target=e2e --all",
