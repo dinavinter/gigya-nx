@@ -30,7 +30,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          folder: app/demo
+          folder: apps/demo
           branch: gh-pages
           clean: true
 
