@@ -1,12 +1,13 @@
 import { useStore } from "@atomico/store";
 import { replaceImport } from "@uppercod/replace-import";
-import { c, css, useCallback, usePromise } from "atomico";
+import {c, css, useCallback, useHost, usePromise} from "atomico";
 import { transform } from "sucrase";
 import { EditorStore } from "../store";
 
 export const EditorPreview = c(
     () => {
         const store = useStore(EditorStore);
+        const host =useHost()
 
         const promise = usePromise(
             async (code) => {
@@ -42,6 +43,12 @@ export const EditorPreview = c(
                 const style = document.createElement("style");
 
                 style.textContent = `
+       @tailwind base;
+        @tailwind components;
+        @tailwind utilities;
+        @tailwind typography;
+        @tailwind forms;
+
           body{
             margin: 0;
             font-family: sans-serif;
@@ -59,8 +66,6 @@ export const EditorPreview = c(
 
                 script.textContent = String.raw`
           import { render } from "https://esm.sh/atomico";
-          import "@gigya/web";
-
           import * as view from "data:text/javascript;base64,${btoa(
               promise.result
           )}";
