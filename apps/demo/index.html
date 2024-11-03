@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Gigya Web Component - Examples</title>
-  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com"/>
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
     rel="stylesheet"
@@ -21,42 +21,40 @@
 
     @tailwind screens;
 
-    @layer utilities {
-      .content-auto {
-        content-visibility: auto;
-      }
-    }
-
   </style>
 </head>
 <body>
-<div class="flex flex-auto mx-auto  h-full  *:border-4  container" >
+<div class="flex flex-auto mx-auto  h-full  *:border-4  container">
 
-   <div class="flex flex-col resize   container" >
-     <div class="hidden sm:mb-8 sm:flex sm:justify-center ">
-        <div class="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-          Example of screen set styled with <a href="#" class="font-semibold text-indigo-600" href="https://flowbite.com/docs/components/forms"> <span class="text-blue-500">Flowbite forms <span aria-hidden="true">&rarr;</span> </span></a>
-        </div>
+  <div class="flex flex-col resize   container">
+    <div class="hidden sm:mb-8 sm:flex sm:justify-center ">
+      <div
+        class="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
+        Example of screen set styled with <a class="font-semibold text-indigo-600"
+                                             href="https://flowbite.com/docs/components/forms"> <span
+        class="text-blue-500">Flowbite forms <span aria-hidden="true">&rarr;</span> </span></a>
       </div>
-      <div class="aspect-ratio w-full h-full  mx-auto justify-items-center px-2 pb-2">
-          <iframe type="text/html" class=" object-fit h-full w-full  resize self-end"
-                  src="examples/flowbite.html"  ></iframe>
-      </div>
-     </div>
-     <div  class="flex flex-col resize mx-auto container" >
-      <div class="hidden sm:mb-8 sm:flex sm:justify-center">
-        <span >
+    </div>
+    <div class="aspect-ratio w-full h-full  mx-auto justify-items-center px-2 pb-2">
+      <iframe type="text/html" class=" object-fit h-full w-full  resize self-end"
+              src="examples/flowbite.html"></iframe>
+    </div>
+  </div>
+  <div class="flex flex-col resize mx-auto container">
+    <div class="hidden sm:mb-8 sm:flex sm:justify-center">
+        <span>
       </span>
-        <div class="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-          Example of screen set styled with <a href="#" class="font-semibold text-indigo-600" href="https://github.com/tailwindlabs/tailwindcss-forms" class="text-blue-500">@tailwindcss/forms <span aria-hidden="true">&rarr;</span> </a>
-        </div>
+      <div
+        class="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
+        Example of screen set styled with <a class="font-semibold text-indigo-600"
+                                             href="https://github.com/tailwindlabs/tailwindcss-forms">@tailwindcss/forms<span aria-hidden="true">&rarr;</span></a>
       </div>
-       <div class="aspect-ratio w-full h-full  mx-auto justify-items-center">
-          <iframe type="text/html" src="examples/tailwindcss.html"  class=" h-[40vh] w-[50%] max-w-full  resize self-end"</iframe>
-        </div>
-     </div>
-
-
+    </div>
+    <div class="aspect-ratio w-full h-full  mx-auto justify-items-center">
+      <iframe type="text/html" src="examples/tailwindcss.html"
+              class=" h-[40vh] w-[50%] max-w-full  resize self-end"></iframe>
+    </div>
+  </div>
 
 
 </div>
