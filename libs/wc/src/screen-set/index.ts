@@ -4,10 +4,10 @@ import {useGigya} from "../loader";
 import {useMutationObserver, useParent} from "@atomico/hooks";
 
 export const GigyaScreen = c(({
-                                screenSet, screen,container, open, ...props
+                                screenSet, screen,container, open, popup, ...props
                               }) => {
 
-  const [containerId] = useState(container || `screen-container-${screenSet}-${screen}`)
+  const [containerId] = useState<string | undefined>(!container && !popup && `screen-container-${screenSet}-${screen}` || undefined)
   const template = useChildNodes().find((node) => node.nodeName == "TEMPLATE") as HTMLTemplateElement;;
   const host = useHost();
    const ref= useRef();
@@ -15,7 +15,7 @@ export const GigyaScreen = c(({
    open && useGigya(({accounts}) => accounts.showScreenSet({
       screenSet: screenSet,
       startScreen: screen,
-      containerID: containerId
+      containerID: popup ? undefined : container || containerId,
     })).catch(console.error);
   },[template?.content, containerId, open])
 
@@ -29,7 +29,7 @@ export const GigyaScreen = c(({
 
   return (html`
       <host>
-        <div id=${containerId} class="w-full"></div>
+        ${containerId? html`<div id=${containerId} class="w-full"/>` : undefined}
         <div id=${screenSet} class="gigya-screen-set" style=${{display: "none"}}>
           <div id=${screen} class="gigya-screen" ref="${ref}" style="height: 100%; width: 100%">
           </div>
@@ -64,6 +64,12 @@ export const GigyaScreen = c(({
       value: undefined,
       attr: "container"
 
+    },
+    popup: {
+      type: Boolean,
+      value: false,
+      attr: "popup",
+      reflect: true
     },
     open: {
       type: Boolean,
