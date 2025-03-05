@@ -1,6 +1,6 @@
 {
   "name": "gigya",
-  "version": "0.0.0-pre-alpha.0",
+  "version": "0.0.0-pre-alpha.6",
   "license": "MIT",
   "scripts": {
     "build": "nx build wc",
