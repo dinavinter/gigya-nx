@@ -44,12 +44,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
-
       - name: Build packages
         run: pnpm build --filter wc
 
-
-
-
-
-
+      - name: Publish packages
+        run: pnpm publish --access public
