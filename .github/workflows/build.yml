@@ -51,6 +51,8 @@ jobs:
 
       - name: Bump version if package already exists
         shell: bash
+        env:
+          NPM_TOKEN: $NPM_TOKEN
         run: |
           if pnpm publish --access public --no-git-checks; then
             echo "Published successfully"
