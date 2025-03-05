@@ -1,7 +1,6 @@
 name: Build wc packages
 permissions:
   contents: read
-
 on:
   push:
     branches:
@@ -10,7 +9,7 @@ on:
 
 jobs:
   build:
-
+    environment: deploy 
     runs-on: ubuntu-latest
 
     steps:
@@ -52,7 +51,7 @@ jobs:
       - name: Bump version if package already exists
         shell: bash
         env:
-          NPM_TOKEN: ${{NPM_TOKEN}}
+          NPM_TOKEN: ${{env.NPM_TOKEN}}
         run: |
           if pnpm publish --access public --no-git-checks; then
             echo "Published successfully"
