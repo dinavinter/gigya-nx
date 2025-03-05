@@ -58,4 +58,5 @@ jobs:
             echo "Version exists, bumping version"
             npm version patch
             pnpm publish --access public --no-git-checks
+          fi
 
