@@ -46,6 +46,18 @@ jobs:
 
       - name: Build packages
         run: pnpm build --filter wc
+      - name: Build packages
+        run: pnpm build --filter wc
+
+      - name: Bump version if package already exists
+        shell: bash
+        run: |
+          if pnpm publish --access public --no-git-checks; then
+            echo "Published successfully"
+          else
+            echo "Version exists, bumping version"
+            npm version patch
+            pnpm publish --access public --no-git-checks
 
       - name: Publish packages
         run: pnpm publish --access public --no-git-checks
