@@ -25,12 +25,17 @@ export const GigyaScreen = c(({
     }
   }, [template?.content])
 
-
+  const dataAttributes = Object.keys(props).reduce((acc, key) => {
+    if (key.startsWith('data-')) {
+      acc[key] = props[key];
+    }
+    return acc;
+  }, {});
 
   return (html`
       <host>
         ${containerId? html`<div id=${containerId} class="w-full"/>` : undefined}
-        <div id=${screenSet} class="gigya-screen-set" style=${{display: "none"}}>
+        <div id=${screenSet} class="gigya-screen-set" style=${{display: "none"}} ...${dataAttributes}>
           <div id=${screen} class="gigya-screen" ref="${ref}" style="height: 100%; width: 100%">
           </div>
         </div>
