@@ -48,16 +48,33 @@ jobs:
       - name: Build packages
         run: pnpm build --filter wc
 
-      - name: Bump version if package already exists
+      - name: Set up npm authentication
+        run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # Ensure git is clean before publish/bump
+      - name: Commit changes if needed
+        run: |
+          git config --global user.email "ci-bot@example.com"
+          git config --global user.name "CI Bot"
+          git add .
+          git diff-index --quiet HEAD || git commit -m "CI: commit changes before publish"
+
+      # Your publish/bump step with --no-git-check
+      - name: Publish
+        run: npm publish --no-git-check
+
+      - name: Publish and Bump version if package already exists
         shell: bash
         env:
           NPM_TOKEN: ${{env.NPM_TOKEN}}
         run: |
-          if pnpm publish --access public --no-git-checks; then
+          if pnpm publish --access public --no-git-check; then
             echo "Published successfully"
           else
             echo "Version exists, bumping version"
             npm version patch
-            pnpm publish --access public --no-git-checks
+            pnpm publish --access public  --no-git-check
           fi
 
