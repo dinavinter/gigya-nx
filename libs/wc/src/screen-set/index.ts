@@ -36,7 +36,7 @@ export const GigyaScreen = c(({
       <host>
         ${containerId? html`<div id=${containerId} class="w-full"/>` : undefined}
         <div id=${screenSet} class="gigya-screen-set" style=${{display: "none"}} ...${dataAttributes}>
-          <div id=${screen} class="gigya-screen" ref="${ref}" style="height: 100%; width: 100%">
+          <div id=${screen} class="gigya-screen" ref="${ref}" style="height: 100%; width: 100%" ...${dataAttributes}>
           </div>
         </div>
       </host>`
