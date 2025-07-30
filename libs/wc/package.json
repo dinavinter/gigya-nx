@@ -1,6 +1,6 @@
 {
   "name": "@gigya/wc",
-  "version": "0.0.0-pre-alpha.8",
+  "version": "0.0.1",
   "type": "module",
   "publishConfig": {
     "access": "public",
