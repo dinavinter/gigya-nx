@@ -33,7 +33,7 @@
          "cwd": "tmp/libs",
         "commands": [
           {
-            "command": "pnpm publish gigya-wc-0.0.0-beta.5.tgz --access public  --tag latest  --no-git-checks --report-summary"
+            "command": "pnpm publish gigya-wc-0.0.0-pre-alpha.6.tgz  --access public  --tag latest  --no-git-checks --report-summary"
           }
         ]
       },
@@ -50,7 +50,6 @@
         "includeDevDependenciesInPackageJson": false,
         "tsConfig": "libs/wc/tsconfig.lib.json",
         "configFile": "libs/wc/vite.config.ts",
-        "assets": ["libs/wc/README.md", "libs/wc/index.html"]
       }
     },
     "nx-release-publish": {

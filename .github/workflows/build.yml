@@ -63,7 +63,7 @@ jobs:
 
       # Your publish/bump step with --no-git-check
       - name: Publish
-        run: npm publish --no-git-check
+        run: cd ./libs/wc && npm publish --no-git-check
 
       - name: Publish and Bump version if package already exists
         shell: bash

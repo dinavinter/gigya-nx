@@ -1,15 +1,14 @@
 import {html, c, css, useEffect, useState, useRef, useHost} from "atomico";
 import {useChildNodes} from "@atomico/hooks/use-child-nodes";
 import {useGigya} from "../loader";
-import {useMutationObserver, useParent} from "@atomico/hooks";
-
+import { useAttributes } from "@atomico/hooks/use-attributes";
 export const GigyaScreen = c(({
                                 screenSet, screen,container, open, popup, ...props
                               }) => {
 
   const [containerId] = useState<string | undefined>(!container && !popup && `screen-container-${screenSet}-${screen}` || undefined)
   const template = useChildNodes().find((node) => node.nodeName == "TEMPLATE") as HTMLTemplateElement;;
-  const host = useHost();
+  const attributes = useAttributes();
    const ref= useRef();
   useEffect(() => {
    open && useGigya(({accounts}) => accounts.showScreenSet({
@@ -24,13 +23,15 @@ export const GigyaScreen = c(({
       ref.current.innerHTML = template.innerHTML
     }
   }, [template?.content])
-
+   
   const dataAttributes = Object.keys(props).reduce((acc, key) => {
     if (key.startsWith('data-')) {
       acc[key] = props[key];
     }
     return acc;
-  }, {});
+  }, toCabbabCase(attributes));
+
+  console.log(dataAttributes)
 
   return (html`
       <host>
@@ -86,3 +87,11 @@ export const GigyaScreen = c(({
 });
 
 customElements.define("gigya-screen", GigyaScreen);
+function toCabbabCase(attributes: Record<string,unknown>): Record<string,unknown> {
+  return Object.keys(attributes).reduce((acc, key) => {
+    const cabbabCaseKey = key.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
+    acc[cabbabCaseKey] = attributes[key];
+    return acc;
+  }, {} as Record<string, unknown>);
+}
+

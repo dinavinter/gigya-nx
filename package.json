@@ -10,8 +10,9 @@
     "demo": "pnpm --filter demo",
     "pack-all": "pnpm -r exec pnpm pack --pack-destination tmp",
     "pnpm-pack": "pnpm pack --pack-destination tmp",
+    "deploy": "nx build wc && cp libs/wc/README.md dist/libs/wc && cd dist/libs/wc && pnpm publish --access public --no-git-check --report-summary",
     "release": "nx release  --skip-publish version preid pre-alpha --verbose --projects web types loader --dry-run ",
-    "publish": " pnpm publish --access public --tag pre-alpha  --tag pre-alpha --no-git-check --report-summary --filter wc",
+    "publish-1": " pnpm publish --access public --tag pre-alpha  --tag pre-alpha --no-git-check --report-summary --filter wc",
     "version": "npm version minor --preid pre-alpha"
   },
   "devDependencies": {
