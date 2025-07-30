@@ -11,7 +11,7 @@
     "pack-all": "pnpm -r exec pnpm pack --pack-destination tmp",
     "pnpm-pack": "pnpm pack --pack-destination tmp",
     "release": "nx release  --skip-publish version preid pre-alpha --verbose --projects web types loader --dry-run ",
-    "publish": " pnpm publish --access public --tag pre-alpha  --dry-run --tag pre-alpha --no-git-checks --report-summary --filter wc",
+    "publish": " pnpm publish --access public --tag pre-alpha  --tag pre-alpha --no-git-check --report-summary --filter wc",
     "version": "npm version minor --preid pre-alpha"
   },
   "devDependencies": {
