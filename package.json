@@ -14,7 +14,6 @@
     "publish": " pnpm publish --access public --tag pre-alpha  --dry-run --tag pre-alpha --no-git-checks --report-summary --filter wc",
     "version": "npm version minor --preid pre-alpha"
   },
-  "private": true,
   "devDependencies": {
     "@xstate/fsm": "^2.1.0",
     "atomico": "^1.79.2",
