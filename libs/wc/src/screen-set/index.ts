@@ -11,6 +11,7 @@ export const GigyaScreen = c(({
   const template = useChildNodes().find((node) => node.nodeName == "TEMPLATE") as HTMLTemplateElement;;
   const host = useHost();
    const ref= useRef();
+  const refScreenSet= useRef();
   useEffect(() => {
    open && useGigya(({accounts}) => accounts.showScreenSet({
       screenSet: screenSet,
@@ -25,12 +26,22 @@ export const GigyaScreen = c(({
     }
   }, [template?.content])
 
+  useEffect(() => {
+    if(host.current  ) {
+      for (let i = 0; i < host.current.attributes.length; i++) {
+        ref.current?.setAttribute(host.current.attributes[i].name, host.current.attributes[i].value);
+        refScreenSet.current?.setAttribute(host.current.attributes[i].name, host.current.attributes[i].value);
+      }
+
+    }
+  }, [host.current,  ref.current, refScreenSet.current]);
+
 
 
   return (html`
       <host>
         ${containerId? html`<div id=${containerId} class="w-full"/>` : undefined}
-        <div id=${screenSet} class="gigya-screen-set" style=${{display: "none"}}>
+        <div id=${screenSet} class="gigya-screen-set" style=${{display: "none"}} ref="${refScreenSet}">
           <div id=${screen} class="gigya-screen" ref="${ref}" style="height: 100%; width: 100%">
           </div>
         </div>

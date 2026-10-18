@@ -12,52 +12,149 @@
 </head>
 <body>
 <gigya-js api-key="4_qfguwzMx5jiJuBcKrSZe4w" domain="eu1.gigya.com">
-    <gigya-screen slot="not-authenticated" >
-      <template>
-        <div class="p-5 bg-white dark:bg-gray-900 antialiased min-h-svh min-w-svn max-w-[30rem]   ">
-          <form class="gigya-register-form  ">
-            <fieldset class="block *:my-2 *:w-full">
-              <input type="text" name="firstName" placeholder="First Name" autocomplete="given-name">
-              <input type="text" name="lastName" placeholder="Last Name" autocomplete="family-name">
-              <input type="email" name="email" placeholder="Email" autocomplete="email">
-              <input type="password" name="password" placeholder="Password" autocomplete="new-password">
-            </fieldset>
-            <button type="submit"
-                    class="w-full py-[0.4375rem] *:text-[#626890] text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-              <span class="sr-only lg:not-sr-only lg:ml-2">Register</span>
-              <iconify-icon class="ms-1 me-2" data-icon="account-add" icon="line-md:account-add"
-                            height="1.5rem"></iconify-icon>
-            </button>
+<!--    <gigya-screen slot="not-authenticated" >-->
+<!--      <template>-->
+<!--        <div class="p-5 bg-white dark:bg-gray-900 antialiased min-h-svh min-w-svn max-w-[30rem]   ">-->
+<!--          <form class="gigya-register-form  ">-->
+<!--            <fieldset class="block *:my-2 *:w-full">-->
+<!--              <input type="text" name="firstName" placeholder="First Name" autocomplete="given-name">-->
+<!--              <input type="text" name="lastName" placeholder="Last Name" autocomplete="family-name">-->
+<!--              <input type="email" name="email" placeholder="Email" autocomplete="email">-->
+<!--              <input type="password" name="password" placeholder="Password" autocomplete="new-password">-->
+<!--            </fieldset>-->
+<!--            <button type="submit"-->
+<!--                    class="w-full py-[0.4375rem] *:text-[#626890] text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">-->
+<!--              <span class="sr-only lg:not-sr-only lg:ml-2">Register</span>-->
+<!--              <iconify-icon class="ms-1 me-2" data-icon="account-add" icon="line-md:account-add"-->
+<!--                            height="1.5rem"></iconify-icon>-->
+<!--            </button>-->
+<!--          </form>-->
+<!--        </div>-->
+<!--        <script src="https://cdn.jsdelivr.net/npm/iconify-icon@2.1.0/dist/iconify-icon.min.js"></script>-->
+<!--        <script-->
+<!--          src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>-->
+<!--        <style type="text/tailwindcss">-->
+
+<!--          @tailwind base; /* Preflight will be injected here */-->
+
+<!--          @tailwind components;-->
+
+<!--          @tailwind utilities;-->
+
+<!--          @layer utilities {-->
+<!--            .content-auto {-->
+<!--              content-visibility: auto;-->
+<!--            }-->
+<!--          }-->
+
+<!--        </style>-->
+
+
+<!--      </template>-->
+<!--    </gigya-screen>-->
+<!--     <div slot="authenticated">-->
+<!--      <div class="p-5 bg-white dark:bg-gray-900 antialiased min-h-svh min-w-svn max-w-[30rem]   ">-->
+<!--        <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Welcome back!</h1>-->
+<!--        <p class="text-gray-500 dark:text-gray-400">You are already logged in.</p>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!-- -->
+<!--</gigya-js>-->
+<!--<gigya-js id="gigya" api-key="4_1tFBvx93ZyUjPTYTBGo2wA" domain="eu1.gigya.com" class="w-full max-w-md">-->
+
+<!--  <gigya-screen-->
+<!--    screen-set="Default-LoginRegistration"-->
+<!--    screen="gigya-complete-registration-screen"-->
+<!--    data-on-success="_finish"-->
+<!--  ></gigya-screen>-->
+  <gigya-screen
+    screen-set="CDC-LoginRegistration"
+    screen="gigya-complete-registration-screen"
+    data-on-success="_finish"
+  >
+    <template>
+      <div class="fixed inset-0 bg-gradient-to-br from-blue-600/20 to-purple-600/20 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+        <div class="bg-white/95 backdrop-blur-sm text-gray-900 rounded-2xl p-8 max-w-md w-full shadow-2xl border border-white/20">
+          <div class="flex items-center space-x-3 mb-6">
+            <div class="bg-blue-100 p-2 rounded-lg">
+              <iconify-icon
+                icon="lucide:user-check"
+                class="text-blue-600"
+                width="24"
+                height="24"
+              />
+            </div>
+            <div>
+              <h2 class="text-2xl font-bold text-gray-900">
+                Welcome back, Tom!
+              </h2>
+              <p class="text-gray-500 text-sm">
+                Just a few quick preferences to set up
+              </p>
+            </div>
+          </div>
+
+          <form class="gigya-profile-form" >
+            <div class="space-y-4">
+              <label class="flex items-start space-x-4 p-4 rounded-xl border border-gray-100 hover:bg-blue-50/50 transition-colors cursor-pointer">
+                <input type="checkbox" class="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500" name="preferences.btp-help.isConsentGranted" required />
+                <div class="space-y-1">
+                      <span class="text-sm font-medium text-gray-900 block">
+                        BTP Support Community
+                      </span>
+                  <span class="text-sm text-gray-500">
+                        I'm happy to help CDC colleagues with their BTP questions
+                      </span>
+                </div>
+              </label>
+
+              <label class="flex items-start space-x-4 p-4 rounded-xl border border-gray-100 hover:bg-blue-50/50 transition-colors cursor-pointer">
+                <input type="checkbox" class="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500" name="preferences.share-demo.isConsentGranted" required />
+                <div class="space-y-1">
+                      <span class="text-sm font-medium text-gray-900 block">
+                        Share the Experience
+                      </span>
+                  <span class="text-sm text-gray-500">
+                        I'll share this demo on Teams, Slack, or social networks if I find it valuable
+                      </span>
+                </div>
+              </label>
+            </div>
+
+            <div class="mt-8 flex justify-end space-x-4 items-center">
+              <button
+                type="button"
+                class="px-4 py-2 text-gray-500 hover:text-gray-700 font-medium flex items-center space-x-2 transition-colors"
+                data-skip-screen="true"
+                data-switch-screen="_finish"
+              >
+                <span>Skip for now</span>
+                <iconify-icon
+                  icon="lucide:arrow-right"
+                  width="16"
+                  height="16"
+                />
+              </button>
+              <button
+                type="submit"
+                class="bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 flex items-center space-x-2 font-medium shadow-lg shadow-blue-600/20 transition-all hover:shadow-xl hover:shadow-blue-600/20"
+              >
+                <span>Continue</span>
+                <iconify-icon
+                  icon="lucide:check"
+                  width="16"
+                  height="16"
+                />
+              </button>
+            </div>
           </form>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/iconify-icon@2.1.0/dist/iconify-icon.min.js"></script>
-        <script
-          src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
-        <style type="text/tailwindcss">
-
-          @tailwind base; /* Preflight will be injected here */
-
-          @tailwind components;
-
-          @tailwind utilities;
-
-          @layer utilities {
-            .content-auto {
-              content-visibility: auto;
-            }
-          }
-
-        </style>
-
-
-      </template>
-    </gigya-screen>
-     <div slot="authenticated">
-      <div class="p-5 bg-white dark:bg-gray-900 antialiased min-h-svh min-w-svn max-w-[30rem]   ">
-        <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Welcome back!</h1>
-        <p class="text-gray-500 dark:text-gray-400">You are already logged in.</p>
       </div>
-    </div>
+    </template>
+  </gigya-screen>
 </gigya-js>
+
+<iframe width="100%" height="400px" src="https://www.val.town/embed/x/dinavinter/dcom/screenset" title="Val Town" frameborder="0" allow="web-share" allowfullscreen></iframe>
 </body>
 </html>
